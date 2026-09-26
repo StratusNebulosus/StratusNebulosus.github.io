@@ -2,51 +2,55 @@
 
 ## Purpose
 
-Run the deterministic tests that protect typed data, navigation, layout helpers, template selection, registry behavior, CSS isolation, and accessibility safeguards.
+Run the complete example-based and property-based suite protecting medical content, theming, navigation, Contact semantics, gallery behavior, privacy boundaries, production policy, documentation, and GitHub Pages compatibility.
 
-## Run All Automated Tests
-
-```bash
-npm run test
-```
-
-Expected verified result:
-
-- 9 test files pass.
-- 88 tests pass.
-- 0 tests fail.
-
-Vitest reports results in the terminal. Coverage reporting is not configured, so no coverage percentage or report directory should be inferred.
-
-## Run the Unit-Oriented Group
+## Run All Tests
 
 ```bash
-npx vitest run src/utils/templateSelection.test.ts src/hooks/usePortfolioLayout.test.ts src/test/data/navigation.test.ts src/test/data/portfolio.test.ts src/templates/templateRegistry.test.ts src/themeAccessibility.test.ts
+npm test
 ```
 
-Expected verified result: 6 files and 49 tests pass.
+Verified result after the section-heading refinement:
 
-## Test Inventory
+- 32 test files passed.
+- 130 tests passed.
+- 0 failures.
 
-| File                                     | Main responsibility                                                                                 |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `src/utils/templateSelection.test.ts`    | Source default, saved preference, invalid-value fallback, and storage failures                      |
-| `src/hooks/usePortfolioLayout.test.ts`   | Layout validation, hash parsing, route creation, fallback, and persistence                          |
-| `src/test/data/navigation.test.ts`       | Unique section IDs, labels, baseline availability, and visibility filtering                         |
-| `src/test/data/portfolio.test.ts`        | Beginner README, shared content, links, accessible media, resume facts, and certificates            |
-| `src/templates/templateRegistry.test.ts` | Two registered templates, visible selector options, complete section maps, and Engineering fallback |
-| `src/themeAccessibility.test.ts`         | Theme contrast, semantic contact colors, scoped selectors, control clearance, and reduced motion    |
+Vitest reports results in the terminal. Coverage instrumentation is not configured, so no coverage percentage or report path is claimed.
 
-The remaining three files exercise rendered component integrations and are documented in `integration-test-instructions.md`.
+## Run the Focused Section-Heading Suite
 
-## Fixing a Failure
+```bash
+npx vitest run src/components/medical/content/medicalContentStyles.test.ts src/components/medical/content/MedicalContent.test.tsx
+```
 
-1. Read the failing test name and first assertion message.
-2. Open the source file named in the stack trace.
-3. Correct the source or update the test only when the intended behavior changed.
-4. Rerun the focused file with `npx vitest run path/to/file.test.ts`.
-5. Rerun `npm run test` before considering the issue resolved.
+Verified result: 2 files and 10 tests passed.
 
-## When to Run
+This group covers the exact shared responsive heading caps, the accessible `Looking ahead` title, exact Contact values, CV-placeholder separation, and semantic non-interactivity.
 
-Run the suite after changing shared data, assets, navigation, template availability, persistence, layouts, section names, theme components, or styling safeguards, and before publishing the site.
+## Reproduce Property Tests Deterministically
+
+Normal execution uses fast-check with shrinking and verbose failure details. Replay the verified seed with:
+
+```bash
+FC_SEED=20260921 npm test
+```
+
+Verified result: 32 files and 130 tests passed. When a future property fails, retain the reported signed 32-bit seed and shrunk counterexample, fix the defect, add the minimal case as an example regression when appropriate, and replay before returning to randomized execution.
+
+## Quality Gate
+
+```bash
+npm run quality
+```
+
+This is the authoritative combined source gate: TypeScript, ESLint, and the complete Vitest suite. The GitHub Pages workflow runs the same command before building.
+
+## Failure Recovery
+
+1. Read the first failing test and its assertion output.
+2. Rerun only that test file.
+3. Fix production code unless the approved behavior itself changed.
+4. For a property failure, replay its seed and preserve shrinking.
+5. Run the focused section-heading suite when relevant.
+6. Run `npm run quality` before considering the issue resolved.

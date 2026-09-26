@@ -1,99 +1,33 @@
-# Services
+# Application Design - Services
 
-This static frontend does not need backend services. For Application Design, "services" are lightweight frontend orchestration modules and support utilities.
+No backend or network service exists or is introduced (NFR-08). "Services" here means module-level orchestration layers consumed by components, per Question 2 (Option A: separate content and allowlist modules).
 
-## Portfolio Data Service
+## `content` module (`src/data/medicalContent.ts` or equivalent)
 
-- **Module**: `src/data/portfolio.ts`
-- **Purpose**: Aggregate focused data modules into one portfolio data object.
-- **Responsibilities**:
-  - Export a complete typed portfolio object.
-  - Keep section data discoverable for students.
-  - Provide the single source of truth for app/section content.
-- **Interactions**:
-  - Consumed by `App`, `Navbar`, section components, and tests.
+- **Responsibility**: Single source of typed, verified portfolio content (hero copy and CV download metadata, narrative, education/GPA timeline, scores, scholarship, research project, awards, leadership/service/activity entries, interests, closing statement).
+- **Consumed by**: `MedicalHero`, `CallingToMedicine`, `EducationJourney`, `AcademicExcellence`, `ScienceAndAwards`, `LeadershipAndService`, `ClosingContact`.
+- **Orchestration pattern**: Pure data export plus small accessor functions (see `component-methods.md`); no side effects, no network calls.
 
-## Navigation Service
+## `assetAllowlist` module (`src/data/assetAllowlist.ts` or equivalent)
 
-- **Module**: `src/data/navigation.ts` and `src/utils/scroll.ts`
-- **Purpose**: Centralize section IDs, labels, order, and scroll behavior.
-- **Responsibilities**:
-  - Define navigation items and section order.
-  - Smooth-scroll to section IDs.
-  - Support active-section tracking.
-- **Interactions**:
-  - Consumed by `App`, `Navbar`, `SectionShell`, and navigation tests.
+- **Responsibility**: Explicit allowlist of public-safe asset paths (FR-15) and a checking function (`isAllowedAsset`) used by any component that renders an image or exposes the approved public CV download.
+- **Consumed by**: `EvidenceGallery`, `GalleryItem`, `AwardItem` (for certificate imagery), `MedicalHero` (for the portrait).
+- **Orchestration pattern**: No component may import or enumerate `src/assets/CV/` directly; every image reference is validated through this module, which is the single point of privacy-boundary enforcement.
 
-## Contact Service
+## `colorMode` service (retained from existing foundation)
 
-- **Module**: `src/utils/contact.ts`
-- **Purpose**: Convert contact form input into an encoded mailto URL.
-- **Responsibilities**:
-  - Encode subject and body.
-  - Use configured owner email.
-  - Keep contact behavior static-hosting friendly.
-- **Interactions**:
-  - Consumed by `Contact`.
+- **Responsibility**: Read/write the visitor's light/dark preference via the existing safe client-side persistence mechanism (FR-12), with safe fallback on failure (NFR-05).
+- **Consumed by**: `App` (owns state), `MedicalNav` (renders the control).
+- **Orchestration pattern**: Unchanged from the current implementation; only the token values it applies change.
 
-## Media Service
+## `navigation` service (retained from existing foundation, simplified)
 
-- **Module**: `src/utils/media.ts`
-- **Purpose**: Build media URLs and support asset metadata.
-- **Responsibilities**:
-  - Build YouTube embed/watch URLs.
-  - Keep certificate and gallery data Vite-compatible through imports.
-- **Interactions**:
-  - Consumed by `Videos`, `Skills`, and data tests.
+- **Responsibility**: Hash-anchor creation/parsing and active-section derivation, compatible with GitHub Pages (FR-03).
+- **Consumed by**: `App`, `MedicalNav`.
+- **Orchestration pattern**: Simplified to remove template-switch and layout-mode branching; otherwise reuses existing hash-routing logic.
 
-## Deployment Configuration Service
+## Service Interaction Summary
 
-- **Modules**: `vite.config.ts`, `.github/workflows/deploy.yml`
-- **Purpose**: Configure the Vite base path for local development and GitHub Pages deployment.
-- **Responsibilities**:
-  - Use `/` as local fallback.
-  - Pass repository-derived `VITE_BASE_PATH` during GitHub Actions deployment.
-  - Keep deployment instructions aligned with actual workflow behavior.
-- **Interactions**:
-  - Used by Vite build and GitHub Actions.
-
-## Test Service
-
-- **Modules**: `vitest.config.ts` or Vite test config, `src/test/*` or `src/**/*.test.tsx`
-- **Purpose**: Provide lightweight template verification.
-- **Responsibilities**:
-  - Smoke render the app.
-  - Validate navigation section IDs.
-  - Validate required profile/template data.
-  - Avoid external network calls and browser automation.
-- **Interactions**:
-  - Uses React Testing Library, Vitest, and static data modules.
-
-## Documentation Service
-
-- **Modules**: `README.md`, `DEPLOYMENT.md`
-- **Purpose**: Guide students through setup, customization, local verification, deployment, and troubleshooting.
-- **Responsibilities**:
-  - Explain prerequisites and commands.
-  - Explain the data files students edit.
-  - Explain asset replacement.
-  - Explain GitHub Pages settings and workflow behavior.
-  - Explain common deployment failures.
-- **Interactions**:
-  - Aligns with data modules, build scripts, and GitHub Actions workflow.
-
-## Orchestration Pattern
-
-1. Data modules define template content.
-2. The app shell renders section components from shared section/navigation config.
-3. Section components render data through Chakra UI and shared UI helpers.
-4. Utilities handle repeated browser behavior and URL generation.
-5. Tests validate data/config/app smoke behavior.
-6. Documentation teaches students how to use the same structure.
-7. GitHub Actions injects deployment base path and publishes `dist/`.
-
-## Extension Rule Compliance
-
-| Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+- `App` composes `colorMode` and `navigation` services and passes derived state down to `MedicalShell`.
+- `MedicalShell`'s content-area components each pull their slice of data from the `content` service; any component rendering imagery additionally validates the path through the `assetAllowlist` service before rendering.
+- No service depends on the removed template-registry, layout-mode, journal, or skills systems; those are deleted, not adapted.

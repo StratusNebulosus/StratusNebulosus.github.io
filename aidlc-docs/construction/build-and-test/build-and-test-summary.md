@@ -2,64 +2,85 @@
 
 ## Outcome
 
-The template-first beginner README and mode-specific Business Direct Contact color update pass all automated quality gates. No dependency, route, asset, data model, or deployment workflow changed.
+The section-heading refinement passes every applicable source, test, privacy, production-output, and GitHub Pages base-path gate. Every shared non-hero section heading now uses the approved compact scale, and the Closing section renders `Looking ahead`, without changing dependencies, public assets, interfaces, infrastructure, or deployment behavior.
 
 ## Build Status
 
-- **Build tool**: TypeScript 5.9 and Vite 7 through `npm run build`
-- **Status**: Success
-- **Build time**: Approximately 6.00 seconds on the verification machine
-- **Artifacts**: Static entry point, JavaScript, CSS, images, resume, and certificates under `dist/`
-- **Preview**: HTTP 200 for `/` on the local production preview
+- **Build tool**: TypeScript 5.9 and Vite 7 through `npm run build`.
+- **Status**: Success for root and project Pages path forms.
+- **Artifacts at the previous checkpoint**: `dist/index.html`, one JavaScript bundle, one CSS bundle, 13 approved JPG files, and one approved CV PDF. The active visual-showcase revision supersedes this count with 16 reviewed JPGs, three disclosed WebP illustrations, and one approved CV PDF; final Build and Test instructions will be refreshed after code approval.
+- **Root verification**: Passed for `/`.
+- **Project verification**: Passed for `/student-profile/`.
+- **Advisory**: The main JavaScript chunk remains above Vite's 500 kB advisory threshold; no runtime dependency was added by this refinement.
 
-## Verified Results
+## Test Execution Summary
 
-| Check                           | Result                                         |
-| ------------------------------- | ---------------------------------------------- |
-| Focused README/contact tests    | 18 tests across 2 files passed                 |
-| Complete Vitest suite           | 88 tests across 9 files passed                 |
-| Unit-oriented test group        | 49 tests across 6 files passed                 |
-| Rendered integration group      | 39 tests across 3 files passed                 |
-| ESLint                          | Passed                                         |
-| TypeScript and Vite build       | Passed                                         |
-| Local production preview        | HTTP 200                                       |
-| Main JavaScript                 | 975.76 kB minified; 296.49 kB gzip             |
-| Main CSS                        | 34.61 kB minified; 7.43 kB gzip                |
-| Complete `dist/`                | Approximately 9.4 MB including images and PDFs |
-| Prettier and `git diff --check` | Passed                                         |
-| Non-audit stale-reference scan  | Passed with no matches                         |
+### Unit and Property Tests
 
-The existing Vite warning for a JavaScript chunk above 500 kB remains non-blocking.
+- **Complete suite**: 32 files, 130 passed, 0 failed.
+- **Focused section-heading suite**: 2 files, 10 passed, 0 failed.
+- **Deterministic replay**: `FC_SEED=20260921 npm test` passed all 130 tests.
+- **Coverage report**: N/A; instrumentation is not configured.
+- **Status**: Pass.
 
-## Test Category Status
+### Integration Tests
 
-| Category             | Status | Rationale                                                           |
-| -------------------- | ------ | ------------------------------------------------------------------- |
-| Unit                 | Pass   | 49 deterministic tests passed                                       |
-| Integration          | Pass   | 39 rendered component and application tests passed                  |
-| Static performance   | Pass   | Build output recorded and local preview returned HTTP 200           |
-| End-to-end browser   | N/A    | No dedicated browser automation is configured                       |
-| Contract             | N/A    | The static application has no service or API contract               |
-| Load and stress      | N/A    | The application has no runtime server                               |
-| Security penetration | N/A    | No new authentication, authorization, or network boundary was added |
+- Typed Contact data to component rendering: Pass.
+- Shared `MedicalSection` hierarchy, compact heading scale, and responsive CSS contract: Pass.
+- Full application, production graph, privacy policy, and documentation contract: Pass.
+- Root/project Pages production output and asset inventory: Pass.
+- **Status**: Pass.
 
-## Scope Validation
+### Static Performance Checks
 
-- `README.md` now follows an ordered account-to-live-site journey with template creation, collaborator access, Pages, local editing, safe push, and deployment verification.
-- The light Business contact card uses the same primary pair as the Send message button; dark mode uses a deep surface, near-white text, and accessible blue control highlights.
-- Engineering presentation, content, assets, routes, and GitHub Pages workflow remain unchanged.
+- Root Vite build: approximately 3.05 seconds.
+- Project-path Vite build: approximately 2.89 seconds.
+- Main JavaScript: approximately 666.23 kB minified and 192.84 kB gzip.
+- Main CSS: approximately 36.46 kB minified and 7.92 kB gzip.
+- Complete output: approximately 3.0 MB.
+- Load/stress testing: N/A for a static site with no runtime server.
+- **Status**: Pass with one non-blocking chunk-size advisory.
 
-## Reproduce
+### Additional Checks
 
-```bash
-npm ci
-npm test
-npm run lint
-npm run build
-```
+| Check | Status | Evidence |
+|---|---|---|
+| TypeScript | Pass | `npm run typecheck` via `npm run quality` |
+| ESLint | Pass | `npm run lint` via `npm run quality` |
+| Property shrinking/replay | Pass | fast-check defaults retained; seed `20260921` replayed |
+| Privacy/source policy | Pass | CV-only and former-owner markers excluded |
+| Production graph | Pass | No legacy path, runtime fetch, XHR, or dynamic asset glob |
+| Asset boundary | Superseded | Previous checkpoint verified 13 approved JPGs and one approved CV PDF; active revision expects 16 JPGs, three WebP illustrations, and one PDF |
+| Documentation contract | Pass | README and deployment guidance match Contact behavior |
+| API contract tests | N/A | No API or service boundary exists |
+| Browser E2E automation | N/A | No dedicated browser runner is configured |
+| Security penetration testing | N/A | No authentication or network boundary; Security Baseline is disabled |
+| Deployment execution | Not performed | This workflow does not deploy or change hosting settings |
+
+## Section Heading Acceptance Evidence
+
+- Shared desktop content sections use `minmax(12rem, 28fr) minmax(0, 72fr)`.
+- Shared non-hero headings cap at `3rem` on desktop, `2.5rem` at the `62rem` single-column breakpoint, and `2.1rem` at the `30rem` narrow-mobile breakpoint.
+- The separate hero `h1` scale is unchanged.
+- The Closing section renders the accessible level-two title `Looking ahead`; the former long title is absent from production output.
+- Existing fictional Contact placeholders remain non-interactive, and CV-only/former-owner values remain prohibited.
+- The public asset inventory, CV download, eight-section navigation, theme behavior, and GitHub Pages workflow remain intact.
+
+## Property-Based Testing Compliance
+
+- **PBT-08**: Compliant. Shrinking remains enabled, verbose counterexample output remains configured, failures expose replay seeds, CI runs the complete property suite through `npm run quality`, and seed `20260921` was replayed successfully.
+- **Blocking findings**: None.
+
+## Generated Instructions
+
+- `aidlc-docs/construction/build-and-test/build-instructions.md`
+- `aidlc-docs/construction/build-and-test/unit-test-instructions.md`
+- `aidlc-docs/construction/build-and-test/integration-test-instructions.md`
+- `aidlc-docs/construction/build-and-test/performance-test-instructions.md`
+- `aidlc-docs/construction/build-and-test/build-and-test-summary.md`
 
 ## Overall Status
 
-- **Build**: Success
-- **All applicable tests**: Pass
-- **Ready for Operations review**: Yes
+- **Build**: Success.
+- **All applicable tests**: Pass.
+- **Ready for Operations review**: Yes.

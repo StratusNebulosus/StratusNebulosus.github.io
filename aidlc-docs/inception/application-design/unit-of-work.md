@@ -1,129 +1,49 @@
-# Unit Of Work
+# Medical Student Portfolio Revamp - Unit of Work
 
-## Decomposition Strategy
+Single monolithic static frontend (`my-portfolio`). Units are logical modules completed strictly in sequence within the Construction per-unit loop (Question 3, Option A), each shipping its own colocated example-based and property-based tests as it is built (Question 2, Option A). Grouping follows the 6-unit technical-layer sequence proposed during Workflow Planning (Question 1, Option A).
 
-The project remains one deployable React/Vite static app. Construction is decomposed into five focused logical units so implementation can happen in a safe dependency order while staying understandable for future contributors.
+## Unit 1: Design Tokens & Theming
 
-## Unit 1: Template Data And Shared Types
+- **Responsibility**: Establish named light/dark medical design tokens (FR-02), typography (editorial serif + readable sans-serif), and subtle anatomy/pulse/clinical-line motif guidelines.
+- **In scope**: Token definitions, `colorMode` service retargeting to new tokens, reduced-motion baseline, contrast validation approach.
+- **Out of scope**: Any component markup beyond applying tokens.
+- **Depends on**: Nothing (foundation unit).
 
-- **Purpose**: Create the typed content layer students will edit.
-- **Primary Responsibilities**:
-  - Define shared portfolio data types in `src/types/portfolio.ts`.
-  - Create focused data files under `src/data/*`.
-  - Create `src/data/portfolio.ts` aggregator.
-  - Preserve current owner content as realistic example data.
-  - Keep asset imports Vite-compatible.
-- **Primary Files**:
-  - `src/types/portfolio.ts`
-  - `src/data/profile.ts`
-  - `src/data/navigation.ts`
-  - `src/data/about.ts`
-  - `src/data/education.ts`
-  - `src/data/experience.ts`
-  - `src/data/awards.ts`
-  - `src/data/projects.ts`
-  - `src/data/gallery.ts`
-  - `src/data/videos.ts`
-  - `src/data/skills.ts`
-  - `src/data/certificates.ts`
-  - `src/data/portfolio.ts`
-- **Owner Profile**: Contributor comfortable with TypeScript and content modeling.
-- **Completion Criteria**:
-  - All existing content is represented in typed data modules.
-  - Navigation IDs are unique and complete.
-  - Data modules compile under strict TypeScript.
+## Unit 2: Content Data & Asset Allowlist
 
-## Unit 2: Component Refactor And Shared UI Utilities
+- **Responsibility**: Typed `content` module (FR-13) and `assetAllowlist` module with `isAllowedAsset` (FR-15) — the single privacy-boundary enforcement point.
+- **In scope**: All verified-content data structures (hero, narrative, education, scores, awards, leadership/service, closing statement), the explicit public-asset allowlist, colocated example and property-based tests (allowlist denial, section-ID uniqueness).
+- **Out of scope**: Any rendering component.
+- **Depends on**: Nothing structurally, but sequenced after Unit 1 per the approved strict-sequential ordering (Question 3, Option A).
 
-- **Purpose**: Refactor UI to consume typed data and reduce meaningful duplication.
-- **Primary Responsibilities**:
-  - Refactor `App`, `Navbar`, and section components to use shared data/config.
-  - Add shared scroll/navigation utilities.
-  - Add contact/media helpers.
-  - Add moderate reusable UI components such as `SectionShell`, `ContentCard`, and `ExternalAction` where useful.
-  - Improve accessible labels for links and controls.
-- **Primary Files**:
-  - `src/App.tsx`
-  - `src/components/*`
-  - `src/components/shared/*`
-  - `src/utils/scroll.ts`
-  - `src/utils/contact.ts`
-  - `src/utils/media.ts`
-  - `src/utils/animation.ts`
-- **Owner Profile**: Contributor comfortable with React, Chakra UI, and accessibility basics.
-- **Completion Criteria**:
-  - Existing portfolio sections still render.
-  - Components consume data/config instead of inline content arrays where planned.
-  - Duplicated scroll helpers are replaced.
-  - Obvious accessible-name gaps are improved.
+## Unit 3: Navigation & Layout Shell
 
-## Unit 3: GitHub Pages Deployment Configuration
+- **Responsibility**: `App` simplification (remove template/layout-mode state), `MedicalShell`, `MedicalNav`, skip link, removal of `PortfolioStyleSelector`/`EngineeringShell`/`BusinessShell` (FR-01, FR-03, FR-14).
+- **In scope**: Hash-anchor navigation, active-section/`aria-current` logic, sticky desktop + accessible mobile nav, color-mode control wiring, colocated tests (hash round-trip properties, nav/section agreement properties).
+- **Out of scope**: Content-area component internals (built in Unit 4).
+- **Depends on**: Unit 1 (tokens applied by shell), Unit 2 (`content`/`assetAllowlist` consumed by nav/shell-level color-mode control).
 
-- **Purpose**: Make deployment easier for student forks.
-- **Primary Responsibilities**:
-  - Update Vite base path handling to read `VITE_BASE_PATH` with `/` fallback.
-  - Update GitHub Actions to derive and pass the repository Pages base path.
-  - Preserve support for `username.github.io` root deployments.
-- **Primary Files**:
-  - `vite.config.ts`
-  - `.github/workflows/deploy.yml`
-- **Owner Profile**: Contributor comfortable with Vite and GitHub Actions.
-- **Completion Criteria**:
-  - Local development works with `/`.
-  - GitHub Actions passes repository-derived base path.
-  - Production build still succeeds.
+## Unit 4: Content Section Components
 
-## Unit 4: Student Documentation
+- **Responsibility**: The eight content-area components and shared primitives excluding the gallery (FR-04 through FR-09, FR-11): `MedicalHero`, `CallingToMedicine`, `EducationJourney`, `AcademicExcellence`, `ScienceAndAwards`, `LeadershipAndService`, `ClosingContact`, plus `ScoreCard`, `AwardItem`, `TimelineEntry`.
+- **In scope**: All non-gallery content rendering, colocated tests (rendering, content-accuracy regression tests, former-identity absence checks scoped to these components).
+- **Out of scope**: `EvidenceGallery`, `GalleryItem`, `GalleryModal` (Unit 5).
+- **Depends on**: Unit 1 (tokens), Unit 2 (content/allowlist), Unit 3 (shell composes these components).
 
-- **Purpose**: Create beginner-friendly setup, customization, deployment, and troubleshooting guidance.
-- **Primary Responsibilities**:
-  - Rewrite README as a student-first quick start.
-  - Rewrite or expand deployment guide.
-  - Explain editable data files and asset replacement.
-  - Explain GitHub Pages settings and base path behavior.
-  - Include verification and troubleshooting steps.
-- **Primary Files**:
-  - `README.md`
-  - `DEPLOYMENT.md`
-- **Owner Profile**: Contributor comfortable writing beginner documentation.
-- **Completion Criteria**:
-  - README no longer contains unrelated Vite starter content.
-  - Setup guide covers prerequisites, install, run, customize, test, build, and deploy.
-  - Deployment guide covers repository Pages and user/organization Pages.
+## Unit 5: Evidence Gallery
 
-## Unit 5: Lightweight Tests And Verification
+- **Responsibility**: `EvidenceGallery`, `GalleryItem`, `GalleryModal` (FR-10) — keyboard access, meaningful alt text, focus containment/Escape/close/focus-restoration, lazy-loading with reserved dimensions.
+- **In scope**: Gallery-specific components and colocated tests (keyboard navigation, focus-trap behavior, lazy-loading/layout-shift checks, allowlist-only sourcing).
+- **Out of scope**: Non-gallery content sections.
+- **Depends on**: Unit 1 (tokens), Unit 2 (content/allowlist), Unit 3 (shell placement in composition order).
 
-- **Purpose**: Add automated guardrails for app render, navigation config, and key template data.
-- **Primary Responsibilities**:
-  - Add Vitest and React Testing Library setup.
-  - Add `npm run test`.
-  - Add app smoke render test.
-  - Add navigation config tests.
-  - Add required portfolio data tests.
-  - Update verification documentation.
-- **Primary Files**:
-  - `package.json`
-  - Test config file if needed
-  - `src/**/*.test.ts`
-  - `src/**/*.test.tsx`
-  - Build/test docs under `aidlc-docs/construction/build-and-test/`
-- **Owner Profile**: Contributor comfortable with TypeScript tests and React Testing Library.
-- **Completion Criteria**:
-  - Test command exists.
-  - Tests pass locally.
-  - Tests avoid external network calls and browser automation.
+## Unit 6: Testing & Documentation
 
-## Recommended Sequence
+- **Responsibility**: Cross-cutting regression and documentation only (per-unit tests are already colocated and complete by this point): former-owner-identity absence across the full app, retired-template-choice absence, full production-build asset-boundary sweep (no prohibited CV file in the bundle), and repository documentation updates (FR-16, NFR-06 cross-cutting scope).
+- **In scope**: Full-app regression test suite additions, `README`/contributor documentation updates describing the new content structure and public/private asset boundary.
+- **Out of scope**: Any new component or content work (all already delivered in Units 1-5).
+- **Depends on**: Units 1 through 5 (validates the completed system as a whole).
 
-1. Unit 1: Template Data And Shared Types
-2. Unit 2: Component Refactor And Shared UI Utilities
-3. Unit 3: GitHub Pages Deployment Configuration
-4. Unit 4: Student Documentation
-5. Unit 5: Lightweight Tests And Verification
+## Code Organization Note (Brownfield)
 
-## Extension Rule Compliance
-
-| Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+No new directory structure is introduced; units map onto the existing `src/data`, `src/types`, `src/hooks`, `src/components/shared`, and root-level component conventions already used by the codebase (see `aidlc-docs/inception/reverse-engineering/component-inventory.md`).

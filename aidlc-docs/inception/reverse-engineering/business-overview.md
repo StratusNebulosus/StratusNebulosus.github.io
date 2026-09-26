@@ -1,76 +1,63 @@
 # Business Overview
 
-## Business Context Diagram
+## Business Context
 
 ```mermaid
-flowchart TD
-    Student["Student or Portfolio Owner"]
-    Visitor["Recruiter, Mentor, Peer, or Collaborator"]
-    Portfolio["Student Portfolio Website"]
-    Content["Typed Portfolio Data and Journal Content"]
-    Templates["Engineering, Neutral, and Business Templates"]
-    External["GitHub, LinkedIn, WordPress, YouTube, and Email"]
-    Pages["GitHub Pages"]
-
-    Student --> Content
-    Content --> Portfolio
-    Templates --> Portfolio
-    Student --> Pages
-    Pages --> Portfolio
-    Visitor --> Portfolio
-    Portfolio --> External
+flowchart LR
+    Student["Student portfolio owner"] --> Content["Verified medical portfolio content"]
+    Reviewer["Academic reviewer or mentor"] --> Site["Public portfolio"]
+    Content --> Site
+    Evidence["Approved evidence allowlist"] --> Site
+    Site --> Download["Approved CV download"]
+    Site --> Gallery["Evidence review dialog"]
 ```
 
-### Text Alternative
-
-Students maintain shared typed content, choose the initial presentation, and publish the static site to GitHub Pages. Visitors can choose and persist their preferred Engineering, Neutral, or Business presentation, open local journal posts, inspect portfolio evidence, and follow external links.
+Text alternative: the student supplies verified content and explicitly approved evidence. Academic reviewers and mentors use the public site to understand the medical pathway, review evidence, and download the approved CV.
 
 ## Business Description
 
-- **Business Description**: The application is a reusable student portfolio that separates personal content from presentation. The same profile, education, experience, projects, media, writing, skills, and contact data can be rendered through Engineering, Neutral, or Business.
-- **Primary Template Goal**: Give students with different disciplines a credible starting point they can customize without duplicating content or needing a backend.
-- **Business Transactions**:
-  - A student edits typed files in `src/data/`, Markdown journal content, and local media assets.
-  - A student chooses the first-visit presentation in `src/data/template.ts`.
-  - A visitor switches among Engineering, Neutral, and Business from any responsive header and the browser remembers the choice.
-  - A visitor browses all enabled sections in single-page mode or one section at a time in multi-page mode.
-  - A visitor navigates through desktop or mobile controls and can switch color and layout modes.
-  - A visitor opens an in-site journal post through a GitHub Pages-safe hash route.
-  - A visitor follows external posts, social profiles, repositories, videos, and email actions.
-  - A visitor downloads the portfolio owner's resume.
-  - GitHub Actions builds and deploys the static application to GitHub Pages.
+- **Purpose**: Present Bui Tuan Phat's verified medical-study pathway through a polished, privacy-safe, accessible static portfolio.
+- **Primary audiences**: Academic reviewers, scholarship and program reviewers, mentors, peers, and collaborators.
+- **Delivery model**: Public GitHub Pages site with no backend, authentication, database, analytics, or runtime content service.
+
+## Business Transactions
+
+1. **Understand the student profile**: A visitor reads the Overview and Calling to Medicine sections.
+2. **Review academic development**: A visitor reviews education milestones, GPA progression, scores, and scholarship recognition.
+3. **Review science and award evidence**: A visitor reads science projects and awards and sees approved supporting images.
+4. **Inspect evidence in detail**: A visitor activates an evidence card, reviews the larger image in an accessible dialog, closes it, and returns focus to the originating control.
+5. **Review leadership and service**: A visitor reads verified activities without clinical overstatement.
+6. **Download the approved CV**: A visitor downloads the explicitly approved public PDF.
+7. **Navigate the portfolio**: A visitor uses sticky responsive anchors and active-section feedback.
+8. **Switch color mode**: A visitor chooses an accessible light or dark medical theme.
 
 ## Business Dictionary
 
-- **Portfolio Owner**: The student or professional whose work and identity are presented.
-- **Portfolio Visitor**: A recruiter, reviewer, mentor, peer, collaborator, or prospective client.
-- **Portfolio Template**: A registered presentation strategy that maps every shared section ID to a React component.
-- **Engineering Template**: The structured technical presentation using the baseline section components.
-- **Neutral Template**: The balanced editorial presentation for multidisciplinary work and reflective writing.
-- **Business Template**: The professional report presentation for outcomes, evidence, and decision-ready project summaries.
-- **Portfolio Style Preference**: A valid visitor choice stored in the browser; it overrides the source default on later visits in that browser.
-- **Layout Mode**: Either a continuous single-page experience or hash-routed multi-page section view.
-- **Writing Entry**: A local in-site journal post or an external WordPress post shown in the Journal section.
-- **Section**: A typed portfolio area such as Home, About, Projects, Gallery, Journal, or Contact.
+- **Approved evidence**: A local media asset explicitly listed in the public asset allowlist.
+- **Evidence gallery**: Thirteen reviewed public images with keyboard-accessible detail viewing.
+- **Award evidence**: An allowlisted image associated with an award entry.
+- **Private source**: A source record used for verification but prohibited from public output.
+- **Medical section**: One of the eight anchored areas in the single-page narrative.
+- **Placeholder contact**: Clearly fictional, non-actionable contact copy that must not be treated as a real channel.
 
 ## Component-Level Business Descriptions
 
-### Application Shell
-- **Purpose**: Resolve template, layout, navigation, and journal routes into the visible experience.
-- **Responsibilities**: Own runtime template state and render the active shell and sections while preserving GitHub Pages compatibility.
+### Medical Content System
 
-### Template Registry
-- **Purpose**: Let one portfolio dataset support multiple student-facing outlooks.
-- **Responsibilities**: Register exactly three templates, resolve active IDs with an Engineering fallback, and guarantee a shell and component for every section.
+- Owns verified hero, education, GPA, scores, awards, activities, and Contact content.
+- Keeps data separate from presentation and preserves evidence traceability.
 
-### Content and Writing Data
-- **Purpose**: Keep student-editable information separate from JSX presentation.
-- **Responsibilities**: Export typed profile, career, project, media, journal, skill, certificate, and navigation records.
+### Public Asset Boundary
 
-### Navigation and Layout
-- **Purpose**: Let visitors move through the portfolio efficiently on desktop and mobile.
-- **Responsibilities**: Handle active state, single/multi-page modes, hash links, portfolio-style selection, color-mode switching, and mobile navigation.
+- Exposes only explicitly allowlisted images and the approved CV PDF.
+- Prevents private CV-source documents and prohibited markers from entering the production graph.
 
-### Deployment Workflow
-- **Purpose**: Publish student portfolios without application servers.
-- **Responsibilities**: Derive the GitHub Pages base path, build `dist/`, and deploy the static artifact.
+### Portfolio Presentation
+
+- Renders the eight-section medical narrative, responsive navigation, light/dark themes, evidence cards, and dialogs.
+- Preserves semantic reading order, keyboard access, and reduced-motion behavior.
+
+### Build and Delivery
+
+- Runs TypeScript, ESLint, example/property tests, production policy checks, and Vite builds.
+- Publishes static output through the existing GitHub Pages workflow.

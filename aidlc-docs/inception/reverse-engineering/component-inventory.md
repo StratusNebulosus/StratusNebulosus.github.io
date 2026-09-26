@@ -1,62 +1,66 @@
 # Component Inventory
 
-## Application Packages
+## Application Package
 
-- `my-portfolio` - React/Vite application that renders a configurable student portfolio and local journal.
+- `my-portfolio` - one React/Vite static application.
 
-## Infrastructure Packages
+## Runtime Component Groups
 
-- `.github/workflows/deploy.yml` - GitHub Actions workflow that builds and deploys the static site to GitHub Pages.
+### Composition and Shell
 
-## Shared Packages
+- `src/App.tsx` - eight-section composition.
+- `src/components/medical/MedicalShell.tsx` - document shell and landmarks.
+- `src/components/medical/MedicalNav.tsx` - responsive sticky navigation and color-mode control.
 
-- `src/data` - Student-editable typed portfolio and template configuration.
-- `src/types` - Shared data and section contracts.
-- `src/hooks` - Layout and navigation state.
-- `src/utils` - Scroll, route, media, animation, and template-selection helpers.
-- `src/components/shared` - Reusable section, card, action, logo, and portfolio-style primitives.
-- `src/components/ui` - Chakra provider and UI helpers.
-- `src/assets` - Images, logos, resume, and certificate documents.
-- `src/content/journal` - Local Markdown journal bodies.
+### Medical Content
+
+- `MedicalHero`
+- `CallingToMedicine`
+- `EducationJourney`
+- `AcademicExcellence`
+- `ScienceAndAwards`
+- `LeadershipAndService`
+- `ClosingContact`
+- `MedicalSection`
+- Shared primitives: `ScoreCard`, `TimelineEntry`, `ResearchFeature`, `AwardItem`, and `ActivityCard`.
+
+### Evidence Gallery
+
+- `EvidenceGallery` - validated collection and selection orchestration.
+- `GalleryItem` - interactive thumbnail and caption card.
+- `GalleryModal` - accessible detail dialog.
+
+### Theme and UI Support
+
+- Chakra provider, color-mode utilities, tooltip, and toaster modules.
+- Generated medical token and contrast modules under `src/theme/`.
+
+## Data and Policy Modules
+
+- `src/data/medical/content.ts` - verified portfolio content.
+- `src/data/medical/gallery.ts` - 13 evidence items.
+- `src/data/medical/assetAllowlist.ts` - 13 approved JPGs and one approved CV PDF.
+- `src/data/medical/navigation.ts` - eight-section navigation.
+- `src/types/medicalPortfolio.ts` - medical domain contracts.
+- `src/utils/medicalGallery.ts` - gallery validation and selection logic.
+
+## Infrastructure Package
+
+- `.github/workflows/deploy.yml` - GitHub Pages quality, build, verification, and deployment workflow.
 
 ## Test Packages
 
-- `src/App.test.tsx` - Application smoke and route behavior.
-- `src/test/data/*.test.ts` - Navigation and content validation.
-- `src/hooks/*.test.ts` - Layout helper behavior.
-- `src/templates/*.test.ts` - Template registry completeness and fallback.
-- `src/utils/*.test.ts` - Journal and template-selection utility behavior.
+- 32 Vitest files covering components, data, privacy, themes, navigation, gallery state, production graph, documentation, and production policy.
+- Testing Library and jsdom provide DOM behavior tests.
+- fast-check provides property tests with shrinking and seed replay.
 
-## Total Count
+## Counts
 
-- **Total Packages**: 1 application package plus deployment configuration.
-- **Source Files**: Current files are tracked directly in `src/`; counts change as students add content and assets.
-- **React Components**: Engineering, Neutral, and Business shells plus shared and template-specific sections.
-- **TypeScript Modules**: Typed data, hooks, utilities, templates, and tests.
-- **Stylesheets**: 2 CSS files.
-- **Bundled Assets and Content**: 24 files, including one Markdown journal post.
-- **Automated Tests**: The active suite covers App, accessibility, layout, registry, data, and template-selection behavior; exact results are recorded in the active code-generation summary.
-
-## User-Facing Components
-
-- `App` / `PortfolioApp` - Runtime template, route, layout, and visible-section orchestration.
-- `Navbar` - Engineering desktop/mobile navigation and display controls.
-- `EngineeringShell`, `NeutralShell`, and `BusinessShell` - Distinct responsive page structures and headers.
-- `PortfolioStyleSelector` - Shared three-choice style menu present in every shell header.
-- `Hero`, `NeutralHero`, and `BusinessHero` - Template-specific introductions and actions.
-- `About` - Biography and metrics.
-- `Education` - Education records.
-- `Experience` - Work and leadership records.
-- `Awards` - Awards and recognitions.
-- `Projects`, `NeutralProjects`, and `BusinessProjects` - Template-specific project presentations.
-- `Gallery` - Shared visual portfolio and preview.
-- `Journal` - Combined in-site and external writing index.
-- `JournalPostPage` - Local writing detail and not-found states.
-- `Skills` - Skill groups and certificates.
-- `Contact` - Mailto contact form and social actions.
-
-## Template Differentiation Boundary
-
-- **Currently Template-Specific**: Shell/header/navigation structure, Hero, About, Projects, chapter labels, and scoped CSS variables where needed.
-- **Currently Shared**: App-level section ordering, runtime style selector, layout state, Education, Experience, Awards, Gallery, Journal, Skills, Contact, local post detail, and all student data.
-- **Architectural Constraint**: Templates can replace their shell and section components, but App retains the shared section sequence, routing model, runtime template state, and layout ownership.
+- **Application packages**: 1.
+- **Infrastructure packages**: 1 workflow configuration.
+- **Files under `src/`**: 137.
+- **Medical TSX files**: 20, including tests.
+- **Medical data TypeScript files**: 10, including tests.
+- **Automated test files**: 32.
+- **Approved public gallery images**: 13.
+- **Approved downloadable CVs**: 1.

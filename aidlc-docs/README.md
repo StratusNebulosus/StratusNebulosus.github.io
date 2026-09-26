@@ -2,22 +2,27 @@
 
 ## Active Change
 
-- **Change**: Business Color and Two-Theme Refresh
-- **Requirement questions**: `inception/requirements/business-youthful-color-refresh-requirement-questions.md`
-- **Requirements**: `inception/requirements/business-youthful-color-refresh-requirements.md`
-- **Execution plan**: `inception/plans/business-youthful-color-refresh-execution-plan.md`
-- **Code-generation plan**: `construction/plans/business-youthful-color-refresh-code-generation-plan.md`
-- **Code-generation summary**: `construction/business-youthful-color-refresh/code/code-generation-summary.md`
+- **Change**: Medical Student Portfolio Revamp
+- **Requirements**: `inception/requirements/requirements.md`
+- **User stories and personas**: `inception/user-stories/stories.md`, `inception/user-stories/personas.md`
+- **Execution plan**: `inception/plans/execution-plan.md`
+- **Application design**: `inception/application-design/application-design.md`
+- **Unit of work**: `inception/application-design/unit-of-work.md`, `unit-of-work-dependency.md`, `unit-of-work-story-map.md`
 - **Current reverse engineering**: `inception/reverse-engineering/`
-- **Build and Test guidance**: `construction/build-and-test/`
 - **State**: `aidlc-state.md`
 - **Append-only audit history**: `audit.md`
 
 ## Current Product Boundary
 
-- Engineering and Business are the complete supported template set.
-- Business uses the approved background and text palettes.
-- Shared content, routes, layout modes, color mode, and GitHub Pages behavior remain authoritative.
+- One unified medical portfolio template replaces the Engineering/Business template pair; the style selector and layout toggle are removed.
+- Shared routes, hash navigation, color mode, and GitHub Pages behavior remain authoritative under the new design tokens.
+- Public content and imagery are restricted to an explicit asset allowlist; `src/assets/CV/` is never enumerated or imported wholesale.
+
+## Previous Change (Superseded)
+
+- **Change**: Business Color and Two-Theme Refresh
+- **Status when superseded**: Code Generation Part 2 completed; final Code Generation review and Build and Test rerun were still pending.
+- **Artifacts**: `inception/requirements/business-youthful-color-refresh-requirements.md`, `construction/plans/business-youthful-color-refresh-code-generation-plan.md`, `construction/business-youthful-color-refresh/code/code-generation-summary.md`, `construction/build-and-test/`.
 
 ## Documentation Controls
 

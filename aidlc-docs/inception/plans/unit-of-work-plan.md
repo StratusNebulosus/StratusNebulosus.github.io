@@ -1,91 +1,70 @@
-# Unit of Work Plan
+# Medical Student Portfolio Revamp - Unit of Work Plan
 
 ## Purpose
 
-Decompose the student portfolio template refactor into manageable units of work for construction. This plan focuses on story grouping, dependencies, ownership boundaries, and technical sequencing.
+Decompose the approved application design into units of work for the CONSTRUCTION phase's per-unit loop (Functional Design, NFR Requirements, NFR Design, Code Generation). This is a single monolithic static frontend (`my-portfolio`); "units" here are logical modules built and completed in sequence, not independently deployable services.
 
-## Recommended Decomposition Direction
+## Context Summary
 
-Use multiple logical units within the single React/Vite application. The project remains one deployable static app, but the work is easier to design and implement if grouped into focused units:
+- The execution plan (`aidlc-docs/inception/plans/execution-plan.md`) proposed a 6-unit sequence: Design Tokens & Theming; Content Data & Asset Allowlist; Navigation & Layout Shell; Content Section Components; Evidence Gallery; Testing & Documentation.
+- Application design (`aidlc-docs/inception/application-design/`) defines `MedicalShell`/`MedicalNav`, eight content-area components, shared primitives, `content`/`assetAllowlist`/`colorMode`/`navigation` services, and `GalleryModal`.
+- 16 approved user stories map onto these components; every story must be assigned to exactly one unit for traceability.
 
-1. Template Data and Shared Types
-2. Component Refactor and Shared UI Utilities
-3. GitHub Pages Deployment Configuration
-4. Student Documentation
-5. Lightweight Tests and Verification
+## Planning Checklist
 
-## Planning Questions
+- [x] Load application design, requirements, and user stories.
+- [x] Generate context-appropriate questions.
+- [x] Collect answers.
+- [x] Analyze answers for ambiguity/contradiction. All four answers selected the recommended option (A); no ambiguity, contradiction, or follow-up needed.
+- [x] Record explicit approval of the plan.
 
-Please answer each question by filling in the letter choice after the `[Answer]:` tag.
-
-If none of the options match your preference, choose `X) Other` and describe your preference after the `[Answer]:` tag.
-
-### Question 1
-
-How should construction units be grouped?
-
-A) Multiple focused units: data/types, component refactor, deployment, documentation, tests
-B) One single unit covering the whole portfolio template refactor
-C) Two units: application code and documentation/deployment/testing
-X) Other (please describe after [Answer]: tag below)
-
-[Answer]: A
-
-### Question 2
-
-How should unit sequencing be handled?
-
-A) Sequential: complete data/types first, then components, then deployment/docs/tests
-B) Parallel-ready: document units as independently workable where possible, with dependency notes
-C) Documentation-first: write student docs before code refactor
-X) Other (please describe after [Answer]: tag below)
-
-[Answer]: A
-
-### Question 3
-
-How should user stories map to units?
-
-A) Map each story to a primary unit and allow secondary supporting units where needed
-B) Assign every story to exactly one unit only
-C) Group stories only by student journey order, even if technical dependencies cross units
-X) Other (please describe after [Answer]: tag below)
-
-[Answer]: A
-
-### Question 4
-
-How should construction ownership be described?
-
-A) Single maintainer executes all units in dependency order
-B) Units are designed so different contributors could work on code, docs, deployment, and tests separately
-C) Only describe technical dependencies; skip ownership guidance
-X) Other (please describe after [Answer]: tag below)
-
-[Answer]: B
-
-## Execution Checklist
-
-- [x] Read requirements, user stories, application design, and execution plan.
-- [x] Confirm decomposition decisions from answered plan questions.
-- [x] Generate `aidlc-docs/inception/application-design/unit-of-work.md` with unit definitions and responsibilities.
-- [x] Generate `aidlc-docs/inception/application-design/unit-of-work-dependency.md` with dependency matrix.
-- [x] Generate `aidlc-docs/inception/application-design/unit-of-work-story-map.md` mapping stories to units.
-- [x] Validate unit boundaries and dependencies.
-- [x] Ensure all stories are assigned to units.
-- [x] Update this plan's completed checkboxes as generation work is completed.
-- [x] Update `aidlc-docs/aidlc-state.md`.
-- [x] Present Units Generation completion checkpoint for review.
-
-## Mandatory Artifacts
+## Mandatory Artifacts (Part 2)
 
 - [x] `aidlc-docs/inception/application-design/unit-of-work.md`
 - [x] `aidlc-docs/inception/application-design/unit-of-work-dependency.md`
 - [x] `aidlc-docs/inception/application-design/unit-of-work-story-map.md`
 
-## Extension Rule Compliance
+## Planning Questions
 
-| Extension              | Status   | Rationale                                    |
-| ---------------------- | -------- | -------------------------------------------- |
-| Security Baseline      | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+Please answer every question by entering the selected letter after its `[Answer]:` tag. If none of the options match your preference, choose `X) Other` and describe the preference after the tag.
+
+### Question 1: Unit grouping strategy
+
+The execution plan proposed 6 units grouped by technical layer (tokens, data, shell/nav, sections, gallery, tests/docs). Should this grouping be kept?
+
+A) Keep the 6-unit technical-layer grouping as proposed (recommended) — clean dependency ordering (tokens → data → shell → sections → gallery → tests/docs), each unit independently completable
+B) Merge into fewer, larger units (e.g., combine tokens+data as "Foundation", combine shell+sections+gallery as "Experience", keep "Testing & Documentation")
+C) Split into more, smaller units (e.g., separate each of the 8 content-area components into its own unit)
+X) Other (please describe after [Answer]: tag below)
+
+[Answer]: A
+
+### Question 2: Testing & Documentation unit sequencing
+
+Should "Testing & Documentation" run strictly last, or should each earlier unit include its own colocated tests as it is built (per Application Design's colocated-testing decision), with a final unit only for cross-cutting regression/property tests and documentation?
+
+A) Each unit (2-5) includes its own colocated example-based and property-based tests as it is built; the final "Testing & Documentation" unit covers only cross-cutting regression tests (former-identity absence, full asset-boundary sweep) and repository documentation (recommended)
+B) Defer ALL test-writing (including per-component tests) to the final unit, after all components and data exist
+X) Other (please describe after [Answer]: tag below)
+
+[Answer]: A
+
+### Question 3: Dependency strictness between units
+
+Should units be completed strictly in sequence, or can some proceed in parallel?
+
+A) Strictly sequential: Design Tokens & Theming → Content Data & Asset Allowlist → Navigation & Layout Shell → Content Section Components → Evidence Gallery → Testing & Documentation, each fully completed (including its own code and tests) before the next starts (recommended) — matches the per-unit Construction loop, which completes one unit fully before moving to the next
+B) Allow Content Data & Asset Allowlist and Design Tokens & Theming to be worked in either order or together, since they have no dependency on each other, before Navigation & Layout Shell starts
+X) Other (please describe after [Answer]: tag below)
+
+[Answer]: A
+
+### Question 4: Story-to-unit mapping granularity
+
+How should the 16 approved user stories be mapped to units?
+
+A) Each story maps to exactly one primary unit based on its dominant component/requirement (e.g., Story 9 "Evidence Gallery" → Evidence Gallery unit), even where a story also touches shared services from an earlier unit (recommended)
+B) Allow stories to be split across multiple units when they touch multiple components, creating partial-story entries per unit
+X) Other (please describe after [Answer]: tag below)
+
+[Answer]: A

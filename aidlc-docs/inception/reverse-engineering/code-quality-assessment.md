@@ -2,52 +2,50 @@
 
 ## Test Coverage
 
-- **Overall**: Focused automated coverage; no measured line/branch percentage.
-- **Unit and Data Tests**: Navigation contracts, portfolio data, template registry, template-selection persistence, and layout helpers are covered.
-- **Integration/DOM Tests**: App rendering, all-three-style switching, persistence, layout switching, hash navigation, local journal detail, and not-found behavior are covered.
-- **End-to-End Tests**: Not configured.
-- **Latest Recorded Result**: 7 test files and 70 tests pass after the runtime template-selector implementation.
+- **Automated suite**: 32 files and 130 passing tests in the last completed workflow.
+- **Component tests**: Medical content, shell, gallery cards, dialog behavior, and focus restoration.
+- **Policy tests**: Asset allowlist, private-field rejection, production graph, production output, and documentation contract.
+- **Property tests**: Navigation, gallery selection/validation, theme tokens, content invariants, and production policy.
+- **Coverage percentage**: Not configured; no percentage is claimed.
 
-## Code Quality Indicators
+## Quality Indicators
 
-- **TypeScript Strictness**: Good. Strict mode and unused/fallthrough/side-effect checks are enabled.
-- **Linting**: Configured and passing at the latest recorded verification.
-- **Formatting**: Prettier is configured.
-- **Documentation**: Good for student customization and AI-DLC traceability, though reverse-engineering artifacts required this refresh.
-- **Accessibility**: Good labels, image alternatives, semantic menu radio items, keyboard-capable controls, focus treatment, reduced-motion styling, and stable test IDs.
-- **Maintainability**: Improved through typed data, shared utilities, shared UI primitives, and the template registry.
+- **TypeScript**: Strict build configured and passing at the last gate.
+- **Linting**: ESLint configured and passing at the last gate.
+- **Formatting**: Prettier installed.
+- **Accessibility**: Semantic headings, keyboard-accessible evidence dialog, focus restoration, visible focus, reduced motion, and contrast checks exist.
+- **Privacy**: Explicit public allowlist and production deny checks exist.
+- **Deployment**: Root and repository-base-path builds are verified.
 
 ## Good Patterns
 
-- Shared typed data supports all three templates without content duplication.
-- Template completeness is enforced by TypeScript and registry tests.
-- Hash routing avoids GitHub Pages rewrite dependencies.
-- Layout storage failures have safe fallbacks and tests.
-- Template storage uses typed validation, an Engineering fallback, and storage-failure tests.
-- Local and external writing use a discriminated union.
-- Resume and certificate assets are bundled through Vite.
-- Student-facing README instructions identify safe customization locations.
+- Typed local content separated from presentation.
+- Explicit public asset allowlist rather than directory enumeration.
+- Pure gallery state utilities with property tests.
+- Chakra Dialog for focus containment and Escape behavior.
+- Shared section semantics and named theme tokens.
+- Deterministic property-test replay and production-output verification.
+
+## Current Findings Relevant to the Request
+
+1. **Section headings still consume substantial vertical space**: the approved 3rem cap is smaller than the original design but remains visually dominant for long headings.
+2. **Award evidence is not interactive**: `AwardItem` renders a small static thumbnail; only the separate Evidence Gallery supports detail viewing.
+3. **Grade 10 scale wraps**: `/10` is an inline child without a no-wrap layout, so narrow cards can display `/1` and `0` on separate lines.
+4. **Dialog inset is minimal on small screens**: the positioner uses 0.5rem padding at narrow widths and centered placement, which does not guarantee the requested larger top margin.
+5. **Visual rhythm is uneven**: content cards use consistent tokens but several sections rely on flat repeated grids without the stronger framing, indexing, rules, and evidence-forward hierarchy visible in the reference design.
+6. **Metadata duplication**: award evidence and gallery items repeat titles and descriptions; reuse or a small adapter can prevent divergence.
 
 ## Technical Debt and Risks
 
-- The shared selector reads template metadata from the registry imported by the same shell graph; this render-safe ESM cycle should be revisited if template modules gain side effects.
-- Neutral and Business intentionally reuse several shared sections, so shared-component changes have a three-template regression surface.
-- `src/hooks/usePortfolioLayout.ts` deliberately gives every template the same single/multi-page and route model; future template-specific routing would require a new contract.
-- `src/App.css` and `src/index.css` contain substantial shared and template-scoped styling that require disciplined selector isolation.
-- No browser-level visual regression or end-to-end suite automatically verifies responsive composition or menu focus behavior.
-- Duplicate ESLint configs remain.
+- Extensive existing dirty-worktree changes must be preserved.
+- Retired general-purpose modules remain outside the current medical runtime graph.
+- Broad visual refinement can regress mobile overflow, dark mode, focus states, or main-content priority if implemented as isolated ad hoc overrides.
+- Reusing the gallery dialog for award evidence should preserve one-dialog ownership and reliable focus restoration rather than adding a second modal system.
 
-## Runtime-Selector Constraints
+## Recommended Change Boundaries
 
-- Keep exactly Engineering, Neutral, and Business.
-- `src/data/template.ts` remains the first-visit source default.
-- Runtime choice must preserve route, journal, layout, and color-mode state.
-- Every responsive shell header must expose the same accessible choice.
-- Static hosting must remain free of backend, URL-selection, and selector-specific dependency requirements.
-
-## Recommended Next Improvements
-
-- Extract template display metadata from the registry graph if future module side effects make the current selector import cycle risky.
-- Add Playwright screenshot and keyboard-flow checks for all three responsive headers when browser automation is available.
-- Consolidate the duplicate ESLint configuration files.
-- Keep future presentation options within the existing shell/registry contract unless requirements justify a wider routing model.
+- Reuse existing Chakra Dialog and gallery selection logic for award detail viewing.
+- Introduce no new asset or UI dependency.
+- Fix GPA scale wrapping through semantic markup/CSS without changing the verified `9.38` or `/10` content.
+- Apply visual polish through shared tokens and repeated component classes so all sections remain coherent in both themes.
+- Preserve the public asset allowlist, navigation, hero identity, Contact rules, and GitHub Pages workflow.

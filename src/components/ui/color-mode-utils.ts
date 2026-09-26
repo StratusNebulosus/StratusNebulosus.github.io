@@ -12,13 +12,22 @@ export interface UseColorModeReturn {
 
 export function useColorMode(): UseColorModeReturn {
   const { resolvedTheme, setTheme, forcedTheme } = useTheme();
-  const colorMode = forcedTheme || resolvedTheme;
-  const toggleColorMode = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  const colorMode = (forcedTheme || resolvedTheme || "light") as ColorMode;
+  const applyColorMode = (nextMode: ColorMode) => {
+    setTheme(nextMode);
+
+    if (typeof document !== "undefined") {
+      document.documentElement.setAttribute("data-color-mode", nextMode);
+      document.documentElement.classList.toggle("light", nextMode === "light");
+      document.documentElement.classList.toggle("dark", nextMode === "dark");
+    }
   };
+  const toggleColorMode = () =>
+    applyColorMode(colorMode === "dark" ? "light" : "dark");
+
   return {
-    colorMode: colorMode as ColorMode,
-    setColorMode: setTheme,
+    colorMode,
+    setColorMode: applyColorMode,
     toggleColorMode,
   };
 }

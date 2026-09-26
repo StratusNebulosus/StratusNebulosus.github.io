@@ -1,191 +1,74 @@
-# Component Methods
+# Application Design - Component Methods
 
-## Application Shell
+Method signatures and high-level purpose only. Detailed business rules (validation logic, exact matching algorithms, edge-case handling) are deferred to Functional Design per unit.
 
-### `App`
+## `App`
 
-```ts
-function App(): JSX.Element
-```
+- `getActiveSection(hash: string, sectionIds: string[]): string` - Derive the active section id from the current hash, falling back to the first section.
+- `setColorMode(mode: "light" | "dark"): void` - Update and persist the visitor's color-mode preference.
+- `getColorMode(): "light" | "dark"` - Read the persisted preference, falling back safely if unavailable (NFR-05).
 
-- **Purpose**: Render the portfolio page with navigation and ordered sections.
-- **Inputs**: Portfolio data/config imported from `src/data/portfolio`.
-- **Output**: React page tree.
+## `MedicalShell`
 
-```ts
-function useActiveSection(sectionIds: SectionId[], offset?: number): SectionId
-```
+- `render(activeSection: string, colorMode: "light" | "dark"): ReactElement` - Compose `MedicalNav` and all content-area components in approved order.
 
-- **Purpose**: Track which section is currently active while scrolling.
-- **Inputs**:
-  - `sectionIds`: Ordered section identifiers.
-  - `offset`: Optional scroll offset for fixed navbar.
-- **Output**: Active section ID.
+## `MedicalNav`
 
-## Navigation
+- `getNavItems(): NavItem[]` - Return the ordered list of enabled section links.
+- `isActive(sectionId: string, activeSection: string): boolean` - Determine whether a nav item should carry the active/`aria-current` state.
+- `toggleMobileMenu(open: boolean): void` - Open/close the compact mobile navigation.
 
-### `Navbar`
+## `MedicalHero`
 
-```ts
-type NavbarProps = {
-  activeSection?: SectionId
-}
+- `getHeroContent(): HeroContent` - Read hero copy and highlight tags from the content module.
 
-function Navbar(props: NavbarProps): JSX.Element
-```
+## `CallingToMedicine`
 
-- **Purpose**: Render desktop/mobile navigation from shared config.
-- **Inputs**: `activeSection`.
-- **Output**: Header, desktop links, mobile drawer.
+- `getNarrative(): NarrativeSection` - Read the reflective narrative content, pre-split into aspiration vs. verified-experience blocks.
 
-```ts
-function scrollToSection(sectionId: SectionId): void
-```
+## `EducationJourney`
 
-- **Purpose**: Smooth-scroll to a section by ID.
-- **Inputs**: Section ID.
-- **Output**: Browser scroll side effect.
+- `getTimelineEntries(): TimelineEntryData[]` - Read ordered education milestones from the content module.
 
-## Shared Utilities
+## `AcademicExcellence`
 
-```ts
-function buildMailtoUrl(input: ContactFormInput, recipientEmail: string): string
-```
+- `getScoreEntries(): ScoreEntryData[]` - Read SAT/IELTS/AP entries from the content module.
 
-- **Purpose**: Build encoded mailto URL from contact form fields.
-- **Inputs**:
-  - Contact form data.
-  - Recipient email.
-- **Output**: Mailto URL string.
+## `ScienceAndAwards`
 
-```ts
-function getYouTubeEmbedUrl(videoId: string): string
-```
+- `getAwardGroups(): AwardGroup[]` - Read awards grouped by theme/chronology from the content module.
 
-- **Purpose**: Build iframe embed URL for YouTube videos.
-- **Inputs**: YouTube video ID.
-- **Output**: YouTube embed URL.
+## `LeadershipAndService`
 
-```ts
-function getYouTubeWatchUrl(videoId: string): string
-```
+- `getServiceEntries(): ServiceEntryData[]` - Read leadership/service entries from the content module.
 
-- **Purpose**: Build external YouTube watch URL.
-- **Inputs**: YouTube video ID.
-- **Output**: YouTube watch URL.
+## `EvidenceGallery`
 
-```ts
-function getAnimationDelayClass(index: number): string
-```
+- `getGalleryItems(): GalleryItemData[]` - Read gallery entries whose asset paths have passed `isAllowedAsset`.
+- `openItem(itemId: string): void` - Open `GalleryModal` for the given item.
+- `closeModal(): void` - Close the modal and restore focus to the triggering `GalleryItem`.
 
-- **Purpose**: Return existing reveal animation delay class.
-- **Inputs**: Item index.
-- **Output**: CSS class string.
+## `GalleryModal`
 
-## Section Components
+- `onKeyDown(event: KeyboardEvent): void` - Handle Escape-to-close and focus-trap tab cycling.
+- `restoreFocus(triggerElementRef: RefObject<HTMLElement>): void` - Return focus to the element that opened the modal.
 
-Each section keeps a simple function component signature:
+## `ClosingContact`
 
-```ts
-function Hero(): JSX.Element
-function About(): JSX.Element
-function Education(): JSX.Element
-function Experience(): JSX.Element
-function Awards(): JSX.Element
-function Projects(): JSX.Element
-function Gallery(): JSX.Element
-function Videos(): JSX.Element
-function Skills(): JSX.Element
-function Contact(): JSX.Element
-```
+- `getClosingStatement(): string` - Read the non-interactive closing statement from the content module.
 
-- **Purpose**: Render one portfolio section.
-- **Inputs**: Imported typed data modules.
-- **Output**: Section-specific React UI.
+## Shared Primitives
 
-## Shared UI Components
+- `ScoreCard.render(entry: ScoreEntryData): ReactElement`
+- `AwardItem.render(entry: AwardEntryData): ReactElement`
+- `TimelineEntry.render(entry: TimelineEntryData): ReactElement`
+- `GalleryItem.render(entry: GalleryItemData, onActivate: (id: string) => void): ReactElement`
 
-```ts
-type SectionShellProps = {
-  id: SectionId
-  eyebrow?: string
-  title: string
-  intro?: string
-  nextSectionId?: SectionId
-  children: React.ReactNode
-}
+## `assetAllowlist` service (see `services.md`)
 
-function SectionShell(props: SectionShellProps): JSX.Element
-```
+- `isAllowedAsset(path: string): boolean` - Return true only if `path` is present in the explicit allowlist.
+- `getAllowlistedAssets(): AssetAllowlistEntry[]` - Return the full approved asset list for consumption by `EvidenceGallery` and any component that renders imagery.
 
-- **Purpose**: Standardize section container and heading layout.
-- **Inputs**: Section metadata, optional next-section target, children.
-- **Output**: Styled section wrapper.
+## `content` service (see `services.md`)
 
-```ts
-type ContentCardProps = {
-  children: React.ReactNode
-  className?: string
-}
-
-function ContentCard(props: ContentCardProps): JSX.Element
-```
-
-- **Purpose**: Standardize repeated card chrome.
-- **Inputs**: Children and optional class name.
-- **Output**: Styled card wrapper.
-
-```ts
-type ExternalActionProps = {
-  href: string
-  label: string
-  ariaLabel?: string
-  variant?: 'button' | 'icon' | 'link'
-}
-
-function ExternalAction(props: ExternalActionProps): JSX.Element
-```
-
-- **Purpose**: Render external links/actions consistently and accessibly.
-- **Inputs**: URL, visual label, accessible label, variant.
-- **Output**: Link or button-like external action.
-
-## Data Modules
-
-```ts
-export const profile: Profile
-export const navigationItems: NavigationItem[]
-export const about: AboutSection
-export const education: EducationEntry[]
-export const experience: ExperienceEntry[]
-export const awards: AwardEntry[]
-export const projects: ProjectEntry[]
-export const gallery: GalleryItem[]
-export const videos: VideoEntry[]
-export const skills: SkillCategory[]
-export const certificates: CertificateEntry[]
-export const portfolio: Portfolio
-```
-
-- **Purpose**: Provide typed example content for students to customize.
-- **Inputs**: Static imports and literals.
-- **Output**: Typed portfolio data.
-
-## Test Interfaces
-
-```ts
-describe('portfolio data', () => void)
-describe('navigation config', () => void)
-describe('App smoke render', () => void)
-```
-
-- **Purpose**: Validate data/config integrity and app render.
-- **Inputs**: Portfolio data and React app.
-- **Output**: Passing Vitest assertions.
-
-## Extension Rule Compliance
-
-| Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+- `getPortfolioContent(): PortfolioContent` - Return the full typed content object consumed by all content-area components.

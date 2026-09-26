@@ -2,50 +2,52 @@
 
 ## Purpose
 
-Track build output and browser-delivery risks appropriate to a static GitHub Pages portfolio. Server load, throughput, concurrent-user, and API stress testing are not applicable because the project has no application server or API.
+Track browser-delivery and static-build characteristics appropriate to this GitHub Pages portfolio. Server load, throughput, concurrent-user, database, queue, and autoscaling tests are not applicable because the application has no runtime server or API.
 
-## Performance Requirements
+## Applicable Requirements
 
-- The production build must complete successfully.
-- Decorative theme work must not add a large external download or materially regress startup size.
-- The built entry page and assets must be servable from the local production preview.
-- Background decoration must remain CSS-based, pointer-inert, and free of scroll-linked processing.
+- Non-critical gallery media remains lazy-loaded with reserved dimensions.
+- The section-heading refinement adds no image, font download, network request, runtime dependency, or interactive JavaScript state.
+- Shared layout changes remain CSS-only and preserve 320-CSS-pixel overflow safeguards.
+- Root and project Pages builds must complete and pass deterministic output verification.
 
 ## Execute the Static Performance Check
 
 ```bash
 npm run build
+npm run verify:dist
 ```
 
-Record the JavaScript and CSS sizes printed by Vite and compare them with the current baseline.
+Record the Vite build time and JavaScript/CSS sizes printed in the terminal.
 
 ## Verified Baseline
 
-| Measure          | Observed result                                            |
-| ---------------- | ---------------------------------------------------------- |
-| Vite build time  | Approximately 6.00 seconds on the verification machine     |
-| Main JavaScript  | 975.76 kB minified; 296.49 kB gzip                         |
-| Main CSS         | 34.61 kB minified; 7.43 kB gzip                            |
-| Complete `dist/` | Approximately 9.4 MB including images and PDF certificates |
-| Preview response | HTTP 200 for `/` on the local Vite production preview      |
+| Measure | Observed result |
+|---|---|
+| Root build time | Approximately 3.05 seconds for Vite bundling |
+| Project-path build time | Approximately 2.89 seconds for Vite bundling |
+| Main JavaScript | Approximately 666.23 kB minified; 192.84 kB gzip |
+| Main CSS | Approximately 36.46 kB minified; 7.92 kB gzip |
+| Complete `dist/` | Approximately 3.0 MB including approved media and CV |
+| Public media inventory | 13 JPG files and one PDF |
+| Runtime application requests | None |
 
-The main JavaScript remains above Vite's 500 kB warning threshold. This is a tracked, non-blocking warning; the current bundle is smaller than the previous recorded baseline.
+The main JavaScript remains above Vite's 500 kB advisory threshold. This is tracked as a non-blocking warning because the section-heading refinement added no runtime dependency or network behavior.
 
 ## Optional Browser Measurement
 
-For a future performance-focused change, run Lighthouse against `npm run preview` and record mobile performance, accessibility, and largest-contentful-paint results on the same machine and network profile. No Lighthouse threshold is claimed for this change because a controlled browser performance run was not part of the approved scope.
+For a future performance-focused change, run Lighthouse against `npm run preview` using a controlled browser/network profile and record mobile performance, accessibility, and largest-contentful-paint results. No Lighthouse score or runtime layout metric is claimed for this revision because dedicated browser measurement is not configured.
 
-## Optimization Candidates if the Baseline Regresses
+## Failure or Regression Response
 
-1. Split theme code with dynamic imports.
-2. Compress the largest local images.
-3. Review whether all PDFs must ship in the initial static artifact.
-4. Lazy-load media below the fold.
-5. Rebuild and compare the same Vite output fields.
+1. Compare current Vite output with the baseline above.
+2. Confirm no new dependency or eager media import was introduced.
+3. Review the production graph and gallery lazy-loading tests.
+4. Optimize the largest justified source of growth.
+5. Rebuild both root and project Pages forms and rerun the verifier.
 
 ## Not Applicable
 
-- Server response-time objectives under load.
-- Requests per second or concurrent-user targets.
-- API, database, queue, or cache throughput.
-- Stress testing or autoscaling validation.
+- Requests per second, server response percentiles, and concurrent-user targets.
+- Load, stress, endurance, database, cache, or queue tests.
+- API latency or service-level objectives.

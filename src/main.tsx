@@ -2,7 +2,12 @@ import { Provider } from "./components/ui/provider";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import { bootstrapColorMode } from "./theme/colorModeBootstrap";
+import { injectThemeCss } from "./theme/injectThemeCss";
 import App from "./App.tsx";
+
+bootstrapColorMode();
+injectThemeCss();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

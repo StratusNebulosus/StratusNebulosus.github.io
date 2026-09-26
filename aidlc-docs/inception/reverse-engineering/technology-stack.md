@@ -1,51 +1,45 @@
 # Technology Stack
 
-## Programming Languages
+## Languages
 
-- **TypeScript 5.9.3** - Application, configuration, data models, and tests.
-- **TSX** - React components and DOM tests.
-- **CSS** - Global and template-scoped visual systems and animations.
-- **Markdown** - Local journal article content and project documentation.
-- **YAML** - GitHub Actions deployment workflow.
+- TypeScript 5.9.3 and TSX for application and tests.
+- CSS for medical content, shell, gallery, and generated theme variables.
+- Markdown for AI-DLC and repository documentation.
+- YAML for GitHub Actions.
 
-## Frameworks and Libraries
+## Runtime Frameworks
 
-- **React 19.2.0** - Component rendering and hooks.
-- **React DOM 19.2.0** - Browser rendering.
-- **Chakra UI 3.30.0** - Responsive UI primitives and interactions.
-- **Emotion React 11.14.0** - Chakra styling dependency.
-- **next-themes 0.4.6** - Color mode support.
-- **React Icons 5.5.0** - Interface and social icons.
-- **React Markdown 10.1.0** - CommonMark rendering for in-site journal content.
-- **Tailwind CSS 4.1.18** - Utility CSS layer integrated through Vite.
+- React 19.2.3 and React DOM 19.2.3.
+- Chakra UI 3.30.0 with Emotion 11.14.0.
+- next-themes 0.4.6 for color-mode state.
+- React Icons 5.5.0.
+- React Markdown 10.1.0 remains installed for legacy journal support but is not part of the main medical page.
 
 ## Build Tools
 
-- **Vite 7.2.4** - Development server, static build, asset processing, and test configuration.
-- **React SWC Plugin 4.2.2** - React compilation and fast refresh.
-- **TypeScript Paths Plugin 6.0.3** - Vite path alias resolution.
-- **npm** - Dependency and script runner.
+- Vite 7.3.0 with React SWC 4.2.2.
+- TypeScript project references.
+- Tailwind CSS 4.1.18 Vite integration.
+- npm and committed lockfile.
 
-## Testing and Quality Tools
+## Testing and Quality
 
-- **Vitest 4.1.9** - Unit and DOM test runner.
-- **Testing Library React 16.3.2** - User-oriented React rendering and interaction tests.
-- **jest-dom 6.9.1** - DOM assertions.
-- **jsdom 29.1.1** - Browser-like test environment.
-- **ESLint 9.39.2** - Static analysis.
-- **typescript-eslint 8.51.0** - TypeScript lint support.
-- **Prettier 3.7.4** - Formatting.
+- Vitest 4.1.9.
+- Testing Library React 16.3.2 and jest-dom 6.9.1.
+- jsdom 29.1.1.
+- fast-check 4.10.1.
+- ESLint 9.39.2, typescript-eslint 8.51.0, and Prettier 3.7.4.
 
 ## Infrastructure
 
-- **GitHub Pages** - Static production hosting.
-- **GitHub Actions** - Build and deployment automation.
-- **Node.js 20** - CI runtime and documented minimum for students.
+- GitHub Actions using Node.js 20.
+- GitHub Pages static hosting.
+- No backend, database, authentication, secret, container, CDN configuration, or runtime API.
 
-## Runtime Model
+## Runtime Characteristics
 
-- Static browser application only.
-- No backend, database, authentication, or runtime secrets.
-- Hash-based client navigation is compatible with GitHub Pages.
-- Template and layout preferences persist independently in browser local storage.
-- Local content and assets are bundled by Vite; external media and links remain third-party dependencies.
+- Static content and assets bundled by Vite.
+- Hash-anchor navigation compatible with GitHub Pages.
+- Local light/dark preference handling.
+- One accessible Chakra dialog for evidence detail viewing.
+- No runtime application fetch, XHR, or dynamic asset glob.

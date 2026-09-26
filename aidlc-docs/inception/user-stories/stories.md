@@ -1,398 +1,250 @@
-# User Stories
+# Medical Student Portfolio Revamp - User Stories
 
-## Story Approach
+Approved approach: hybrid user-journey and domain-based stories (Question 1, Option A), 4 personas (Question 2, Option A), ~12-16 stories (Question 3, Option A), Given/When/Then acceptance criteria throughout (Question 4, Option A), ordered by visitor journey and risk (Question 5, Option A), balanced success emphasis (Question 6, Option A).
 
-- **Breakdown**: Hybrid user journey-based stories with feature-based support stories.
-- **Personas**: Student Template User, Portfolio Visitor, Template Maintainer.
-- **Acceptance Criteria Style**: Mixed. User workflow stories use Given/When/Then. Technical support stories use concise checklist criteria.
-- **Priority Order**: Student journey order: discover, customize, run locally, test, deploy, troubleshoot.
+Personas: see `aidlc-docs/inception/user-stories/personas.md` — Academic Reviewer (AR), Medical Educator/Mentor (ME), Peer/General Visitor (PV), Portfolio Owner/Maintainer (OM).
 
-## Story Summary
+## First Impression
 
-| ID | Title | Primary Persona | Priority |
-|---|---|---|---|
-| US-01 | Understand the template at first glance | Student Template User | High |
-| US-02 | Identify editable content files | Student Template User | High |
-| US-03 | Edit profile and social identity safely | Student Template User | High |
-| US-04 | Edit resume-style section content safely | Student Template User | High |
-| US-05 | Replace visual and certificate assets | Student Template User | High |
-| US-06 | Keep section navigation consistent | Template Maintainer | High |
-| US-07 | Navigate the portfolio on desktop and mobile | Portfolio Visitor | High |
-| US-08 | View projects and external proof links | Portfolio Visitor | Medium |
-| US-09 | Contact the portfolio owner | Portfolio Visitor | Medium |
-| US-10 | Run the project locally | Student Template User | High |
-| US-11 | Verify the portfolio before publishing | Student Template User | High |
-| US-12 | Deploy to GitHub Pages with minimal manual setup | Student Template User | High |
-| US-13 | Troubleshoot common deployment failures | Student Template User | High |
-| US-14 | Preserve accessibility and responsive usability | Portfolio Visitor | Medium |
-| US-15 | Maintain simple reusable code structure | Template Maintainer | High |
-| US-16 | Validate template data and app rendering with tests | Template Maintainer | High |
+### Story 1: Recognize the student's medical identity immediately
 
-## US-01: Understand The Template At First Glance
+- **Unit implementation status**: [x] Unit 4 implementation complete and verified on 2026-09-20.
 
-**As a** Student Template User,  
-**I want** a beginner-friendly README that explains what this project is and how to start,  
-**so that** I can use the portfolio template without needing prior Vite or GitHub Pages experience.
+As a **visitor (AR, ME, PV)**, I want to see Bui Tuan Phat identified as a Medical Student at Thai Nguyen University of Medicine and Pharmacy within the first viewport, so that I immediately understand who he is and his current path.
 
-### Acceptance Criteria
+- **Personas**: AR, ME, PV
+- **Requirements traced**: FR-04, Acceptance Criteria 1, 5
 
-Given I open the repository README,  
-When I read the first sections,  
-Then I can understand the purpose of the template, required tools, and the first setup command.
+**Acceptance Criteria**
+- Given a visitor loads the site, when the hero section renders, then it displays the student's name, "Medical Student at Thai Nguyen University of Medicine and Pharmacy," and a concise positioning statement.
+- Given the hero renders, when the portrait loads, then it uses `src/assets/profile_pic.jpg` with an intentional editorial crop.
+- Given the hero renders, when a visitor activates the CV action, then the explicitly approved `bui-tuan-phat-cv.pdf` downloads with a stable descriptive filename.
+- Given the website renders contact information, then the placeholder phone and email visible inside the approved PDF are not reused as website contact channels; only the separate fictional values approved under FR-11 may appear, clearly labeled and non-interactive.
 
-Given I am new to the project,  
-When I look for customization instructions,  
-Then the README points me to the files and guide sections I should edit first.
+### Story 2: See a unified medical design with no leftover engineering/business identity
 
-### INVEST Notes
+- **Unit implementation status**: [x] Unit 3 implementation complete and verified on 2026-09-19.
 
-- **Independent**: Can be completed as documentation work.
-- **Valuable**: Reduces beginner confusion.
-- **Testable**: README includes required setup, customization, and deployment sections.
+As a **visitor (AR, ME, PV)**, I want the portfolio to present one cohesive medical design with no trace of a prior engineering/business persona or template picker, so that I trust the site is a dedicated, current medical portfolio.
 
-## US-02: Identify Editable Content Files
+- **Personas**: AR, ME, PV
+- **Requirements traced**: FR-01, FR-14, Acceptance Criteria 2
 
-**As a** Student Template User,  
-**I want** portfolio content stored in clearly named data files,  
-**so that** I can update my information without editing layout-heavy JSX.
+**Acceptance Criteria**
+- Given any page load, when the visitor inspects the interface, then no engineering/business profile content, template selector, or layout selector is visible or reachable.
+- Given a visitor has a stale stored template preference from before the revamp, when the site loads, then it renders correctly without error using the unified medical presentation.
 
-### Acceptance Criteria
+### Story 3: Navigate confidently across devices and input methods
 
-Given I want to change profile, education, experience, awards, projects, videos, skills, certificates, or contact details,  
-When I inspect the source tree,  
-Then I can find clearly named data/config files for those content areas.
+- **Unit implementation status**: [x] Unit 3 implementation complete and verified on 2026-09-19.
 
-Given I edit a content field incorrectly,  
-When TypeScript checks run,  
-Then type errors help me identify the mistake.
+As a **visitor (AR, ME, PV)**, I want sticky, accessible navigation to every enabled section on desktop and mobile, so that I can move directly to the content I care about using keyboard, touch, or pointer.
 
-### INVEST Notes
+- **Personas**: AR, ME, PV
+- **Requirements traced**: FR-03, Acceptance Criteria 4
 
-- **Independent**: Content data can be extracted without changing visual theme.
-- **Valuable**: Makes the template student-friendly.
-- **Testable**: Data files exist and components consume them.
+**Acceptance Criteria**
+- Given a desktop viewport, when the visitor scrolls, then a sticky navigation bar remains visible with links to every enabled section.
+- Given a mobile viewport, when the visitor opens the compact menu, then all section links are reachable and operable by touch.
+- Given a visitor uses only the keyboard, when they tab through navigation, then focus order is logical, the active section is indicated (including via `aria-current` where applicable), and a skip link reaches main content.
+- Given the visitor follows a hash-anchor link, when the target section is reached, then the URL and scroll position remain compatible with GitHub Pages hosting.
 
-## US-03: Edit Profile And Social Identity Safely
+## Narrative
 
-**As a** Student Template User,  
-**I want** profile identity, social links, email, location, and hero highlights in typed data,  
-**so that** I can personalize the first impression of my portfolio safely.
+### Story 4: Understand the student's calling to medicine
 
-### Acceptance Criteria
+- **Unit implementation status**: [x] Unit 4 implementation complete and verified on 2026-09-20.
 
-Given I edit profile data,  
-When the app renders,  
-Then the hero, navbar, and contact sections display my updated information.
+As a **medical educator or mentor (ME)**, I want to read a reflective narrative connecting scientific curiosity, discipline, empathy, leadership, and service, so that I can assess the student's motivation and character.
 
-Given I update GitHub, LinkedIn, email, or other links,  
-When I open the portfolio,  
-Then the relevant links point to my updated destinations.
+- **Personas**: ME, AR
+- **Requirements traced**: FR-05, Acceptance Criteria 6
 
-### INVEST Notes
+**Acceptance Criteria**
+- Given the visitor reaches the Calling to Medicine section, when they read the narrative, then aspiration and values are clearly distinguished from verified experience.
+- Given the narrative describes the student's background, when it is read in full, then it does not imply completed clinical training, patient care, research publications, or professional licensure.
 
-- **Independent**: Can be validated through rendered text and links.
-- **Valuable**: Hero/contact identity is the most visible student customization.
-- **Testable**: Tests or manual checks can assert required profile fields.
+### Story 5: Follow the education journey from high school to medical school
 
-## US-04: Edit Resume-Style Section Content Safely
+- **Unit implementation status**: [x] Unit 4 implementation complete and verified on 2026-09-20.
 
-**As a** Student Template User,  
-**I want** education, experience, awards, projects, skills, videos, and gallery content in typed arrays,  
-**so that** I can replace example content with my own achievements.
+As a **visitor (AR, ME)**, I want to see a readable journey from Wellspring high-school completion to the current Medicine program, so that I understand the student's educational trajectory without exposure to private records.
 
-### Acceptance Criteria
+- **Personas**: AR, ME
+- **Requirements traced**: FR-06, Acceptance Criteria 6, 9
 
-Given I update an education or experience entry,  
-When the site renders,  
-Then the corresponding section shows the updated card content.
+**Acceptance Criteria**
+- Given the Education section renders, when the visitor reviews it, then Wellspring completion (2026) and the current Medicine program at Thai Nguyen University of Medicine and Pharmacy are both presented in a timeline or journey layout.
+- Given the section renders, when the visitor inspects it, then no date of birth, applicant number, student number, admission score, address, or phone number from source records appears anywhere in the markup or content.
 
-Given I add a project with technologies and external links,  
-When the project section renders,  
-Then the project appears with readable tags and working actions.
+## Evidence
 
-### INVEST Notes
+### Story 6: Review verified academic scores with confidence
 
-- **Independent**: Each section can consume exported data.
-- **Valuable**: Covers the core student resume content.
-- **Testable**: Data shape and section rendering can be verified.
+- **Unit implementation status**: [x] Unit 4 implementation complete and verified on 2026-09-20.
 
-## US-05: Replace Visual And Certificate Assets
+As an **academic reviewer (AR)**, I want compact, accessible score cards for SAT, IELTS, and AP results, so that I can quickly verify academic strength without seeing raw score reports.
 
-**As a** Student Template User,  
-**I want** clear instructions and data references for images, logos, gallery photos, and certificates,  
-**so that** I can replace example assets without breaking production builds.
+- **Personas**: AR
+- **Requirements traced**: FR-07, Acceptance Criteria 7, 9
 
-### Acceptance Criteria
+**Acceptance Criteria**
+- Given the Academic Excellence section renders, when the reviewer inspects it, then SAT 1500, IELTS 8.0, AP Scholar status, AP Biology 5, AP Chemistry 5, and AP Microeconomics 4 are each shown with a clear label.
+- Given the reviewer looks for source documents, when they inspect links and assets, then no raw SAT, AP, IELTS, transcript, or report-card file is linked or rendered.
+- Given the scores are displayed, when read in context, then they are not framed in a misleading comparative context (e.g., unverified rankings or percentiles).
 
-Given I replace an image or certificate asset,  
-When I run the build,  
-Then Vite resolves the asset successfully.
+### Story 7: Explore science and award recognition grouped for scanability
 
-Given I add a certificate PDF,  
-When the skills/certificates section renders,  
-Then the certificate metadata and preview/open action are available.
+- **Unit implementation status**: [x] Unit 4 implementation complete and verified on 2026-09-20.
 
-### INVEST Notes
+As an **academic reviewer or mentor (AR, ME)**, I want science-olympiad, Chemistry, Science and Passion, and conference recognitions grouped by theme or chronology, so that I can scan achievements efficiently and trust their authenticity.
 
-- **Independent**: Asset references can be documented and typed.
-- **Valuable**: Students often personalize visuals first.
-- **Testable**: Build and data validation confirm asset references.
+- **Personas**: AR, ME
+- **Requirements traced**: FR-08, Acceptance Criteria 7
 
-## US-06: Keep Section Navigation Consistent
+**Acceptance Criteria**
+- Given the Science and Awards section renders, when the visitor scans it, then HKISO Silver (2022) and Bronze (2023, 2025) awards, the Chemistry Second Prize, Science and Passion recognitions, and the WIS Conference/Top 10 Delegate (ranked fourth) result are each present and grouped.
+- Given a certificate image is shown, when a screen-reader user inspects it, then the alternative text describes the achievement rather than transcribing decorative certificate text verbatim.
 
-**As a** Template Maintainer,  
-**I want** section IDs, labels, and order defined once,  
-**so that** navigation, active section tracking, and rendered sections stay synchronized.
+### Story 8: See leadership and service framed accurately
 
-### Acceptance Criteria
+- **Unit implementation status**: [x] Unit 4 implementation complete and verified on 2026-09-20.
 
-- Navigation config contains unique section IDs.
-- App section tracking uses the same section config as the navbar.
-- Desktop and mobile navigation render from the same config.
-- Adding or removing a section requires changing one shared source of truth.
+As a **medical educator or mentor (ME)**, I want WHO committee participation, leadership training, the Science of Tram and Cham project, "Embrace the Present," and pediatric-patient support presented with careful, accurate language, so that I can evaluate character without being misled about the nature of the activities.
 
-### INVEST Notes
+- **Personas**: ME, AR
+- **Requirements traced**: FR-09, Acceptance Criteria 7
 
-- **Independent**: Shared navigation config can be implemented separately.
-- **Valuable**: Prevents template drift.
-- **Testable**: Tests can assert uniqueness and expected IDs.
+**Acceptance Criteria**
+- Given the Leadership and Service section renders, when the visitor reads each activity, then the described participation matches the verified public content baseline exactly.
+- Given the pediatric-patient support activity is described, when read in context, then it is never characterized as clinical service or medical treatment.
 
-## US-07: Navigate The Portfolio On Desktop And Mobile
+### Story 9: Browse an accessible evidence gallery without encountering private records
 
-**As a** Portfolio Visitor,  
-**I want** clear desktop and mobile navigation,  
-**so that** I can move to the portfolio section I care about.
+- **Unit implementation status**: [x] Unit 5 implementation complete and verified on 2026-09-20.
 
-### Acceptance Criteria
+As a **visitor (AR, ME, PV)**, I want an accessible gallery of approved portrait, achievement, event, and certificate imagery, so that I can inspect credible evidence without risk of seeing private source records.
 
-Given I am using a desktop viewport,  
-When I click a navigation link,  
-Then the page scrolls smoothly to the matching section.
+- **Personas**: AR, ME, PV
+- **Requirements traced**: FR-10, FR-15, Acceptance Criteria 9, 10
 
-Given I am using a mobile viewport,  
-When I open the menu and select a section,  
-Then the drawer closes and the page scrolls to that section.
+**Acceptance Criteria**
+- Given the Evidence Gallery renders, when the visitor browses it via keyboard, then every item is reachable and operable, and each item has meaningful alternative text.
+- Given a gallery item opens in a modal or expanded preview, when the visitor interacts with it, then Escape closes it, focus is contained within it, a visible close control exists, and focus returns to the triggering element on close.
+- Given the gallery's asset list, when compared against the public asset allowlist, then it contains only approved assets and never a prohibited or `dontuse` file.
+- Given a non-critical gallery image, when the page loads, then it is lazy-loaded and its dimensions are reserved to avoid layout shift.
 
-### INVEST Notes
+## Accessibility and Preference
 
-- **Independent**: Navigation behavior can be validated apart from content changes.
-- **Valuable**: Visitors need quick scanning.
-- **Testable**: Manual or component tests can verify section config and controls.
+### Story 10: Read comfortably in light or dark medical theme
 
-## US-08: View Projects And External Proof Links
+As a **visitor (PV, AR, ME)**, I want to switch between accessible light and dark medical color modes, so that I can read the portfolio comfortably in my preferred or ambient lighting condition.
 
-**As a** Portfolio Visitor,  
-**I want** project cards with clear external actions,  
-**so that** I can inspect the student's work and supporting evidence.
+- **Personas**: PV, AR, ME
+- **Requirements traced**: FR-02, FR-12, Acceptance Criteria 3, 11
 
-### Acceptance Criteria
+**Acceptance Criteria**
+- Given the visitor toggles the color-mode control, when the new mode applies, then both modes preserve the same medical identity and information hierarchy.
+- Given the visitor reloads the page after choosing a mode, when the page renders, then the chosen preference persists via the existing safe client-side mechanism and no flash of unreadable content occurs.
+- Given any mode is active, when contrast is measured, then normal text meets at least 4.5:1 and large text/essential controls meet at least 3:1.
 
-Given I view the projects section,  
-When I inspect a project card,  
-Then I can see title, description, technologies, and external action buttons.
+### Story 11: Use the site with reduced motion and adaptive layout
 
-Given I use assistive technology,  
-When I focus an external project action,  
-Then the action has a meaningful accessible name.
+- **Unit implementation status**: [x] Contact/layout revision implemented and verified on 2026-09-20.
 
-### INVEST Notes
+As a **visitor using assistive settings (PV, AR, ME)**, I want the portfolio to respect reduced-motion preferences and adapt cleanly from 320 CSS pixels up to wide desktop, so that I can use the site without discomfort or lost content regardless of device or motion sensitivity.
 
-- **Independent**: Project data and buttons can be checked directly.
-- **Valuable**: Projects are central portfolio evidence.
-- **Testable**: Link labels and URLs can be validated.
+- **Personas**: PV, AR, ME
+- **Requirements traced**: NFR-01, NFR-02, Acceptance Criteria 12, 13
 
-## US-09: Contact The Portfolio Owner
+**Acceptance Criteria**
+- Given `prefers-reduced-motion` is enabled, when the visitor browses any section, then non-essential animation and motion are suppressed while content remains fully accessible.
+- Given a viewport of 320 CSS pixels, when the visitor browses the site, then no horizontal scrolling occurs and all essential content remains visible.
+- Given a wide desktop viewport, when the visitor browses the site, then navigation, portrait, score cards, timeline, and gallery adapt without hiding essential content.
+- Given any shared content section renders on desktop, when the visitor scans its layout, then the header uses an approximately 28% editorial rail, main content receives approximately 72% of the section width, and the heading is capped near 4rem.
+- Given a shared content section renders below the single-column breakpoint, when the visitor begins reading it, then the heading scales down enough that it does not dominate the viewport or delay access to the main content.
 
-**As a** Portfolio Visitor,  
-**I want** a simple contact form and social links,  
-**so that** I can reach the student without a backend service.
+## Content Maintenance and Privacy
 
-### Acceptance Criteria
+### Story 12: Keep private and prohibited assets out of the public build
 
-Given I enter name, email, subject, and message,  
-When I submit the contact form,  
-Then my email client opens with a prefilled mailto message.
+As the **portfolio owner or maintainer (OM)**, I want an explicit public-asset allowlist enforced in code, so that raw identity, immigration, address, transcript, and `dontuse` files can never be bundled or linked even by accident.
 
-Given I click a social/contact link,  
-When the link opens,  
-Then it points to the portfolio owner's configured profile or email address.
+- **Personas**: OM
+- **Requirements traced**: FR-15, Acceptance Criteria 9, 17
 
-### INVEST Notes
+**Acceptance Criteria**
+- Given the asset allowlist module, when a developer inspects it, then it explicitly lists only approved public assets rather than importing or enumerating the entire `src/assets/CV/` directory.
+- Given the production build completes, when its output is inspected, then it contains no passport, national identity, visa, birth-certificate, address-bearing, candidate-number-bearing, transcript, report-card, or `dontuse` file.
+- Given a developer attempts to add a non-allowlisted asset to a public component, when tests run, then the test suite fails and identifies the violation.
 
-- **Independent**: Contact remains static-site friendly.
-- **Valuable**: Supports recruiter/collaborator outreach.
-- **Testable**: Mailto composition and link data can be checked.
+### Story 13: Maintain content through typed, decoupled data modules
 
-## US-10: Run The Project Locally
+As the **portfolio owner or maintainer (OM)**, I want student facts and evidence metadata stored in typed data modules separate from presentation components, so that I can update content (including a future résumé or verified contact details) without touching layout code.
 
-**As a** Student Template User,  
-**I want** setup instructions for local development,  
-**so that** I can preview my changes before publishing.
+- **Personas**: OM
+- **Requirements traced**: FR-13, NFR-04, Acceptance Criteria 6
 
-### Acceptance Criteria
+**Acceptance Criteria**
+- Given a maintainer needs to update a score, award, or narrative line, when they edit the relevant typed data module, then the change reflects across the site without modifying component markup.
+- Given the codebase after the revamp, when reviewed, then no leftover engineering/business, journal, or project data models or dead template abstractions remain.
 
-Given I have Git, Node.js 20 or newer, npm, and the repository,  
-When I follow the setup guide,  
-Then I can install dependencies and start the Vite dev server.
+### Story 14: Trust example-based and property-based tests to catch regressions
 
-Given the dev server is running,  
-When I edit content data,  
-Then I can preview my changes locally.
+- **Unit implementation status**: [x] Unit 6 implementation complete and verified on 2026-09-20.
 
-### INVEST Notes
+As the **portfolio owner or maintainer (OM)**, I want example-based and property-based tests covering navigation, content, color-mode, asset boundaries, and prior-identity regressions, so that I can change the site with confidence and reproduce any failure deterministically.
 
-- **Independent**: Local setup guide can be validated with commands.
-- **Valuable**: Students need fast feedback before deploy.
-- **Testable**: `npm install` and `npm run dev` instructions are present.
+- **Personas**: OM
+- **Requirements traced**: NFR-06, NFR-07, Acceptance Criteria 14, 15
 
-## US-11: Verify The Portfolio Before Publishing
+**Acceptance Criteria**
+- Given the test suite runs, when it completes, then explicit regression tests confirm the former owner's identity and retired template choices are absent.
+- Given `fast-check` property-based tests run for navigation, allowlists, hash round-trips, and color-mode validation, when a property fails, then the failure output includes a reproducible seed and shrinking information.
+- Given TypeScript compilation, ESLint, Vitest (example-based and property-based), and the Vite production build run, when the pipeline completes, then all steps pass.
 
-**As a** Student Template User,  
-**I want** clear build, lint, and test commands,  
-**so that** I can catch mistakes before deploying to GitHub Pages.
+### Story 15: Keep documentation aligned with the medical portfolio
 
-### Acceptance Criteria
+- **Unit implementation status**: [x] Unit 6 implementation complete and verified on 2026-09-20.
 
-Given I finish customizing content,  
-When I run the documented verification commands,  
-Then lint, tests, and production build can be run locally.
+As the **portfolio owner or maintainer (OM)**, I want repository documentation to describe the current medical content structure, asset boundary, and customization workflow, so that future contributors understand how to safely update the site.
 
-Given a required data field is missing or invalid,  
-When tests or type checks run,  
-Then the issue is caught before deployment.
+- **Personas**: OM
+- **Requirements traced**: FR-16, Acceptance Criteria 18
 
-### INVEST Notes
+**Acceptance Criteria**
+- Given a contributor reads the repository documentation, when they look for how to update content, then it accurately describes the current data files, sections, and navigation.
+- Given a contributor looks for the privacy boundary, when they read the documentation, then it explicitly documents which assets are public versus private and why.
 
-- **Independent**: Verification scripts are distinct from deployment.
-- **Valuable**: Prevents broken student portfolios.
-- **Testable**: Scripts exist and run.
+## Delivery
 
-## US-12: Deploy To GitHub Pages With Minimal Manual Setup
+### Story 16: Preserve reliable static GitHub Pages delivery
 
-**As a** Student Template User,  
-**I want** GitHub Pages deployment to use repository metadata where possible,  
-**so that** I do not have to manually understand Vite base paths before publishing.
+- **Unit implementation status**: [x] Unit 6 implementation complete and verified on 2026-09-20.
 
-### Acceptance Criteria
+As a **visitor and portfolio owner (PV, OM)**, I want the site to remain a static, GitHub Pages-deployed experience with no backend or new runtime dependency, so that the portfolio stays fast, reliable, and simple to host.
 
-Given I push to the main branch,  
-When GitHub Actions runs,  
-Then it builds and deploys the site to GitHub Pages.
+- **Personas**: PV, OM
+- **Requirements traced**: NFR-05, NFR-08, Acceptance Criteria 16
 
-Given my repository is not named `username.github.io`,  
-When deployment builds,  
-Then the Vite base path is configured for the repository page path where possible.
+**Acceptance Criteria**
+- Given the site is deployed via the existing GitHub Actions workflow, when it is loaded from the GitHub Pages base path, then hash-anchor navigation and all assets resolve correctly.
+- Given the deployed build, when inspected, then it contains no backend, database, authentication, paid service, or runtime secret.
+- Given a client-side preference (such as color mode) fails to load, when the page renders, then content still displays correctly without blocking on the failed preference.
 
-Given my repository is named `username.github.io`,  
-When deployment builds,  
-Then the site can deploy at the root path.
+## Contact Revision
 
-### INVEST Notes
+### Story 17: Understand that contact channels are placeholders
 
-- **Independent**: Deployment config can be updated and documented.
-- **Valuable**: GitHub Pages base paths are a common student blocker.
-- **Testable**: Workflow and docs can be inspected; build can run locally with base path settings.
+- **Unit implementation status**: [x] Contact/layout revision implemented and verified on 2026-09-20.
 
-## US-13: Troubleshoot Common Deployment Failures
+As a **visitor (AR, ME, PV)**, I want the Contact section to show clearly fictional placeholder channels without activating them, so that I understand how verified contact information will eventually appear without being directed to an invalid recipient.
 
-**As a** Student Template User,  
-**I want** troubleshooting guidance for 404s, missing assets, wrong base paths, failed builds, and Node version issues,  
-**so that** I can recover when deployment does not work the first time.
+- **Personas**: AR, ME, PV
+- **Requirements traced**: FR-11, Acceptance Criterion 8
 
-### Acceptance Criteria
-
-Given my deployed page returns 404,  
-When I read the deployment guide,  
-Then I can check Pages source, workflow status, repository name, and base path.
-
-Given assets are missing after deployment,  
-When I read troubleshooting guidance,  
-Then I can identify base path or asset reference issues.
-
-### INVEST Notes
-
-- **Independent**: Troubleshooting docs can be added without code changes.
-- **Valuable**: Reduces support friction.
-- **Testable**: Guide includes named failure modes and remedies.
-
-## US-14: Preserve Accessibility And Responsive Usability
-
-**As a** Portfolio Visitor,  
-**I want** the portfolio to remain readable and navigable on common devices and with accessible labels,  
-**so that** I can review the student's work comfortably.
-
-### Acceptance Criteria
-
-- External icon-only links have accessible labels.
-- Interactive project, gallery, certificate, menu, and contact controls have meaningful labels.
-- Existing responsive layout behavior is preserved.
-- The refactor does not remove image alt text.
-
-### INVEST Notes
-
-- **Independent**: Accessibility improvements can be validated by inspection and smoke tests.
-- **Valuable**: Improves visitor trust and usability.
-- **Testable**: Labels and alt text can be checked.
-
-## US-15: Maintain Simple Reusable Code Structure
-
-**As a** Template Maintainer,  
-**I want** reusable helpers and components for repeated section patterns,  
-**so that** future template updates stay small and understandable.
-
-### Acceptance Criteria
-
-- Repeated scroll helper logic is replaced by a shared utility or hook.
-- Reusable components are introduced only where they reduce meaningful duplication.
-- Components remain easy for students to trace from data to UI.
-- Application code remains outside `aidlc-docs/`.
-
-### INVEST Notes
-
-- **Independent**: Helper and component refactors can be implemented incrementally.
-- **Valuable**: Improves long-term maintainability.
-- **Testable**: Repeated helper code is reduced and imports use shared utilities.
-
-## US-16: Validate Template Data And App Rendering With Tests
-
-**As a** Template Maintainer,  
-**I want** lightweight automated tests for rendering, navigation config, and key template data,  
-**so that** future changes do not silently break the template.
-
-### Acceptance Criteria
-
-- A test command is available in `package.json`.
-- Tests verify the app renders without crashing.
-- Tests verify navigation IDs are unique and include required sections.
-- Tests verify required profile/template data fields are present.
-- Tests do not require external network calls or browser automation.
-
-### INVEST Notes
-
-- **Independent**: Test setup can be added after or alongside refactor.
-- **Valuable**: Provides guardrails for students and maintainers.
-- **Testable**: Test command passes locally and in build/test instructions.
-
-## Requirements Coverage
-
-| Requirement Area | Covered By |
-|---|---|
-| Preserve sections and example content | US-03, US-04, US-05, US-07 |
-| Extract editable content | US-02, US-03, US-04, US-05 |
-| Shared types | US-02, US-03, US-04, US-16 |
-| Centralized navigation | US-06, US-07, US-16 |
-| Shared scroll behavior | US-07, US-15 |
-| Reusable UI structure | US-15 |
-| Accessibility labels | US-08, US-09, US-14 |
-| GitHub Pages base path | US-12, US-13 |
-| Beginner setup guide | US-01, US-10, US-13 |
-| Student README cleanup | US-01 |
-| Lightweight tests | US-11, US-16 |
-| Static hosting model | US-09, US-12 |
-
-## Extension Rule Compliance
-
-| Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+**Acceptance Criteria**
+- Given the visitor reaches the Contact section, when its contact entries render, then it displays `student.email@example.com` and `+84 XXX XXX XXX` with explicit placeholder labels.
+- Given either placeholder entry is inspected or activated, when the visitor uses keyboard, touch, or pointer, then it is non-interactive and exposes no `mailto:`, `tel:`, form control, or submission behavior.
+- Given the Contact section renders, when its text and links are inspected, then neither the CV's placeholder values nor any former-owner contact detail appears.
+- Given the visitor reads the full section, when they reach the closing status, then it explains that verified contact channels will replace the placeholders later.

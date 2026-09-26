@@ -2,28 +2,67 @@
 
 ## Purpose
 
-Verify that the application shell, Business presentation, shared data, routes, and journal pages work together after the README and contact-color amendment.
+Verify that the typed medical data, content components, shared layout, application shell, cross-cutting policy tests, documentation, and production verifier work together as one static portfolio.
 
-## Run the Rendered Integration Group
+No backend, database, container, test server, or external endpoint is required.
+
+## Scenario 1: Typed Contact Data to Rendered Contact Section
+
+- **Description**: Unit 2's `PortfolioContent.contact` is passed through `App` to Unit 4's `ClosingContact`.
+- **Run**:
 
 ```bash
-npx vitest run src/App.test.tsx src/templates/journalPostPages.test.tsx src/templates/business/businessTemplate.test.tsx
+npx vitest run src/data/medical/content.test.ts src/components/medical/content/MedicalContent.test.tsx src/App.test.tsx
 ```
 
-Expected verified result: 3 files and 39 tests pass.
+- **Expected**: The exact email and phone examples, labels, `Placeholder` statuses, and verification notice render; CV-only values remain absent; no link, button, form, input, `mailto:`, or `tel:` behavior exists.
+- **Cleanup**: None.
 
-## Test Inventory
+## Scenario 2: Shared Section Contract Across Content Areas
 
-| File                                               | Main responsibility                                                   |
-| -------------------------------------------------- | --------------------------------------------------------------------- |
-| `src/App.test.tsx`                                 | Application rendering, navigation, style switching, and shared routes |
-| `src/templates/journalPostPages.test.tsx`          | Journal list/detail rendering and route behavior                      |
-| `src/templates/business/businessTemplate.test.tsx` | Business sections, contact content, project media, and presentation   |
+- **Description**: `MedicalSection`, medical content CSS, shell composition, and navigation preserve all eight section IDs and the compact heading/body hierarchy.
+- **Run**:
 
-## Manual Responsive Check
+```bash
+npx vitest run src/components/medical/content/MedicalContent.property.test.tsx src/components/medical/content/medicalContentStyles.test.ts src/App.test.tsx
+```
 
-Run `npm run dev`, then check Engineering and Business in light and dark modes. In Business, confirm the Direct Contact card matches nearby surfaces and retains readable email and social controls at desktop and narrow widths.
+- **Expected**: Generated section content preserves one associated `h2` and one body; desktop CSS contains the 28/72 grid and a 3rem shared-heading cap; single-column and narrow-mobile overrides cap headings at 2.5rem and 2.1rem; all eight application sections remain ordered.
+- **Cleanup**: None.
 
-## Failure Recovery
+## Scenario 3: Application Graph, Privacy Policy, and Documentation
 
-Run only the failing file first, fix the earliest assertion or render error, and then rerun `npm run test` so shared behavior remains protected.
+- **Description**: Unit 6 verifies that the production graph requires approved website placeholders while continuing to prohibit CV-only/former-owner markers and that repository guidance explains the same boundary.
+- **Run**:
+
+```bash
+npx vitest run src/test/medicalPortfolioRegression.test.tsx src/test/productionGraph.test.ts src/test/documentationContract.test.ts
+```
+
+- **Expected**: Full-app Contact content is present and non-actionable; retired identities/features remain absent; production imports stay within the medical graph; README/deployment guidance matches implementation.
+- **Cleanup**: None.
+
+## Scenario 4: Static Production Output
+
+- **Description**: The complete Vite bundle satisfies the asset, privacy, runtime-request, and base-path contract.
+- **Run**:
+
+```bash
+npm run build
+npm run verify:dist
+VITE_BASE_PATH=/student-profile/ npm run build
+EXPECTED_BASE_PATH=/student-profile/ npm run verify:dist
+```
+
+- **Expected**: Both path forms pass with 16 approved JPG files, three approved WebP illustrations, one approved CV PDF, allowed Contact copy, no prohibited markers, and all local URLs inside the expected base path.
+- **Cleanup**: No cleanup is required; a later build replaces `dist/`.
+
+## Full Integration Gate
+
+```bash
+npm run quality
+npm run build
+npm run verify:dist
+```
+
+Use the full gate after any focused scenario passes to catch interactions outside the immediate files.

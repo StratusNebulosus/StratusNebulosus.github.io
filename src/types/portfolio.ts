@@ -8,7 +8,12 @@ export type SectionId =
   | "gallery"
   | "journal"
   | "skills"
-  | "contact";
+  | "contact"
+  | "overview"
+  | "calling"
+  | "academics"
+  | "science"
+  | "leadership";
 
 export type ExternalLink = {
   label: string;
@@ -66,7 +71,10 @@ export type AboutSection = {
   metrics: Metric[];
 };
 
-export type ContentSectionId = Exclude<SectionId, "home">;
+export type ContentSectionId = Exclude<
+  SectionId,
+  "home" | "overview" | "calling" | "academics" | "science" | "leadership"
+>;
 
 export type SectionCopy = {
   eyebrow: string;

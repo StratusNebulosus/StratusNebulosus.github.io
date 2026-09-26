@@ -4,52 +4,18 @@ import {
   render,
   screen,
   waitFor,
+  within,
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import App, { PortfolioApp } from "./App";
+import App from "./App";
 import { Provider } from "./components/ui/provider";
+import { content } from "./data/medical/content";
+import { galleryItems } from "./data/medical/gallery";
 import {
-  journalPosts,
-  navigation,
-  profile,
-  projects,
-  sectionContent,
-} from "./data/portfolio";
-import { selectedTemplateId } from "./data/template";
-import { businessTemplate } from "./templates/business";
-import { engineeringTemplate } from "./templates/engineering";
-import type { PortfolioTemplate, PortfolioTemplateId } from "./templates/types";
-import { PORTFOLIO_TEMPLATE_STORAGE_KEY } from "./utils/templateSelection";
-
-const enabledNavigationItems = navigation.filter((item) => item.enabled);
-
-type ActiveTemplateControls = {
-  primaryAction: string;
-  resume: string;
-  layout: string;
-  theme: string;
-  menu?: string;
-  projectLink: string;
-};
-
-const activeTemplateControls: ActiveTemplateControls = {
-  engineering: {
-    primaryAction: "hero-primary-action",
-    resume: "hero-resume-download",
-    layout: "navbar-layout-toggle",
-    theme: "navbar-theme-toggle",
-    menu: "navbar-menu-toggle",
-    projectLink: "navbar-mobile-link-projects",
-  },
-  business: {
-    primaryAction: "business-hero-primary-action",
-    resume: "business-hero-resume-download",
-    layout: "business-layout-toggle",
-    theme: "business-theme-toggle",
-    projectLink: "business-contents-link-projects",
-  },
-}[selectedTemplateId];
+  medicalNavigation,
+  medicalSectionIds,
+} from "./data/medical/navigation";
 
 const renderPortfolio = () =>
   render(
@@ -57,32 +23,6 @@ const renderPortfolio = () =>
       <App />
     </Provider>,
   );
-
-const renderTemplate = (template: PortfolioTemplate) =>
-  render(
-    <Provider>
-      <PortfolioApp initialTemplate={template} />
-    </Provider>,
-  );
-
-const templateSelectorPrefixes: Record<PortfolioTemplateId, string> = {
-  engineering: "navbar",
-  business: "business",
-};
-
-const selectPortfolioStyle = async (
-  currentTemplateId: PortfolioTemplateId,
-  nextTemplateId: PortfolioTemplateId,
-) => {
-  const prefix = templateSelectorPrefixes[currentTemplateId];
-
-  fireEvent.click(screen.getByTestId(`${prefix}-style-selector-trigger`));
-  fireEvent.click(
-    await screen.findByTestId(
-      `${prefix}-style-selector-option-${nextTemplateId}`,
-    ),
-  );
-};
 
 beforeEach(() => {
   vi.stubGlobal(
@@ -94,498 +34,142 @@ beforeEach(() => {
     },
   );
   window.localStorage.clear();
-  window.history.pushState(null, "", "/");
+  window.history.replaceState(null, "", "/");
+  document.documentElement.classList.remove("dark");
+  document.documentElement.classList.add("light");
 });
 
-afterEach(() => {
-  cleanup();
-});
+afterEach(() => cleanup());
 
-describe("App smoke render", () => {
-  it("renders core portfolio content from local data files", () => {
+describe("medical portfolio application", () => {
+  it("renders the finished non-gallery medical profile", () => {
     renderPortfolio();
-
-    expect(document.body.textContent).toContain(profile.name);
-    expect(document.body.textContent).toContain(profile.role);
+    expect(screen.getByTestId("medical-portfolio-shell")).toBeInTheDocument();
     expect(
-      screen.getByTestId(activeTemplateControls.primaryAction),
+      screen.getByRole("heading", { level: 1, name: content.hero.name }),
     ).toBeInTheDocument();
-    expect(screen.getByTestId(activeTemplateControls.resume)).toHaveAttribute(
-      "download",
-      profile.resume.fileName,
-    );
+    expect(screen.getByText(content.hero.role)).toBeInTheDocument();
     expect(
-      screen.getAllByText(enabledNavigationItems[0].label).length,
-    ).toBeGreaterThan(0);
-  });
-
-  it("renders school achievements with accessible school logos", () => {
-    renderPortfolio();
-
-    expect(screen.getByText("Model Student Award")).toBeInTheDocument();
-    expect(
-      screen.getByText("Singapore Youth Festival Choir - Silver Award"),
+      screen.getByText("Exploring Nanomaterials in Medicine"),
     ).toBeInTheDocument();
     expect(
-      screen.getAllByRole("img", { name: "Zhonghua Secondary School logo" }),
-    ).toHaveLength(2);
-  });
-
-  it("renders student-editable descriptions below every non-home section heading", () => {
-    renderPortfolio();
-
-    for (const copy of Object.values(sectionContent)) {
-      expect(screen.getByText(copy.description)).toBeInTheDocument();
-    }
-  });
-
-  it("renders the layout switch control and all enabled sections in single-page mode", () => {
-    renderPortfolio();
-
-    expect(
-      screen.getByTestId(activeTemplateControls.layout),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(activeTemplateControls.theme),
-    ).toBeInTheDocument();
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-layout-mode",
-      "single",
-    );
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      selectedTemplateId,
-    );
-    expect(
-      screen.getByTestId(
-        `${templateSelectorPrefixes[selectedTemplateId]}-style-selector-trigger`,
-      ),
-    ).toHaveAccessibleName("Portfolio style: Engineering");
-    expect(document.getElementById("home")).toBeInTheDocument();
-    expect(screen.getByTestId("about-section")).toBeInTheDocument();
-    expect(screen.getByTestId("projects-section")).toBeInTheDocument();
-    expect(screen.getAllByText("IN_SITE").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("WORDPRESS").length).toBeGreaterThan(0);
-    expect(screen.getByTestId("writing-image-local-0")).toHaveAttribute(
-      "data-image-fit",
-      "cover",
-    );
-    expect(screen.getByTestId("writing-image-frame-local-0")).toHaveAttribute(
-      "data-thumbnail-height",
-      "190px",
-    );
-    expect(
-      screen.getAllByTestId(/^writing-image-wordpress-/)[0],
-    ).toHaveAttribute("data-image-fit", "cover");
-    expect(
-      screen.getAllByTestId(/^writing-image-frame-wordpress-/)[0],
-    ).toHaveAttribute("data-thumbnail-height", "190px");
-  });
-
-  it("switches to multi-page mode and renders one selected page section", async () => {
-    renderPortfolio();
-
-    fireEvent.click(screen.getByTestId(activeTemplateControls.layout));
-
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-layout-mode",
-      "multi",
-    );
-    expect(document.getElementById("home")).toBeInTheDocument();
-    expect(screen.queryByTestId("about-section")).not.toBeInTheDocument();
-    if (activeTemplateControls.menu) {
-      fireEvent.click(screen.getByTestId(activeTemplateControls.menu));
-    }
-    fireEvent.click(
-      await screen.findByTestId(activeTemplateControls.projectLink),
-    );
-
-    expect(screen.getByTestId("projects-section")).toBeInTheDocument();
-    expect(screen.queryByTestId("about-section")).not.toBeInTheDocument();
-    expect(window.location.hash).toBe("#/projects");
-  });
-
-  it("initializes multi-page mode from a direct GitHub Pages-safe section hash", async () => {
-    window.history.pushState(null, "", "#/projects");
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-layout-mode",
-      "multi",
-    );
-    expect(screen.getByTestId("projects-section")).toBeInTheDocument();
-    expect(screen.queryByTestId("about-section")).not.toBeInTheDocument();
-    expect(window.location.hash).toBe("#/projects");
-  });
-
-  it("keeps a direct anchor hash in single-page mode", () => {
-    window.history.pushState(null, "", "#about");
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-layout-mode",
-      "single",
-    );
-    expect(screen.getByTestId("about-section")).toBeInTheDocument();
-    expect(screen.getByTestId("projects-section")).toBeInTheDocument();
-  });
-
-  it("resolves an invalid slash route to the first enabled section without rendering an alternate tree", () => {
-    window.history.pushState(null, "", "#/missing");
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-layout-mode",
-      "multi",
-    );
-    expect(
-      document.getElementById(enabledNavigationItems[0].id),
-    ).toBeInTheDocument();
-    expect(screen.queryByTestId("about-section")).not.toBeInTheDocument();
-    expect(screen.queryByTestId("projects-section")).not.toBeInTheDocument();
-  });
-
-  it("renders a local journal post from a direct GitHub Pages-safe hash", () => {
-    window.history.pushState(null, "", journalPosts[0].href);
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("journal-post-page")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { level: 1, name: journalPosts[0].title }),
-    ).toBeInTheDocument();
-    expect(screen.getByText("IN_SITE")).toBeInTheDocument();
-    expect(screen.getByTestId("journal-post-image")).toHaveAttribute(
-      "data-image-fit",
-      "contain",
-    );
-    expect(
-      screen.getByRole("heading", {
-        level: 2,
-        name: "Mentoring at the SIM–LSE Data Analytics Challenge 2026",
-      }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("SIM–LSE Data Analytics Challenge 2026", {
-        selector: "strong",
-      }),
-    ).toBeInTheDocument();
-    expect(screen.getByTestId("journal-post-back-link")).toHaveAttribute(
-      "href",
-      "#/journal",
-    );
-  });
-
-  it("renders a graceful fallback for an unknown local journal post hash", () => {
-    window.history.pushState(null, "", "#/journal/missing-post");
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("journal-post-not-found")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { level: 1, name: "Journal post not found" }),
+      screen.getByText("WIS Conference - WHO Committee"),
     ).toBeInTheDocument();
   });
 
-  it.each([
-    [
-      "engineering",
-      engineeringTemplate,
-      "navbar-layout-toggle",
-      "navbar-theme-toggle",
-      "navbar",
-    ],
-    [
-      "business",
-      businessTemplate,
-      "business-layout-toggle",
-      "business-theme-toggle",
-      "business",
-    ],
-  ] as const)(
-    "composes the %s template through the shared App boundary",
-    async (
-      templateId,
-      template,
-      layoutToggleId,
-      themeToggleId,
-      selectorPrefix,
-    ) => {
-      renderTemplate(template);
-
-      expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-        "data-template-id",
-        templateId,
+  it("renders exactly eight top-level section targets in approved order", () => {
+    renderPortfolio();
+    const main = screen.getByTestId("medical-main");
+    const sectionIds = Array.from(main.children, (element) => element.id);
+    expect(sectionIds).toEqual(medicalSectionIds);
+    medicalNavigation.forEach((item) => {
+      expect(screen.getByTestId(`medical-section-${item.id}`)).toHaveAttribute(
+        "aria-labelledby",
+        `${item.id}-heading`,
       );
-      expect(document.getElementById("home")).toBeInTheDocument();
-      expect(screen.getByTestId("about-section")).toBeInTheDocument();
-      expect(screen.getByTestId(layoutToggleId)).toBeInTheDocument();
-      expect(screen.getByTestId(themeToggleId)).toBeInTheDocument();
-      fireEvent.click(
-        screen.getByTestId(`${selectorPrefix}-style-selector-trigger`),
-      );
-      for (const supportedTemplate of ["engineering", "business"] as const) {
-        const option = await screen.findByTestId(
-          `${selectorPrefix}-style-selector-option-${supportedTemplate}`,
-        );
-
-        expect(option).toHaveAttribute(
-          "aria-checked",
-          supportedTemplate === templateId ? "true" : "false",
-        );
-      }
-      for (const copy of Object.values(sectionContent)) {
-        expect(screen.getByText(copy.description)).toBeInTheDocument();
-      }
-    },
-  );
-
-  it.each([
-    [engineeringTemplate, "hero-resume-download"],
-    [businessTemplate, "business-hero-resume-download"],
-  ] as const)(
-    "keeps shared external actions clear of their borders",
-    (template, resumeActionId) => {
-      renderTemplate(template);
-
-      expect(screen.getByTestId(resumeActionId)).toHaveClass(
-        "portfolio-action-link",
-      );
-    },
-  );
-
-  it("composes Business as an editorial casebook with sticky contents", () => {
-    renderTemplate(businessTemplate);
-
-    expect(
-      document.querySelector(".business-casebook-header"),
-    ).toBeInTheDocument();
-    expect(
-      document.querySelector(".business-casebook-rail"),
-    ).toBeInTheDocument();
-    expect(
-      document.querySelector(".business-casebook-document"),
-    ).toBeInTheDocument();
-    expect(
-      document.querySelector('nav[aria-label="Business showcase contents"]'),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId("business-contents-link-projects"),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Editorial casebook")).toBeInTheDocument();
-    expect(
-      screen.getByText(sectionContent.projects.eyebrow),
-    ).toBeInTheDocument();
-    expect(screen.queryByText("Executive brief")).not.toBeInTheDocument();
-    expect(screen.queryByText("Reviewed evidence")).not.toBeInTheDocument();
+    });
   });
 
-  it.each([["business", businessTemplate]] as const)(
-    "uses project-owned covers throughout the %s presentation",
-    (_templateId, template) => {
-      renderTemplate(template);
-
-      for (const project of projects) {
-        const projectImages = screen.getAllByRole("img", {
-          name: project.imageAlt,
-        });
-
-        expect(projectImages.length).toBeGreaterThan(0);
-        for (const image of projectImages) {
-          expect(image).toHaveAttribute("src", project.image);
-        }
-      }
-    },
-  );
-
-  it("gives every Business project card explicit mobile clearance", () => {
-    renderTemplate(businessTemplate);
-
-    for (const project of projects) {
+  it("renders the final gallery with every approved image trigger", () => {
+    renderPortfolio();
+    expect(screen.getByTestId("medical-gallery-grid")).toBeInTheDocument();
+    expect(screen.getAllByTestId(/^medical-gallery-item-/)).toHaveLength(16);
+    galleryItems.forEach((item) => {
       expect(
-        screen.getByTestId(`business-case-label-${project.id}`),
-      ).toHaveAttribute("data-inline-clearance", "16px");
-    }
+        screen.getByTestId(`medical-gallery-item-${item.id}`),
+      ).toHaveAttribute("data-content-id", item.id);
+    });
   });
 
-  it.each([
-    ["engineering", engineeringTemplate, "navbar-layout-toggle"],
-    ["business", businessTemplate, "business-layout-toggle"],
-  ] as const)(
-    "keeps the %s template compatible with both layout modes",
-    (_templateId, template, layoutToggleId) => {
-      renderTemplate(template);
-
-      expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-        "data-layout-mode",
-        "single",
-      );
-      fireEvent.click(screen.getByTestId(layoutToggleId));
-      expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-        "data-layout-mode",
-        "multi",
-      );
-      expect(document.getElementById("home")).toBeInTheDocument();
-      expect(screen.queryByTestId("about-section")).not.toBeInTheDocument();
-    },
-  );
-
-  it.each([
-    ["engineering", engineeringTemplate, "navbar-link-journal"],
-    ["business", businessTemplate, "business-contents-link-journal"],
-  ] as const)(
-    "keeps the %s shell and journal context for local journal routes",
-    (templateId, template, journalLinkId) => {
-      window.history.pushState(null, "", journalPosts[0].href);
-
-      renderTemplate(template);
-
-      expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-        "data-template-id",
-        templateId,
-      );
-      expect(screen.getByTestId("journal-post-page")).toBeInTheDocument();
-      expect(screen.getByTestId(journalLinkId)).toHaveAttribute(
-        "aria-current",
-        "page",
-      );
-    },
-  );
-
-  it("keeps semantic portfolio-style selection without a visible check indicator", async () => {
+  it("opens award evidence in the shared dialog and restores the award trigger", async () => {
     renderPortfolio();
+    const award = content.awardGroups[0].awards.find(
+      (entry) => entry.evidence,
+    )!;
+    const galleryItem = galleryItems.find(
+      (entry) => entry.asset === award.evidence,
+    )!;
+    const trigger = screen.getByTestId(`medical-award-evidence-${award.id}`);
 
-    fireEvent.click(screen.getByTestId("navbar-style-selector-trigger"));
-    const activeOption = await screen.findByTestId(
-      "navbar-style-selector-option-engineering",
+    trigger.focus();
+    fireEvent.click(trigger);
+
+    const dialog = await screen.findByRole("dialog");
+    expect(dialog).toHaveAccessibleName(galleryItem.title);
+    expect(screen.getByTestId("medical-gallery-modal-image")).toHaveAttribute(
+      "src",
+      galleryItem.asset,
     );
-    const selectorMenu = screen.getByTestId("navbar-style-selector-menu");
+    expect(screen.getAllByTestId("medical-gallery-modal")).toHaveLength(1);
 
-    expect(activeOption).toHaveAttribute("aria-checked", "true");
+    fireEvent.click(screen.getByTestId("medical-gallery-modal-close"));
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    await waitFor(() => expect(trigger).toHaveFocus());
+  });
+
+  it("renders the exact Grade 10 metric and an honest no-evidence award state", () => {
+    renderPortfolio();
     expect(
-      selectorMenu.querySelector('[data-part="item-indicator"]'),
-    ).toBeNull();
-  });
-
-  it("switches immediately between both visible portfolio styles and persists the latest choice", async () => {
-    renderPortfolio();
-
-    await selectPortfolioStyle("engineering", "business");
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "business",
-    );
-    expect(window.localStorage.getItem(PORTFOLIO_TEMPLATE_STORAGE_KEY)).toBe(
-      "business",
-    );
-
-    await selectPortfolioStyle("business", "engineering");
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "engineering",
-    );
-    expect(window.localStorage.getItem(PORTFOLIO_TEMPLATE_STORAGE_KEY)).toBe(
-      "engineering",
-    );
-  });
-
-  it("restores a valid saved style instead of the source default", () => {
-    window.localStorage.setItem(PORTFOLIO_TEMPLATE_STORAGE_KEY, "business");
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "business",
+      screen.getByTestId("medical-gpa-metric-gpa-grade-10"),
+    ).toHaveTextContent("9.38 /10");
+    const award = content.awardGroups[0].awards.find(
+      (entry) => entry.illustration,
+    )!;
+    expect(
+      screen.getByTestId(`medical-award-illustration-${award.id}`),
+    ).toHaveTextContent(
+      "Commemorative illustration · not documentary evidence",
     );
     expect(
-      screen.getByTestId("business-style-selector-trigger"),
-    ).toHaveAccessibleName("Portfolio style: Business");
+      screen.queryByTestId(`medical-award-evidence-${award.id}`),
+    ).not.toBeInTheDocument();
   });
 
-  it("falls back to Engineering when a saved style is invalid", () => {
-    window.localStorage.setItem(PORTFOLIO_TEMPLATE_STORAGE_KEY, "missing");
-
+  it("renders the approved email-only Contact draft form", () => {
     renderPortfolio();
+    const contact = screen.getByTestId("medical-section-contact");
 
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "engineering",
-    );
-  });
-
-  it("falls back to Engineering when a saved style is the removed Neutral option", () => {
-    window.localStorage.setItem(PORTFOLIO_TEMPLATE_STORAGE_KEY, "neutral");
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "engineering",
-    );
-  });
-
-  it("preserves a multi-page section route and layout while changing styles", async () => {
-    window.history.pushState(null, "", "#/projects");
-
-    renderPortfolio();
-    await selectPortfolioStyle("engineering", "business");
-
-    expect(window.location.hash).toBe("#/projects");
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "business",
-    );
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-layout-mode",
-      "multi",
-    );
-    expect(screen.getByTestId("projects-section")).toBeInTheDocument();
-  });
-
-  it("preserves an open local journal post while changing styles", async () => {
-    window.history.pushState(null, "", journalPosts[0].href);
-
-    renderPortfolio();
-    await selectPortfolioStyle("engineering", "business");
-
-    expect(window.location.hash).toBe(journalPosts[0].href);
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "business",
-    );
-    expect(screen.getByTestId("journal-post-page")).toBeInTheDocument();
-  });
-
-  it("preserves a visitor-selected layout mode while changing styles", async () => {
-    renderPortfolio();
-
-    fireEvent.click(screen.getByTestId("navbar-layout-toggle"));
-    await selectPortfolioStyle("engineering", "business");
-
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "business",
-    );
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-layout-mode",
-      "multi",
-    );
-  });
-
-  it("preserves color mode while changing styles", async () => {
-    renderPortfolio();
-
-    fireEvent.click(await screen.findByTestId("navbar-theme-toggle"));
-    await waitFor(() => expect(document.documentElement).toHaveClass("dark"));
-    await selectPortfolioStyle("engineering", "business");
-
-    expect(document.documentElement).toHaveClass("dark");
     expect(
-      await screen.findByTestId("business-theme-toggle"),
+      within(contact).getByTestId("medical-contact-form"),
     ).toBeInTheDocument();
+    expect(within(contact).getByLabelText("Name")).toBeInTheDocument();
+    expect(
+      within(contact).getByLabelText("Reply-to email"),
+    ).toBeInTheDocument();
+    expect(within(contact).getByLabelText("Message")).toBeInTheDocument();
+    expect(
+      within(contact).getByRole("button", { name: /open email draft/i }),
+    ).toBeInTheDocument();
+    expect(contact).not.toHaveTextContent("student.email@example.com");
+    expect(contact).not.toHaveTextContent("+84 XXX XXX XXX");
+    expect(contact).not.toHaveTextContent("Phone");
+  });
+
+  it("navigates with a plain hash anchor", () => {
+    renderPortfolio();
+    fireEvent.click(screen.getByTestId("medical-nav-link-science"));
+    expect(window.location.hash).toBe("#science");
+    expect(window.location.hash).not.toContain("#/");
+  });
+
+  it("leaves obsolete layout and template preferences inert", () => {
+    window.localStorage.setItem("portfolio-layout-mode", "multi");
+    window.localStorage.setItem("portfolio-template-id", "business");
+    renderPortfolio();
+    expect(screen.queryByText(/portfolio style/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/engineering portfolio/i),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/business showcase/i)).not.toBeInTheDocument();
+  });
+
+  it("retains the accessible color-mode control", async () => {
+    renderPortfolio();
+    const control = screen.getByTestId("medical-nav-theme-toggle");
+    expect(control).toHaveAccessibleName("Toggle color mode");
+    fireEvent.click(control);
+    await waitFor(() => expect(document.documentElement).toHaveClass("dark"));
   });
 });

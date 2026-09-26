@@ -1,69 +1,35 @@
-# Personas
+# Medical Student Portfolio Revamp - Personas
 
-## Persona 1: Student Template User
+Approved persona set (Question 2, Option A): four personas representing the primary audiences named in `aidlc-docs/inception/requirements/requirements.md`.
 
-- **Name**: Minh, the student portfolio builder.
-- **Role**: Student or early-career developer using the repository as a baseline portfolio.
-- **Goals**:
-  - Replace example content with personal profile, education, experience, projects, skills, media, and contact details.
-  - Run the site locally without confusion.
-  - Deploy the portfolio to GitHub Pages.
-  - Understand where to make changes without accidentally breaking layout code.
-- **Motivations**:
-  - Build a polished portfolio for internships, scholarships, jobs, or school applications.
-  - Learn a practical React/Vite project structure.
-  - Avoid getting stuck on deployment details.
-- **Pain Points**:
-  - New to GitHub Pages, Vite base paths, and GitHub Actions.
-  - Can accidentally break JSX while editing text.
-  - May not know which assets or links need replacement.
-- **Relevant Stories**: US-01 through US-13, US-15, US-16.
+## Persona 1: Academic Reviewer (Anh, Admissions/Scholarship Committee Member)
 
-## Persona 2: Portfolio Visitor
+- **Role**: Evaluates the student's academic record, science achievements, and evidence for a scholarship, program, or admissions decision.
+- **Goals**: Quickly verify identity, program, standardized-test scores, and awards; trust that displayed evidence is authentic and traceable to source materials.
+- **Behaviors**: Scans the first viewport for identity and program; jumps via navigation to Academic Excellence and Science and Awards; inspects certificate imagery closely.
+- **Needs**: Accurate, unembellished score presentation; no misleading comparisons; legible certificate evidence with meaningful alternative text; no private identifiers exposed.
+- **Accessibility considerations**: May use zoom or high-contrast display settings; needs sufficient color contrast and clear heading structure for fast scanning.
 
-- **Name**: Linh, the portfolio reviewer.
-- **Role**: Recruiter, mentor, teacher, peer, scholarship reviewer, or collaborator viewing the deployed site.
-- **Goals**:
-  - Quickly understand the student's profile, education, experience, projects, skills, and contact options.
-  - Navigate the portfolio smoothly on desktop or mobile.
-  - Open supporting links, videos, and certificates.
-- **Motivations**:
-  - Evaluate the student's readiness, interests, and communication clarity.
-  - Find relevant evidence of technical ability and learning journey.
-- **Pain Points**:
-  - Poor navigation, missing labels, broken assets, or incorrect links reduce trust.
-  - Mobile issues can make the portfolio hard to review.
-- **Relevant Stories**: US-07, US-08, US-09, US-11, US-14.
+## Persona 2: Medical Educator or Mentor (Dr. Linh, Faculty Mentor)
 
-## Persona 3: Template Maintainer
+- **Role**: Assesses character, motivation, leadership, and service orientation as an indicator of fitness for medical study.
+- **Goals**: Understand the narrative connecting scientific curiosity, discipline, empathy, and service; distinguish aspiration from verified experience.
+- **Behaviors**: Reads the Calling to Medicine narrative and Leadership and Service section in sequence; reviews the Evidence Gallery for corroborating context.
+- **Needs**: Reflective, precise language that never overstates clinical involvement; clear separation of values/aspiration from documented fact.
+- **Accessibility considerations**: May review on a tablet between meetings; needs responsive layout and touch-friendly navigation.
 
-- **Name**: An, the template maintainer.
-- **Role**: Developer maintaining the portfolio baseline for future students.
-- **Goals**:
-  - Keep content data, UI components, deployment configuration, and tests easy to maintain.
-  - Preserve the current visual experience while improving code organization.
-  - Provide clear documentation and guardrails for student forks.
-- **Motivations**:
-  - Reduce repeated support questions.
-  - Make future enhancements safer.
-  - Keep the template stable across GitHub Pages deployments.
-- **Pain Points**:
-  - Duplicated navigation IDs and helper functions can drift.
-  - Hard-coded content makes template updates slow.
-  - Missing tests make regressions harder to catch.
-- **Relevant Stories**: US-03, US-04, US-05, US-06, US-10, US-12, US-13, US-15, US-16.
+## Persona 3: Peer or General Visitor (Minh, Prospective Peer/Collaborator)
 
-## Persona Coverage Summary
+- **Role**: A fellow student, collaborator, or interested visitor exploring the portfolio out of general interest or shared background.
+- **Goals**: Get an engaging, credible impression of the student's journey without needing domain expertise to interpret it.
+- **Behaviors**: Browses casually on a phone; toggles light/dark mode; explores the Evidence Gallery for visual highlights.
+- **Needs**: An inviting, non-clinical-cliché visual identity; comfortable mobile navigation; smooth theme switching without flicker.
+- **Accessibility considerations**: Mobile-first, touch-target size, reduced-motion preference respected, no horizontal scrolling at narrow widths.
 
-| Persona | Primary Needs Covered |
-|---|---|
-| Student Template User | Setup, customization, local development, testing, deployment, troubleshooting |
-| Portfolio Visitor | Navigation, content clarity, media access, contact flow, accessibility |
-| Template Maintainer | Typed data, shared config, reusable helpers/components, docs, tests, deployment stability |
+## Persona 4: Portfolio Owner or Maintainer (Phat, the Student, or a Trusted Maintainer)
 
-## Extension Rule Compliance
-
-| Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+- **Role**: Owns the accuracy, privacy safety, and long-term upkeep of the published content.
+- **Goals**: Ensure only verified, privacy-safe content and assets are published; keep content and code maintainable as facts change (e.g., new contact info or résumé becomes available later).
+- **Behaviors**: Edits typed data modules to update facts; reviews the asset allowlist before adding new evidence; relies on tests to catch accidental exposure of sensitive content or regressions to the old identity.
+- **Needs**: Clear separation of content data from presentation; an explicit, enforced public-asset allowlist; example-based and property-based tests that fail loudly on regressions or privacy violations; documentation that matches the current structure.
+- **Accessibility considerations**: Needs the codebase itself to be navigable and well-documented, since accessibility here means maintainability rather than end-user accessibility.

@@ -1,89 +1,43 @@
-# Application Design
+# Medical Student Portfolio Revamp - Application Design
 
-## Summary
+Consolidated application design. Approved via `aidlc-docs/inception/plans/application-design-plan.md` (all five questions answered with the recommended option).
 
-The portfolio template will remain a static React/Vite single-page app. The design improves maintainability by moving student-editable content into typed data modules, centralizing navigation configuration, adding shared utilities, and introducing moderate reusable UI helpers. GitHub Pages deployment will use repository-derived `VITE_BASE_PATH` in GitHub Actions with `/` as the local fallback. Tests will use Vitest and React Testing Library.
+## Approach Summary
 
-## Design Artifacts
+- **Component granularity**: One component per content area, composed by a single `MedicalShell`, plus shared presentational primitives (`ScoreCard`, `AwardItem`, `TimelineEntry`, `GalleryItem`, `GalleryModal`).
+- **Content/allowlist layer**: Two separate typed modules — a `content` module for all portfolio copy/data, and an `assetAllowlist` module that is the single enforcement point for FR-15's public-asset boundary.
+- **Shell/navigation split**: `App` retains ownership of hash/active-section/color-mode state; `MedicalShell` renders navigation and composes sections.
+- **Evidence gallery**: A reusable `GalleryModal` component owns focus-trap, Escape, and focus-restoration behavior independently of `EvidenceGallery`.
+- **Property-based tests**: Colocated with the module under test (e.g., `assetAllowlist.property.test.ts` beside `assetAllowlist.ts`), consistent with the existing per-module test convention.
 
-- `components.md` - Component definitions and responsibilities.
-- `component-methods.md` - High-level method signatures and interfaces.
-- `services.md` - Frontend support services/orchestration modules.
-- `component-dependency.md` - Dependency graph, matrix, and communication patterns.
+## Components
 
-## Component Model
+See `components.md` for full detail. Summary: `App` (retained), `MedicalShell`, `MedicalNav`, and eight content-area components (`MedicalHero`, `CallingToMedicine`, `EducationJourney`, `AcademicExcellence`, `ScienceAndAwards`, `LeadershipAndService`, `EvidenceGallery`, `ClosingContact`), plus shared primitives (`ScoreCard`, `AwardItem`, `TimelineEntry`, `GalleryItem`, `GalleryModal`). The template registry, style selector, and template-specific components (`EngineeringShell`, `BusinessShell`, `Journal`, `Skills`, etc.) are removed.
 
-The app keeps its current section-based architecture:
+## Component Methods
 
-- `App` renders the page shell and ordered sections.
-- `Navbar` renders navigation from shared config.
-- Section components remain readable and recognizable.
-- Shared UI components standardize repeated section/card/action patterns.
-- Data modules become the primary editing surface for students.
+See `component-methods.md` for method signatures. Business rules (exact allowlist-matching algorithm, hash-parsing edge cases, focus-trap tab-cycling details) are deferred to Functional Design.
 
-## Data Model
+## Services
 
-The design uses focused data files plus an aggregator:
+See `services.md`. Four module-level "services," none backed by a network call: `content`, `assetAllowlist`, `colorMode` (retained), `navigation` (retained, simplified).
 
-- `src/data/profile.ts`
-- `src/data/navigation.ts`
-- `src/data/about.ts`
-- `src/data/education.ts`
-- `src/data/experience.ts`
-- `src/data/awards.ts`
-- `src/data/projects.ts`
-- `src/data/gallery.ts`
-- `src/data/videos.ts`
-- `src/data/skills.ts`
-- `src/data/certificates.ts`
-- `src/data/portfolio.ts`
+## Component Dependencies
 
-Shared types live in `src/types/portfolio.ts`.
+See `component-dependency.md` for the dependency matrix and data-flow diagram. Key invariant: every component rendering an image path must pass through `assetAllowlist.isAllowedAsset` — this is the single privacy-boundary chokepoint required by FR-15.
 
-## Utility Model
+## Traceability to Requirements
 
-Shared utilities support repeated behavior:
+| Requirement | Design Coverage |
+|---|---|
+| FR-01, FR-14 | Removal of template registry, style selector, `EngineeringShell`/`BusinessShell`; `MedicalShell` as sole shell |
+| FR-02, FR-12 | Design tokens applied by `MedicalShell`; `colorMode` service retained |
+| FR-03 | `navigation` service retained/simplified; `MedicalNav` renders sticky/mobile nav with skip link |
+| FR-04 through FR-11 | One dedicated content-area component per requirement |
+| FR-13 | `content` module as typed, decoupled data layer |
+| FR-15 | `assetAllowlist` module as sole enforcement point |
+| NFR-06, NFR-07 | Colocated example-based and property-based tests per module |
 
-- `src/utils/scroll.ts` - section scrolling and active section tracking.
-- `src/utils/contact.ts` - mailto URL generation.
-- `src/utils/media.ts` - YouTube URL helpers and small media helpers.
-- `src/utils/animation.ts` - repeated reveal delay class behavior if extracted.
+## Next Stage
 
-## Deployment Model
-
-- Local development uses `base: '/'`.
-- GitHub Actions derives the Pages path from repository metadata and passes `VITE_BASE_PATH`.
-- Vite reads `process.env.VITE_BASE_PATH ?? '/'`.
-- Documentation explains both repository Pages and user/organization Pages behavior.
-
-## Test Model
-
-Vitest and React Testing Library will provide:
-
-- App smoke render.
-- Navigation config uniqueness and required section checks.
-- Required profile/template data checks.
-
-Tests avoid browser automation and external network calls.
-
-## Design Completeness Check
-
-- **FR1 Preserve sections**: Covered by section component model.
-- **FR2 Extract content**: Covered by focused data files and aggregator.
-- **FR3 Shared types**: Covered by `src/types/portfolio.ts`.
-- **FR4 Centralized navigation**: Covered by `src/data/navigation.ts`.
-- **FR5 Shared scroll behavior**: Covered by `src/utils/scroll.ts`.
-- **FR6 Reusable UI structure**: Covered by `SectionShell`, `ContentCard`, and `ExternalAction`.
-- **FR7 Accessibility labels**: Covered by `ExternalAction` and component responsibilities.
-- **FR8 GitHub Pages base path**: Covered by deployment model.
-- **FR9 Setup docs**: Covered by documentation service.
-- **FR10 README cleanup**: Covered by documentation service.
-- **FR11 Lightweight tests**: Covered by test model.
-- **FR12 Static hosting**: Preserved by no backend service design.
-
-## Extension Rule Compliance
-
-| Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+Proceeds to Units Generation, using the 6-unit sequence proposed in `aidlc-docs/inception/plans/execution-plan.md`, refined against this component/service design.

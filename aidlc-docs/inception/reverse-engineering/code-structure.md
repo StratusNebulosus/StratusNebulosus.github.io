@@ -2,138 +2,87 @@
 
 ## Build System
 
-- **Type**: npm scripts with Vite and TypeScript project references.
-- **Configuration**:
-  - `package.json` defines `dev`, `test`, `build`, `lint`, and `preview`.
-  - `vite.config.ts` configures React SWC, Tailwind CSS, TypeScript paths, Vitest, and an environment-driven base path.
-  - `tsconfig.app.json` enables strict TypeScript checks for application and test code.
-  - `eslint.config.ts` configures base JavaScript, TypeScript, React, and Prettier compatibility.
-  - `.github/workflows/deploy.yml` derives the GitHub Pages base path and deploys `dist/`.
+- **Package manager**: npm with committed `package-lock.json`.
+- **Application build**: TypeScript project build followed by Vite.
+- **Quality scripts**: `typecheck`, `lint`, `test`, `quality`, `build`, and `verify:dist` in `package.json`.
+- **Deployment configuration**: `.github/workflows/deploy.yml`.
 
-## Module Hierarchy
+## Current Module Hierarchy
 
 ```mermaid
 flowchart TD
-    Main["src/main.tsx"]
-    Provider["UI Provider"]
-    App["App Shell"]
-    Selector["Shared Style Selector"]
-    Registry["Template Registry"]
-    Templates["Engineering, Neutral, and Business Templates"]
-    Sections["Section Components"]
-    Hooks["Layout Hook"]
-    Utils["Scroll, Journal, Media, and Animation Utilities"]
-    Data["Typed Data Modules"]
-    Content["Journal Markdown"]
-    Assets["Static Assets"]
-
-    Main --> Provider
-    Provider --> App
-    App --> Selector
-    App --> Registry
-    App --> Hooks
-    Registry --> Templates
-    Templates --> Sections
-    Sections --> Data
-    Sections --> Utils
-    Data --> Content
-    Data --> Assets
+    Main["src/main.tsx"] --> Provider["UI and theme providers"]
+    Provider --> App["src/App.tsx"]
+    App --> Shell["medical shell and navigation"]
+    App --> ContentComponents["medical content components"]
+    App --> GalleryComponents["medical gallery components"]
+    ContentComponents --> ContentData["typed medical content"]
+    GalleryComponents --> GalleryData["gallery metadata"]
+    GalleryComponents --> GalleryLogic["gallery state utilities"]
+    ContentData --> AssetPolicy["asset allowlist"]
+    GalleryData --> AssetPolicy
+    Shell --> LayoutHook["hash navigation hook"]
 ```
 
-### Text Alternative
+Text alternative: `main.tsx` mounts providers and `App`. `App` composes the medical shell, content sections, and gallery. Components consume typed content, gallery metadata, pure gallery state utilities, hash navigation, and the shared asset allowlist.
 
-`main.tsx` mounts the provider and App. App owns the active runtime template and uses the layout hook, selection utility, and template registry. Each template supplies its shell and maps section IDs to components. Components consume typed data and utilities; data modules import journal Markdown and static assets.
+## Existing Files Relevant to the Requested Change
 
-## Existing Files Inventory
-
-### Application and Styling
-- `src/main.tsx` - React entrypoint and provider mount.
-- `src/App.tsx` - Template, navigation, layout, and journal route orchestration.
-- `src/App.css` - Template-scoped variables, backgrounds, and shared animations.
-- `src/index.css` - Global variables, document styles, font import, and color mode values.
-
-### Templates
-- `src/data/template.ts` - Student-editable initial template selection.
-- `src/templates/types.ts` - Template ID, shell, journal, chapter, and complete section-map contracts.
-- `src/templates/index.ts` - Three-template registry, source-default compatibility export, resolution, and fallback.
-- `src/templates/engineering/index.ts` - Engineering section mapping.
-- `src/templates/engineering/EngineeringShell.tsx` - Engineering shell and Navbar integration.
-- `src/templates/neutral/*` - Neutral magazine shell plus editorial Hero, About, and Projects.
-- `src/templates/business/*` - Business report shell plus executive Hero, About, and Projects.
-
-### Shared and Baseline Components
-- `src/components/Navbar.tsx` - Engineering fixed desktop/mobile navigation and display controls.
-- `src/components/Hero.tsx` - Engineering hero.
-- `src/components/About.tsx` - Biography and metrics.
-- `src/components/Education.tsx` - Education records.
-- `src/components/Experience.tsx` - Experience timeline.
-- `src/components/Awards.tsx` - Awards and recognitions.
-- `src/components/Projects.tsx` - Engineering project cards.
-- `src/components/Gallery.tsx` - Engineering media gallery and preview.
-- `src/components/Journal.tsx` - Combined local and external writing cards.
-- `src/components/JournalPostPage.tsx` - Local post detail and not-found states.
-- `src/components/Skills.tsx` - Skills and certificate previews.
-- `src/components/Contact.tsx` - Contact form and social actions.
-- `src/components/shared/PortfolioStyleSelector.tsx` - Shared runtime template menu used by all three shell headers.
-- `src/components/shared/*` - Shared section, card, action, logo, and template-selection primitives.
-- `src/components/ui/*` - Chakra provider, color mode, tooltip, and toaster helpers.
-
-### Data, Content, Types, and Utilities
-- `src/data/*.ts` - Typed student-editable profile, navigation, career, project, media, writing, skill, certificate, and template configuration.
-- `src/content/journal/*.md` - Local journal article bodies.
-- `src/types/portfolio.ts` - Shared content and section contracts.
-- `src/hooks/usePortfolioLayout.ts` - Layout persistence, hash parsing, and section navigation.
-- `src/utils/scroll.ts` - Enabled-navigation filtering, active-section tracking, and smooth scrolling.
-- `src/utils/journal.ts` - Local journal route creation and parsing.
-- `src/utils/media.ts` - YouTube URL helpers.
-- `src/utils/animation.ts` - Staggered reveal class selection.
-- `src/utils/templateSelection.ts` - Typed template-ID validation and guarded browser persistence.
-
-### Tests and Delivery
-- `src/App.test.tsx` - App rendering, runtime template selection, persistence, route, layout, navigation, and journal tests.
-- `src/test/data/navigation.test.ts` - Section/navigation configuration tests.
-- `src/test/data/portfolio.test.ts` - Portfolio content and link validation tests.
-- `src/hooks/usePortfolioLayout.test.ts` - Layout helper tests.
-- `src/templates/templateRegistry.test.ts` - Template resolution and section completeness tests.
-- `src/utils/templateSelection.test.ts` - Template validation, fallback, persistence, and storage-failure tests.
-- `.github/workflows/deploy.yml` - GitHub Pages deployment workflow.
-- `README.md` - Student customization and publishing manual.
-- `DEPLOYMENT.md` - Detailed deployment guidance.
+- `src/components/medical/content/MedicalSection.tsx` - Shared non-hero header/body section structure.
+- `src/components/medical/content/medical-content.css` - Section headings, GPA cards, awards, research, activities, and shared visual treatment.
+- `src/components/medical/content/EducationJourney.tsx` - Grade 10-12 GPA markup.
+- `src/components/medical/content/ScienceAndAwards.tsx` - Science feature and award-group composition.
+- `src/components/medical/content/ContentPrimitives.tsx` - Award, score, timeline, research, and activity primitives.
+- `src/components/medical/gallery/EvidenceGallery.tsx` - Gallery selection orchestration and focus restoration.
+- `src/components/medical/gallery/GalleryItem.tsx` - Clickable evidence card.
+- `src/components/medical/gallery/GalleryModal.tsx` - Accessible detail dialog.
+- `src/components/medical/gallery/medical-gallery.css` - Gallery cards, modal sizing, and viewport inset.
+- `src/data/medical/content.ts` - GPA values and award-to-evidence associations.
+- `src/data/medical/gallery.ts` - Detailed evidence metadata for 13 reviewed images.
+- `src/data/medical/assetAllowlist.ts` - Approved public image and CV boundary.
+- `src/types/medicalPortfolio.ts` - Award, GPA, gallery, and portfolio contracts.
+- `src/App.tsx` - Final section composition.
+- `src/components/medical/content/MedicalContent.test.tsx` - Content/component regression coverage.
+- `src/components/medical/content/medicalContentStyles.test.ts` - CSS contract assertions.
+- `src/components/medical/gallery/EvidenceGallery.test.tsx` - Dialog behavior and focus coverage.
+- `src/components/medical/gallery/medicalGalleryStyles.test.ts` - Gallery source/style safeguards.
 
 ## Design Patterns
 
-### Registry, Strategy, and Runtime Selection
-- **Location**: `src/templates/`.
-- **Purpose**: Swap presentation while preserving one content model and current visitor context.
-- **Implementation**: Each `PortfolioTemplate` supplies a shell and complete section map; App derives a registry entry from validated runtime state and every shell emits typed choices through one selector.
-
 ### Typed Content Configuration
-- **Location**: `src/data/` and `src/types/portfolio.ts`.
-- **Purpose**: Let students edit content without modifying presentation logic.
-- **Implementation**: Section data uses `satisfies` against shared TypeScript types and is aggregated by `portfolio.ts`.
 
-### Hash-Routed Static Navigation
-- **Location**: `src/hooks/usePortfolioLayout.ts`, `src/utils/journal.ts`, and `src/App.tsx`.
-- **Purpose**: Support direct links and multiple layout modes on GitHub Pages without a server router.
-- **Implementation**: Anchor hashes represent single-page sections; `#/section` and `#/journal/slug` represent routed views.
+- Content is defined in `src/data/medical/content.ts` and rendered through typed props.
+- Presentation components do not parse source documents or fetch content at runtime.
 
-### Shared Section and Action Primitives
-- **Location**: `src/components/shared/`.
-- **Purpose**: Keep recurring layout, links, logos, template selection, and accessibility behavior consistent.
-- **Implementation**: Shared React components receive typed props and CSS-variable styling.
+### Explicit Public Asset Allowlist
+
+- Only assets listed in `ALLOWED_ASSETS` can be rendered by medical components.
+- Tests reject private, prohibited, dynamically discovered, or unapproved files.
+
+### Shared Section Primitive
+
+- `MedicalSection` preserves one semantic `h2`, introduction, source order, tone, and stable section ID across non-hero sections.
+
+### Pure Gallery State Machine
+
+- `transitionGalleryState`, collection validation, and item resolution are pure utilities with example and property tests.
+- Chakra Dialog owns focus containment, Escape handling, and focus restoration hooks.
+
+### Generated Theme Tokens
+
+- Named tokens support consistent light/dark medical palettes and contrast validation.
 
 ## Critical Dependencies
 
-- **React 19.2.0** - Component rendering, state, effects, and hooks.
-- **Chakra UI 3.30.0** - Responsive primitives, controls, drawers, dialogs, and styling props.
-- **Vite 7.2.4** - Development server, asset handling, testing integration, and production bundling.
-- **Vitest 4.1.9 and Testing Library 16.3.2** - Unit and DOM behavior tests.
-- **React Icons 5.5.0** - Navigation, action, social, and status iconography.
+- React and React DOM 19.2.3.
+- Chakra UI 3.30.0 and Emotion 11.14.0.
+- Vite 7.3.0 and TypeScript 5.9.3.
+- Vitest 4.1.9, Testing Library 16.3.2, jsdom 29.1.1, and fast-check 4.10.1.
 
-## Maintainability Risks
+## Current Maintainability Risks
 
-- The shared selector imports registry metadata while shells are registered by that same index; the current ESM cycle is render-safe but should be watched if template definitions gain module-level side effects.
-- Neutral and Business intentionally reuse several shared sections, so deep changes to those shared components affect all three presentations.
-- `SectionId` and `sectionIds` are maintained separately and require tests to prevent drift.
-- There are two ESLint configuration files, which can confuse contributors about the active configuration.
-- Template and layout preferences use separate local-storage keys and require regression tests whenever App ownership changes.
+- Several retired general-purpose `src/data/*.ts` and shared components remain even though the current runtime graph is medical-only.
+- The worktree contains extensive pre-existing user changes and untracked medical files; new work must avoid broad cleanup or resets.
+- Award evidence and gallery evidence currently duplicate some metadata rather than sharing one canonical evidence-view model.
+- Award thumbnails are static images, while only gallery cards currently open the detail dialog.
+- The GPA scale is inline text and can break between `/1` and `0` under constrained card width.

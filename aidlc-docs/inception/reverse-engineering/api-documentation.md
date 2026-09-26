@@ -1,86 +1,68 @@
 # API Documentation
 
-## REST APIs
+## External APIs
 
-No REST APIs are implemented. The portfolio is a static client-side application with no backend or database.
+The portfolio has no REST, GraphQL, WebSocket, database, or runtime content API. All public content and evidence metadata are bundled locally at build time.
 
-## Internal APIs
+## Primary Internal Interfaces
 
-### Template Registry
-- **`getPortfolioTemplate(templateId: PortfolioTemplateId | string): PortfolioTemplate`**: Resolves a registered template and falls back to Engineering.
-- **`activePortfolioTemplate: PortfolioTemplate`**: Compatibility export for the source default selected by `src/data/template.ts`; runtime App rendering derives its active template from state.
-- **`portfolioTemplates: PortfolioTemplate[]`**: Registered Engineering, Neutral, and Business templates.
+### `PortfolioContent`
 
-### `PortfolioTemplate`
-- **Fields**: `id`, `label`, `description`, `ShellComponent`, `JournalPostComponent`, `chapterLabels`, and `sectionComponents`.
-- **Section Contract**: `sectionComponents` is a complete `Record<SectionId, ComponentType>`.
-- **Current IDs**: `engineering`, `neutral`, and `business`.
+- Aggregates hero, narrative, education, GPA, scores, scholarship, research, award groups, activities, interests, and Contact content.
+- Defined in `src/types/medicalPortfolio.ts` and instantiated in `src/data/medical/content.ts`.
 
-### App Shell
-- **`PortfolioApp({ initialTemplate? }): JSX.Element`**: Owns the active runtime template ID and resolves enabled navigation, template sections, layout mode, current hash, and local journal routes.
-- **`App(): JSX.Element`**: Renders `PortfolioApp` with the source default and any valid saved visitor preference.
-- **Journal Behavior**: A `#/journal/{slug}` hash renders `JournalPostPage`; otherwise App renders all enabled sections or the active multi-page section.
+### `AwardEntryData`
 
-### Runtime Template Selection
-- **`isPortfolioTemplateId(value): value is PortfolioTemplateId`**: Accepts only the three registered IDs.
-- **`getInitialPortfolioTemplateId(defaultTemplateId, storage?): PortfolioTemplateId`**: Restores a valid visitor choice, uses the source default when no choice exists, falls back to Engineering for corrupted state, and tolerates unavailable storage.
-- **`persistPortfolioTemplateId(templateId, storage?): void`**: Saves a valid visitor choice without allowing storage failures to block rendering.
-- **`PortfolioStyleSelector`**: Shared Chakra Menu radio selector rendered by every template shell.
-- **Storage key**: `portfolio-template-id`.
+- Fields: `id`, `title`, `year`, optional `organization`, `description`, optional `evidence`, and optional `evidenceAltText`.
+- Validation: evidence renders only when both metadata fields exist and `isAllowedAsset` returns true.
 
-### `PortfolioShellProps`
-- **State**: `activeSection`, `activeTemplateId`, and `layoutMode`.
-- **Actions**: Section navigation, layout toggling, and typed template selection.
-- **Content**: Enabled navigation items, navigation-href resolver, and rendered section children.
+### `AcademicYearPerformance`
 
-### Layout Hook
-- **`usePortfolioLayout(enabledSectionIds, scrollActiveSection): PortfolioLayoutState`**: Coordinates layout mode and navigation.
-- **`createSectionHash(sectionId): string`**: Returns a multi-page hash such as `#/projects`.
-- **`createAnchorHash(sectionId): string`**: Returns a single-page anchor such as `#projects`.
-- **`parseSectionHash(hash, enabledSectionIds): SectionId | undefined`**: Validates a section hash.
-- **`resolveSectionId(sectionId, enabledSectionIds, fallback): SectionId`**: Resolves unknown IDs safely.
-- **`readStoredLayoutMode` / `writeStoredLayoutMode`**: Access layout preference with storage failure fallbacks.
+- Fields: `id`, `grade`, `academicYear`, `gpa`, and `scale`.
+- Current values include Grade 10 GPA `9.38` with scale `/10`.
 
-### Navigation and Scroll Utilities
-- **`getEnabledNavigationItems(items)`**: Narrows navigation to enabled entries.
-- **`getEnabledSectionIds(items)`**: Returns enabled section IDs.
-- **`scrollToSection(sectionId)`**: Smooth-scrolls to a section.
-- **`useActiveSection(sectionIds, offset)`**: Tracks the active section from viewport geometry.
+### `GalleryItemData`
 
-### Journal Utilities
-- **`createJournalPostHref(slug): string`**: Creates `#/journal/{slug}`.
-- **`parseJournalPostHash(hash): string | undefined`**: Extracts a local post slug from the hash.
+- Fields: `id`, `asset`, `sourceFileName`, `title`, `description`, `category`, `period`, `altText`, and optional `thumbnailPosition`.
+- Validation: gallery collection validation checks stable IDs, allowlisted assets, approved source filenames, and complete display metadata.
 
-### Shared UI APIs
-- **`ExternalAction`**: Renders accessible internal, external, mail, and download actions.
-- **`SectionShell`**: Frames shared section headings, descriptions, content, and next-section navigation.
-- **`ContentCard`**: Provides shared card surface behavior.
-- **`LogoMark`**: Resolves configured logo keys into visual marks.
-- **`PortfolioStyleSelector`**: Displays the current portfolio style and emits one of the three typed IDs.
+### `GallerySelectionState` and `GalleryCommand`
 
-## Data Models
+- State: one `selectedItemId` or `null`.
+- Commands: `{ type: "open", itemId }` and `{ type: "close" }`.
 
-### Portfolio Root
-- **Fields**: `profile`, `hero`, `navigation`, `about`, `education`, `experience`, `awards`, `projects`, `gallery`, `videos`, `blog`, `journalPosts`, `writing`, `skills`, and `certificates`.
-- **Validation**: Constructed with TypeScript `satisfies Portfolio`; tests verify key fields and links.
+## Primary Internal Functions
 
-### Navigation and Sections
-- **`SectionId`**: Union of `home`, `about`, `education`, `experience`, `awards`, `projects`, `gallery`, `journal`, `skills`, and `contact`.
-- **`NavigationItem`**: `id`, `label`, and `enabled`.
+### Content and Asset Functions
 
-### Writing
-- **`WordPressWritingPost`**: External WordPress title, URL, image, date, category, summary, and topics.
-- **`LocalJournalPost`**: Local slug, hash URL, image, date, metadata, and imported Markdown content.
-- **`WritingEntry`**: Union of WordPress and local writing entries.
+- `isAllowedAsset(candidate): boolean` - checks exact membership in the public allowlist.
+- `getAllowlistedAssets(): AssetAllowlistEntry[]` - returns approved public entries.
+- `getAllowlistedAssetBySourceFileName(name)` - resolves one approved asset by source filename.
+- `getPortfolioContent(): PortfolioContent` - returns the complete typed content object.
+- `getScienceRecognitions(): AwardGroup[]` - returns grouped award content.
 
-### Portfolio Evidence
-- **Models**: `Profile`, `HeroSection`, `AboutSection`, `EducationEntry`, `ExperienceEntry`, `AwardEntry`, `ProjectEntry`, `GalleryItem`, `VideoEntry`, `SkillCategory`, and `CertificateEntry`.
-- **Relationships**: Templates consume these shared records; actions use `ExternalLink` or `DownloadLink`; project and media arrays feed repeated presentation components.
+### Gallery Functions
 
-## External Browser APIs
+- `validateGalleryCollection(items, allowedAssets, approvedNames)` - returns valid items and policy errors.
+- `transitionGalleryState(state, command, items, failedIds?)` - applies open/close selection rules.
+- `resolveGalleryItem(items, selectedId, failedIds)` - returns the selected usable item or `null`.
 
-- `window.history.pushState` and hash events for static routing.
-- `window.localStorage` for layout and portfolio-style preferences.
-- `document.getElementById` and `scrollIntoView` for single-page navigation.
-- `window.location.href` with `mailto:` for contact submission.
-- Dialog, iframe, image, and PDF browser capabilities for media previews.
+### Navigation Functions
+
+- `getMedicalNavigationHref(sectionId)` - creates a GitHub Pages-safe hash.
+- `navigateToMedicalSection(sectionId)` - pushes the hash and scrolls to the section.
+- `useMedicalLayout(enabledIds, scrollActiveSection)` - returns active section, href generation, and navigation behavior.
+
+## Component Contracts
+
+- `MedicalSection` renders one semantic section heading and content body for a stable section ID.
+- `AwardItem` receives one `AwardEntryData` record and conditionally renders allowlisted evidence.
+- `EvidenceGallery` receives a readonly gallery collection, validates it, and manages selection/error state.
+- `GalleryModal` receives one selected item or `null`, a close callback, image-error callback, and focus-restoration resolver.
+
+## Validation and Error Handling
+
+- Invalid award evidence is omitted instead of rendered.
+- Invalid gallery items are excluded from the interactive collection.
+- Failed gallery images become unavailable and close an active dialog if necessary.
+- Production verification rejects prohibited assets, markers, runtime requests, and incorrect base paths.

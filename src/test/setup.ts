@@ -1,4 +1,13 @@
 import '@testing-library/jest-dom/vitest'
+import fc from 'fast-check'
+
+import { parseFastCheckSeed } from './propertySeed'
+
+const replaySeed = parseFastCheckSeed(process.env.FC_SEED)
+fc.configureGlobal({
+  verbose: true,
+  ...(replaySeed === undefined ? {} : { seed: replaySeed }),
+})
 
 if (!Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = () => undefined

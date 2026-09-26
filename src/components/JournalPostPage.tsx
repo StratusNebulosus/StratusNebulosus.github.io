@@ -5,7 +5,10 @@ import { HiArrowLeft } from 'react-icons/hi'
 
 import ContentCard from './shared/ContentCard'
 import { getLocalJournalPostBySlug } from '../data/journalPosts'
-import type { JournalPostPageProps } from '../templates/types'
+
+type JournalPostPageProps = {
+  slug: string
+}
 
 const markdownComponents: Components = {
   h1: ({ children }) => (
