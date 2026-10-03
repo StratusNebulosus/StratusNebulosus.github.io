@@ -57,8 +57,8 @@ export function ClosingContact({ contact }: { contact: ContactSectionData }) {
     <MedicalSection
       id="contact"
       index="08"
-      eyebrow="Email draft"
-      title="Looking ahead"
+      eyebrow="Contact"
+      title="Let's connect"
       tone="surface"
     >
       <div className="medical-contact-panel">

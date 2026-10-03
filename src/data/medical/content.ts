@@ -20,11 +20,11 @@ import { APPROVED_CV_ASSET } from "./assetAllowlist";
 
 export const content: PortfolioContent = {
   hero: {
-    eyebrow: "A path shaped by science and service",
+    eyebrow: "Welcome to my portfolio",
     name: "Bui Tuan Phat",
     role: "Medical Student at Thai Nguyen University of Medicine and Pharmacy",
     positioningStatement:
-      "Bringing scientific curiosity, disciplined learning, leadership, and compassion to the study of medicine.",
+      "I am Bui Tuan Phat, a medical student bringing my curiosity for science and commitment to service into the next chapter of my education.",
     highlights: ["SAT 1500", "IELTS 8.0", "AP Biology 5", "AP Chemistry 5"],
     academicHonor: "Valedictorian · American Dual Diploma Program · 2026",
     portrait: profilePic,
@@ -39,12 +39,12 @@ export const content: PortfolioContent = {
   },
   narrative: {
     aspirationParagraphs: [
-      "Phat is drawn to medicine by the possibility of joining careful scientific thinking with humane, dependable service.",
-      "He hopes to keep developing the discipline, curiosity, and empathy needed to contribute responsibly throughout his medical education.",
+      "I am drawn to medicine because it brings careful scientific thinking together with compassion and service.",
+      "As I continue my medical education, I want to grow in knowledge, discipline, and empathy.",
     ],
     experienceParagraphs: [
-      "His path has been built through sustained academic work at Wellspring, science competitions, a student research project, leadership training, conference participation, and community initiatives.",
-      "These experiences are foundations for further learning. They are not presented as completed clinical training, professional research, or patient-care experience.",
+      "My time at Wellspring, science competitions, student research, leadership training, and community projects have shaped how I learn and work with others.",
+      "I carry the lessons from these experiences into my studies and look forward to building on them as I grow.",
     ],
   },
   education: [
@@ -54,7 +54,7 @@ export const content: PortfolioContent = {
       period: "2023-2026",
       milestone: "American Dual Course",
       description:
-        "Completed a rigorous bilingual high-school pathway with sustained academic strength and a strong science focus.",
+        "I completed a bilingual high-school pathway at Wellspring, with a strong focus on science.",
     },
     {
       id: "thai-nguyen-medicine",
@@ -62,7 +62,7 @@ export const content: PortfolioContent = {
       period: "Current",
       milestone: "Medicine Program",
       description:
-        "Continuing his education as a medical student with an emphasis on disciplined study and responsible growth.",
+        "I am continuing my education as a medical student at Thai Nguyen University of Medicine and Pharmacy.",
     },
   ],
   academicYears: [
@@ -147,7 +147,7 @@ export const content: PortfolioContent = {
       ],
       reportedObservations: [
         "Recorded OD600 readings showed differences across the prepared samples.",
-        "The project recorded observations across the referenced cell-line conditions; these are student-project findings, not clinical conclusions.",
+        "In this student project, I recorded observations across the referenced cell-line conditions.",
       ],
     },
   ],
@@ -314,7 +314,7 @@ export const content: PortfolioContent = {
   ],
   contact: {
     statement:
-      "A strong medical path is built one careful question, one disciplined practice, and one generous act at a time.",
+      "Thank you for taking the time to explore my portfolio. If you would like to connect, discuss a project, or share an opportunity, I would be glad to hear from you.",
     recipientEmail: "buituanphat123456@gmail.com",
     draftSubject: "Portfolio contact for Bui Tuan Phat",
     privacyNotice:

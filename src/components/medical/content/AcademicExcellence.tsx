@@ -22,8 +22,8 @@ export function AcademicExcellence({
       id="academics"
       index="04"
       eyebrow="Academic excellence"
-      title="Academic distinction, sustained through discipline"
-      introduction="Valedictorian honors in Wellspring's American Dual Diploma Program crown a record of strong standardized results, advanced-subject outcomes, and merit recognition."
+      title="My academic achievements"
+      introduction="I graduated as valedictorian of Wellspring's American Dual Diploma Program. These results and recognitions reflect the effort I have put into my studies."
       tone="surface"
     >
       {recognition ? (

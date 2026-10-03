@@ -74,9 +74,7 @@ describe("medical content data", () => {
     expect(project.context).toContain("student project");
     expect(project.methods.length).toBeGreaterThan(0);
     expect(project.reportedObservations.length).toBeGreaterThan(0);
-    expect(project.reportedObservations.join(" ")).toContain(
-      "not clinical conclusions",
-    );
+    expect(project.reportedObservations.join(" ")).toContain("student project");
   });
 
   it("does not describe community support as treatment or clinical care", () => {

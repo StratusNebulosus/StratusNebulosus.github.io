@@ -88,3 +88,7 @@ The section-heading refinement passes every applicable source, test, privacy, pr
 ## Accolades Revision — Corrected Checkout — 2026-10-03
 
 Verified directly in `/Users/nhamhhung/StratusNebulosus.github.io`: TypeScript, ESLint, 135 tests across 33 files, formatting, whitespace checks, and root/repository-path production builds and asset policy pass. Public inventory: 18 JPEG images, two interest WebPs, one CV PDF. Browser inspection confirms the valedictorian anchor, prominent academic evidence, full certificate fitting, matching activity card colors in both themes and no horizontal overflow at 390px. Existing design retained. Extensions remain disabled by existing configuration; independent privacy/accessibility and regression contracts pass.
+
+## Portfolio Voice Revision — 2026-10-03
+
+Section titles and introductions now speak in the student's voice. Editorial disclaimers replaced with factual personal narrative. Existing copy assertions updated. TypeScript, ESLint, 135 tests across 33 files, production build and public-asset verification pass.

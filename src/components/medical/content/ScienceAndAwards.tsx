@@ -19,8 +19,8 @@ export function ScienceAndAwards({
       id="science"
       index="05"
       eyebrow="Science and recognition"
-      title="Curiosity tested through projects and competition"
-      introduction="Student research and science recognition are presented as evidence of a developing scientific practice—not as professional or clinical claims."
+      title="My research and science awards"
+      introduction="I explore scientific questions through student research and competitions. These projects and awards have helped me turn curiosity into practice."
       tone="accent"
     >
       {researchProjects.length ? (
@@ -40,7 +40,9 @@ export function ScienceAndAwards({
           >
             <h3 id={`${group.id}-heading`}>{group.theme}</h3>
             <ul>
-              {group.awards.map((award) => <AwardItem key={award.id} award={award} />)}
+              {group.awards.map((award) => (
+                <AwardItem key={award.id} award={award} />
+              ))}
             </ul>
           </section>
         ))}

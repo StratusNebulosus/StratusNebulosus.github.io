@@ -10945,3 +10945,18 @@ approve and continue, please make use of the content in this CV to structure the
 **Context**: Completed user-directed project-path correction.
 
 ---
+
+## Portfolio Voice Revision
+**Timestamp**: 2026-10-03T12:35:45Z
+**User Input**: "please update all the section header to be consistent like a portfolio display, where the student talks directly to the reader instead of the current disclaimer which are irrelevant"
+**AI Response**: "Rewrote section headers and introductions in first person, removed editorial disclaimers from narrative and student research observations, retained factual student-project framing, and updated the overview and Contact copy. Existing architecture and disabled extension choices reused."
+**Context**: Text-only portfolio presentation update in the user-specified project.
+
+---
+
+## Portfolio Voice — Verification Complete
+**Timestamp**: 2026-10-03T12:37:01Z
+**AI Response**: "Updated all section headers and introductions in /Users/nhamhhung/StratusNebulosus.github.io to personal portfolio language, with related narrative in first person. Removed editorial disclaimers while retaining factual student-project context. TypeScript, ESLint, all 135 tests, formatting, production build and public asset verification pass. Changes remain local."
+**Context**: Requested copy revision complete; plan checkboxes updated.
+
+---

@@ -10,20 +10,28 @@ type EducationJourneyProps = {
   academicYears: AcademicYearPerformance[];
 };
 
-export function EducationJourney({ education, academicYears }: EducationJourneyProps) {
+export function EducationJourney({
+  education,
+  academicYears,
+}: EducationJourneyProps) {
   return (
     <MedicalSection
       id="education"
       index="03"
       eyebrow="Education journey"
-      title="From a science-focused foundation to medicine"
-      introduction="A continuous learning path built through Wellspring and now carried forward at Thai Nguyen University of Medicine and Pharmacy."
+      title="My education"
+      introduction="My journey began at Wellspring, where I built a strong foundation in science. Today, I am continuing that journey at Thai Nguyen University of Medicine and Pharmacy."
     >
       <ol className="medical-timeline">
-        {education.map((entry) => <TimelineEntry key={entry.id} entry={entry} />)}
+        {education.map((entry) => (
+          <TimelineEntry key={entry.id} entry={entry} />
+        ))}
       </ol>
       {academicYears.length ? (
-        <div className="medical-gpa-panel" aria-labelledby="gpa-progression-heading">
+        <div
+          className="medical-gpa-panel"
+          aria-labelledby="gpa-progression-heading"
+        >
           <div>
             <p className="medical-card-label">Academic consistency</p>
             <h3 id="gpa-progression-heading">Grade 10-12 GPA progression</h3>
@@ -36,8 +44,7 @@ export function EducationJourney({ education, academicYears }: EducationJourneyP
                   className="medical-gpa-metric"
                   data-testid={`medical-gpa-metric-${year.id}`}
                 >
-                  <span>{year.gpa}</span>{" "}
-                  <span>{year.scale}</span>
+                  <span>{year.gpa}</span> <span>{year.scale}</span>
                 </strong>
                 <small>{year.academicYear}</small>
               </li>

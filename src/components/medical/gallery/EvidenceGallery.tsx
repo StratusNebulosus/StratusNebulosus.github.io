@@ -3,19 +3,23 @@ import { useEvidencePreview } from "./EvidencePreviewProvider";
 import { GalleryItem } from "./GalleryItem";
 
 export function EvidenceGallery() {
-  const { items, failedItemIds, openItem, markImageFailed } = useEvidencePreview();
+  const { items, failedItemIds, openItem, markImageFailed } =
+    useEvidencePreview();
 
   return (
     <MedicalSection
       id="gallery"
       index="07"
-      eyebrow="Evidence gallery"
-      title="A visual record of the journey"
-      introduction="Sixteen reviewed images trace academic recognition, scientific curiosity, conference participation, and collaborative school projects."
+      eyebrow="Gallery"
+      title="My certificates and milestones"
+      introduction="Take a look at the certificates and milestones from my academic journey, science competitions, and school activities."
       tone="accent"
     >
       {items.length ? (
-        <div className="medical-gallery-grid" data-testid="medical-gallery-grid">
+        <div
+          className="medical-gallery-grid"
+          data-testid="medical-gallery-grid"
+        >
           {items.map((item) => (
             <GalleryItem
               key={item.id}

@@ -255,3 +255,11 @@
 - [x] Workspace inspection and focused requirement scope confirmed.
 - [x] Requested accolade integration and presentation changes applied in the corrected project.
 - [x] Build and Test verification: 135 tests, TypeScript, lint, root/repository-path production policies and desktop/mobile browser checks pass.
+
+## Portfolio Voice Revision — 2026-10-03
+
+- [x] Requirements and scope: consistent personal section headers and reader-facing introductions, with editorial disclaimers removed.
+- [x] Code generation: all section headings and introductions, overview, calling narrative and Contact statement updated; factual student-project context preserved.
+- [x] Build and Test: TypeScript, ESLint, 135 tests, production build, asset-policy verification, formatting and whitespace checks pass.
+
+Extension compliance: existing Security/PBT opt-outs preserved. No new architectural, infrastructure or privacy impact.

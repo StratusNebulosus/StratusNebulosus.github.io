@@ -8,3 +8,11 @@ Apply the four requested changes to `/Users/nhamhhung/StratusNebulosus.github.io
 - [x] Correct sideways certificate assets, contain previews and unify activity card colors.
 - [x] Update exact media policy, gallery counts and documentation.
 - [x] Run quality, production builds and browser verification against this project.
+
+## Portfolio Voice Revision — 2026-10-03
+
+Requirements: make section titles and introductions consistent, personal and addressed to the reader. Replace editorial disclaimers with factual student portfolio copy. Reuse current section architecture and preserve verified achievements. Text-only change; no design or infrastructure stages needed.
+
+- [x] Review every section header and supporting narrative.
+- [x] Rewrite headers, introductions and related narrative in the student's voice.
+- [x] Align existing copy assertions, run quality/build checks, and record completion.

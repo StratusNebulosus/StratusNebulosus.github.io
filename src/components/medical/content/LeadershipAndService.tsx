@@ -19,8 +19,8 @@ export function LeadershipAndService({
       id="leadership"
       index="06"
       eyebrow="Leadership and service"
-      title="Showing up with care, curiosity, and initiative"
-      introduction="Training, conferences, school projects, and community initiatives reveal a habit of contributing while respecting the boundaries of a student's role."
+      title="How I lead and contribute"
+      introduction="Through teamwork, conferences, and community projects, I put what I learn into action and contribute to the people around me."
     >
       <div className="medical-activity-grid">
         {activities.map((activity) => (
@@ -28,9 +28,12 @@ export function LeadershipAndService({
         ))}
       </div>
       {interests.length ? (
-        <aside className="medical-interests" aria-labelledby="interests-heading">
+        <aside
+          className="medical-interests"
+          aria-labelledby="interests-heading"
+        >
           <p className="medical-card-label">Beyond the classroom</p>
-          <h3 id="interests-heading">Practices in patience and expression</h3>
+          <h3 id="interests-heading">What I enjoy beyond my studies</h3>
           <ul className="medical-interest-grid">
             {interests.map((interest) => (
               <li key={interest.id} data-content-id={interest.id}>

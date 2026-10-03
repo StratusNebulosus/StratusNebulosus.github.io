@@ -83,7 +83,7 @@ describe("medical content components", () => {
       screen.getByRole("heading", { name: "Project-reported observations" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/student-project findings, not clinical conclusions/i),
+      screen.getByText(/in this student project, I recorded observations/i),
     ).toBeInTheDocument();
   });
 
@@ -143,7 +143,7 @@ describe("medical content components", () => {
     const section = screen.getByTestId("medical-section-contact");
 
     expect(
-      within(section).getByRole("heading", { level: 2, name: "Looking ahead" }),
+      within(section).getByRole("heading", { level: 2, name: "Let's connect" }),
     ).toBeInTheDocument();
     expect(
       within(section).queryByRole("heading", {
