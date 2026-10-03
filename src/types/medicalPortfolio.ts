@@ -24,6 +24,7 @@ export interface HeroContent {
   role: string;
   positioningStatement: string;
   highlights: string[];
+  academicHonor?: string;
   portrait: AllowedAsset;
   portraitAltText: string;
   cvDownload: DownloadAsset;

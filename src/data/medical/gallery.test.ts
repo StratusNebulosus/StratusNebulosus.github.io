@@ -8,13 +8,15 @@ import {
 } from "./gallery";
 
 describe("medical gallery data", () => {
-  it("contains the exact approved 16-image inventory in curated order", () => {
-    expect(galleryItems).toHaveLength(16);
+  it("contains the exact approved 18-image inventory in curated order", () => {
+    expect(galleryItems).toHaveLength(18);
     expect(galleryItems.map((item) => item.sourceFileName)).toEqual(
       APPROVED_GALLERY_SOURCE_FILE_NAMES,
     );
     expect(galleryItems[0]?.category).toBe("portrait");
-    expect(galleryItems.at(-1)?.category).toBe("science");
+    expect(galleryItems.at(-1)?.sourceFileName).toBe(
+      "wellspring-valedictorian-2026.jpg",
+    );
   });
 
   it("uses unique stable IDs and one allowlisted asset per record", () => {
@@ -34,7 +36,9 @@ describe("medical gallery data", () => {
   });
 
   it("excludes the approved CV PDF from gallery media", () => {
-    expect(galleryItems.some((item) => item.sourceFileName.endsWith(".pdf"))).toBe(false);
+    expect(
+      galleryItems.some((item) => item.sourceFileName.endsWith(".pdf")),
+    ).toBe(false);
   });
 
   it("returns the authored collection without sorting or copying it", () => {

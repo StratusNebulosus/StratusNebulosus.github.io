@@ -10930,3 +10930,18 @@ approve and continue, please make use of the content in this CV to structure the
 **Context**: CONSTRUCTION - Code Generation Visual Revision Complete; Review Required
 
 ---
+
+## Accolades — Correct Project Path
+**Timestamp**: 2026-10-03T09:20:36Z
+**User Input**: "the changes should be for this project path instead: /Users/nhamhhung/StratusNebulosus.github.io"
+**AI Response**: "Confirmed intended checkout is clean and retains generated Gold filler. Ported focused accolade, orientation and consistent-color fixes from the Documents copy while preserving this checkout's visual design. Existing workspace rules and disabled extension settings reused."
+**Context**: User explicitly corrected the target project path; no commit or publication requested.
+
+---
+
+## Corrected Checkout — Verification Complete
+**Timestamp**: 2026-10-03T09:24:34Z
+**AI Response**: "All requested accolade, certificate and color fixes are now in /Users/nhamhhung/StratusNebulosus.github.io and visible in git status. Verified 135 tests, TypeScript, lint, formatting, both production paths and desktop/mobile light/dark presentation. This checkout's existing design was retained. Changes remain uncommitted and unpublished."
+**Context**: Completed user-directed project-path correction.
+
+---

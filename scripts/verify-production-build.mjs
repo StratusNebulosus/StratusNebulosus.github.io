@@ -49,7 +49,7 @@ try {
     process.exitCode = 1;
   } else {
     console.log(
-      `Production build verified: 19 approved images, 1 approved CV, base path ${expectedBasePath}`,
+      `Production build verified: 20 approved images, 1 approved CV, base path ${expectedBasePath}`,
     );
   }
 } catch (error) {

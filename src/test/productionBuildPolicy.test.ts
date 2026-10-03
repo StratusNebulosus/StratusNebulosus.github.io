@@ -36,7 +36,7 @@ describe("production build policy examples", () => {
     ]);
 
     expect(errors.join(" ")).toContain("passport-secret.jpg");
-    expect(errors.join(" ")).toContain("exactly 16 approved JPG files");
+    expect(errors.join(" ")).toContain("exactly 18 approved JPG files");
   });
 
   it("rejects unreviewed media even when its filename is not a sensitive marker", () => {
@@ -51,10 +51,10 @@ describe("production build policy examples", () => {
   });
 
   it("allows only Vite's module-preload fetch in generated bundle text", () => {
-    expect(validateBundleText('modulepreload;fetch(link.href,{})')).toEqual([]);
-    expect(validateBundleText('fetch("https://example.test/content")')).toContain(
-      "Unexpected application runtime request marker detected.",
-    );
+    expect(validateBundleText("modulepreload;fetch(link.href,{})")).toEqual([]);
+    expect(
+      validateBundleText('fetch("https://example.test/content")'),
+    ).toContain("Unexpected application runtime request marker detected.");
   });
 
   it("accepts root and project Pages URLs and rejects escaped URLs", () => {
@@ -71,7 +71,12 @@ describe("production build policy examples", () => {
       ),
     ).toEqual([]);
     expect(
-      validateHtmlBasePath('<script src="/assets/index.js"></script>', "/student/"),
-    ).toContain("Local URL /assets/index.js is outside expected base path /student/.");
+      validateHtmlBasePath(
+        '<script src="/assets/index.js"></script>',
+        "/student/",
+      ),
+    ).toContain(
+      "Local URL /assets/index.js is outside expected base path /student/.",
+    );
   });
 });

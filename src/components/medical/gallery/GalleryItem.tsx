@@ -46,7 +46,12 @@ function GalleryCardContent({
   );
 }
 
-export function GalleryItem({ item, failed, onActivate, onImageError }: GalleryItemProps) {
+export function GalleryItem({
+  item,
+  failed,
+  onActivate,
+  onImageError,
+}: GalleryItemProps) {
   if (failed) {
     return (
       <article
@@ -69,6 +74,7 @@ export function GalleryItem({ item, failed, onActivate, onImageError }: GalleryI
       className="medical-gallery-card"
       aria-label={`Open ${item.title} evidence preview`}
       data-content-id={item.id}
+      data-category={item.category}
       data-testid={`medical-gallery-item-${item.id}`}
       onClick={(event) => onActivate(item.id, event.currentTarget)}
     >

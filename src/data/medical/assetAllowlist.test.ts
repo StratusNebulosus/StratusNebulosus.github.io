@@ -26,7 +26,8 @@ const EXPECTED_SOURCE_FILE_NAMES = [
   "internationalg9.jpg",
   "origami-interest.webp",
   "piano-interest.webp",
-  "gold-award-commemorative.webp",
+  "HKISO2022gold.jpg",
+  "wellspring-valedictorian-2026.jpg",
   "bui-tuan-phat-cv.pdf",
 ];
 
@@ -50,7 +51,9 @@ describe("assetAllowlist (BR-1, BR-2)", () => {
   it("contains exactly the 20 approved source files", () => {
     const sourceFileNames = ALLOWED_ASSETS.map((entry) => entry.sourceFileName);
 
-    expect(sourceFileNames.sort()).toEqual([...EXPECTED_SOURCE_FILE_NAMES].sort());
+    expect(sourceFileNames.sort()).toEqual(
+      [...EXPECTED_SOURCE_FILE_NAMES].sort(),
+    );
   });
 
   it("never contains a prohibited or text-verification-only source file", () => {
@@ -83,8 +86,12 @@ describe("assetAllowlist (BR-1, BR-2)", () => {
   });
 
   it("looks up only exact explicit source filenames", () => {
-    expect(getAllowlistedAssetBySourceFileName("profile_pic.jpg")?.asset).toBeTruthy();
-    expect(getAllowlistedAssetBySourceFileName("PROFILE_PIC.JPG")).toBeUndefined();
+    expect(
+      getAllowlistedAssetBySourceFileName("profile_pic.jpg")?.asset,
+    ).toBeTruthy();
+    expect(
+      getAllowlistedAssetBySourceFileName("PROFILE_PIC.JPG"),
+    ).toBeUndefined();
     expect(getAllowlistedAssetBySourceFileName("passport.jpg")).toBeUndefined();
   });
 });

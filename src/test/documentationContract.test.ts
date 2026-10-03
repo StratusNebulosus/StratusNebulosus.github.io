@@ -49,7 +49,7 @@ describe("medical portfolio documentation contract", () => {
       "dontuse",
       "bui-tuan-phat-cv.pdf",
       "The CV is not gallery media",
-      "16-image collection",
+      "18-image collection",
       "placeholder contact line",
       "buituanphat123456@gmail.com",
       "local email application",

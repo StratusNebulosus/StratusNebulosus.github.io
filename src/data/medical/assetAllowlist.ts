@@ -1,4 +1,5 @@
 import profilePic from "../../assets/profile_pic.jpg";
+import hkiso2022Gold from "../../assets/CV/HKISO2022gold.jpg";
 import hkiso2022Silver from "../../assets/CV/HKISO2022silver.jpg";
 import hkiso2023Bronze from "../../assets/CV/HKISO2023bronze.jpg";
 import hkiso2025Bronze from "../../assets/CV/HKISO2025bronze.jpg";
@@ -14,11 +15,14 @@ import embracePresentContribution from "../../assets/CV/presentg11.jpg";
 import vucaProject from "../../assets/CV/VUCAg9.jpg";
 import greatProgress from "../../assets/CV/greatprogressg11.jpg";
 import internationalMerit from "../../assets/CV/internationalg9.jpg";
+import wellspringValedictorian from "../../assets/CV/wellspring-valedictorian-2026.jpg";
 import buiTuanPhatCv from "../../assets/documents/bui-tuan-phat-cv.pdf";
-import goldAwardCommemorative from "../../assets/illustrations/gold-award-commemorative.webp";
 import origamiInterest from "../../assets/illustrations/origami-interest.webp";
 import pianoInterest from "../../assets/illustrations/piano-interest.webp";
-import type { AllowedAsset, AssetAllowlistEntry } from "../../types/medicalPortfolio";
+import type {
+  AllowedAsset,
+  AssetAllowlistEntry,
+} from "../../types/medicalPortfolio";
 
 export const APPROVED_CV_ASSET = buiTuanPhatCv;
 
@@ -27,6 +31,12 @@ export const ALLOWED_ASSETS: AssetAllowlistEntry[] = [
     asset: profilePic,
     sourceFileName: "profile_pic.jpg",
     description: "Publication-ready graduation portrait",
+  },
+  {
+    asset: hkiso2022Gold,
+    sourceFileName: "HKISO2022gold.jpg",
+    description:
+      "Hong Kong International Science Olympiad Gold Award, Heat Round 2021-2022",
   },
   {
     asset: hkiso2022Silver,
@@ -46,7 +56,8 @@ export const ALLOWED_ASSETS: AssetAllowlistEntry[] = [
   {
     asset: wisConParticipation,
     sourceFileName: "WISCONg10.jpg",
-    description: "WIS Conference World Health Organization committee delegate certificate",
+    description:
+      "WIS Conference World Health Organization committee delegate certificate",
   },
   {
     asset: wisConTop4,
@@ -76,7 +87,8 @@ export const ALLOWED_ASSETS: AssetAllowlistEntry[] = [
   {
     asset: chemistryExcellentSecond,
     sourceFileName: "excellentsecond.jpg",
-    description: "School-level Grade 12 Chemistry excellent-student selection exam, Second Prize",
+    description:
+      "School-level Grade 12 Chemistry excellent-student selection exam, Second Prize",
   },
   {
     asset: tramChamProject,
@@ -86,12 +98,14 @@ export const ALLOWED_ASSETS: AssetAllowlistEntry[] = [
   {
     asset: embracePresentContribution,
     sourceFileName: "presentg11.jpg",
-    description: "\"Embrace the Present\" school event outstanding contributor certificate",
+    description:
+      '"Embrace the Present" school event outstanding contributor certificate',
   },
   {
     asset: vucaProject,
     sourceFileName: "VUCAg9.jpg",
-    description: "Grade 9 VUCA interdisciplinary project participation certificate",
+    description:
+      "Grade 9 VUCA interdisciplinary project participation certificate",
   },
   {
     asset: greatProgress,
@@ -101,22 +115,26 @@ export const ALLOWED_ASSETS: AssetAllowlistEntry[] = [
   {
     asset: internationalMerit,
     sourceFileName: "internationalg9.jpg",
-    description: "International Program outstanding academic achievement merit scholarship",
+    description:
+      "International Program outstanding academic achievement merit scholarship",
+  },
+  {
+    asset: wellspringValedictorian,
+    sourceFileName: "wellspring-valedictorian-2026.jpg",
+    description:
+      "Wellspring Student Emulation and Reward, American Dual Diploma Program valedictorian, 2025-2026",
   },
   {
     asset: origamiInterest,
     sourceFileName: "origami-interest.webp",
-    description: "Original editorial illustration of origami as a personal interest",
+    description:
+      "Original editorial illustration of origami as a personal interest",
   },
   {
     asset: pianoInterest,
     sourceFileName: "piano-interest.webp",
-    description: "Original editorial illustration of piano as a personal interest",
-  },
-  {
-    asset: goldAwardCommemorative,
-    sourceFileName: "gold-award-commemorative.webp",
-    description: "Original commemorative illustration for the verified HKISO Gold Award",
+    description:
+      "Original editorial illustration of piano as a personal interest",
   },
   {
     asset: buiTuanPhatCv,
@@ -136,5 +154,7 @@ export function getAllowlistedAssets(): AssetAllowlistEntry[] {
 export function getAllowlistedAssetBySourceFileName(
   sourceFileName: string,
 ): AssetAllowlistEntry | undefined {
-  return ALLOWED_ASSETS.find((entry) => entry.sourceFileName === sourceFileName);
+  return ALLOWED_ASSETS.find(
+    (entry) => entry.sourceFileName === sourceFileName,
+  );
 }

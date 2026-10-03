@@ -51,7 +51,8 @@ export const APPROVED_PRODUCTION_ASSET_PREFIXES = [
   "internationalg9-",
   "origami-interest-",
   "piano-interest-",
-  "gold-award-commemorative-",
+  "HKISO2022gold-",
+  "wellspring-valedictorian-2026-",
   "bui-tuan-phat-cv-",
 ] as const;
 
@@ -67,5 +68,5 @@ export const APPROVED_WEBSITE_CONTACT_MARKERS = [
   "buituanphat123456@gmail.com",
 ] as const;
 
-export const EXPECTED_GALLERY_IMAGE_COUNT = 16;
+export const EXPECTED_GALLERY_IMAGE_COUNT = 18;
 export const EXPECTED_PUBLIC_PDF_COUNT = 1;

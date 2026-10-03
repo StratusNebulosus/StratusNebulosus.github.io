@@ -46,10 +46,17 @@ export function PortfolioApp() {
         <AcademicExcellence
           scores={content.scores}
           scholarship={content.scholarship}
+          recognition={
+            content.awardGroups.find(
+              (group) => group.id === "awards-school-honors",
+            )?.awards[0]
+          }
         />
         <ScienceAndAwards
           researchProjects={content.researchProjects}
-          awardGroups={content.awardGroups}
+          awardGroups={content.awardGroups.filter(
+            (group) => group.id !== "awards-school-honors",
+          )}
         />
         <LeadershipAndService
           activities={content.activities}

@@ -12,7 +12,7 @@ The public page has eight sections in this order:
 4. **Academics** - GPA, SAT, IELTS, AP results, and scholarship context
 5. **Science & Awards** - student research and verified recognition
 6. **Leadership & Service** - school, conference, leadership, and community activities
-7. **Evidence** - 16 reviewed portrait, certificate, award, and event images
+7. **Evidence** - 18 reviewed portrait, certificate, award, and event images
 8. **Contact** - an email-only draft form that opens the visitor's local email application
 
 The production composition starts in `src/App.tsx`. The main files future contributors should use are:
@@ -39,10 +39,10 @@ Approved public material currently consists of:
 
 - `src/assets/profile_pic.jpg`
 - 15 reviewed achievement, certificate, conference, and project images listed in the allowlist
-- Three original, clearly classified portfolio illustrations for Origami, Piano, and the Gold Award commemorative visual, delivered as optimized WebP files
+- Two original, clearly classified portfolio illustrations for Origami and Piano, delivered as optimized WebP files
 - `src/assets/documents/bui-tuan-phat-cv.pdf`, provided as a separate CV download
 
-The CV is not gallery media. The gallery is an explicit 16-image collection: the portrait plus 15 reviewed evidence images. Generated interest artwork is not gallery evidence, and the Gold Award commemorative illustration is visibly disclosed as non-documentary.
+The CV is not gallery media. The gallery is an explicit 18-image collection: the portrait plus 17 reviewed evidence images. Generated interest artwork is not gallery evidence, and the Gold Award uses its real certificate.
 
 Award cards reuse those reviewed gallery records by matching their allowlisted asset. Awards with evidence provide a large preview and a `View evidence` control; Gallery cards and award controls open the same accessible dialog. Awards without an approved matching image remain visible with an explicit unavailable status. Keep this shared interaction in `src/components/medical/gallery/EvidencePreviewProvider.tsx` rather than adding a second modal.
 
@@ -112,7 +112,7 @@ VITE_BASE_PATH=/repository-name/ npm run build
 EXPECTED_BASE_PATH=/repository-name/ npm run verify:dist
 ```
 
-The verifier requires exactly 16 approved JPG files, three approved WebP illustrations, and one approved CV PDF. It rejects prohibited/private filename and text markers and checks that generated HTML assets remain inside the expected Pages base path. The generated `dist/` directory is not committed.
+The verifier requires exactly 18 approved JPG files, two approved WebP illustrations, and one approved CV PDF. It rejects prohibited/private filename and text markers and checks that generated HTML assets remain inside the expected Pages base path. The generated `dist/` directory is not committed.
 
 ## GitHub Pages deployment
 
@@ -160,3 +160,7 @@ The site uses React 19, TypeScript, Vite, Chakra UI, Vitest, Testing Library, fa
 ## License
 
 MIT
+
+### Featured academic recognition
+
+Valedictorian honors in Wellspring's American Dual Diploma Program (2025–2026) appear in the overview and as a featured certificate in Academic Excellence. Certificate previews show the full upright image. Leadership & Service cards use consistent theme colors.

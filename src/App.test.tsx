@@ -73,7 +73,7 @@ describe("medical portfolio application", () => {
   it("renders the final gallery with every approved image trigger", () => {
     renderPortfolio();
     expect(screen.getByTestId("medical-gallery-grid")).toBeInTheDocument();
-    expect(screen.getAllByTestId(/^medical-gallery-item-/)).toHaveLength(16);
+    expect(screen.getAllByTestId(/^medical-gallery-item-/)).toHaveLength(18);
     galleryItems.forEach((item) => {
       expect(
         screen.getByTestId(`medical-gallery-item-${item.id}`),
@@ -109,21 +109,29 @@ describe("medical portfolio application", () => {
     await waitFor(() => expect(trigger).toHaveFocus());
   });
 
-  it("renders the exact Grade 10 metric and an honest no-evidence award state", () => {
+  it("features valedictorian academically and replaces the Gold illustration with evidence", () => {
     renderPortfolio();
     expect(
       screen.getByTestId("medical-gpa-metric-gpa-grade-10"),
     ).toHaveTextContent("9.38 /10");
-    const award = content.awardGroups[0].awards.find(
-      (entry) => entry.illustration,
-    )!;
+    const academics = screen.getByTestId("medical-section-academics");
     expect(
-      screen.getByTestId(`medical-award-illustration-${award.id}`),
-    ).toHaveTextContent(
-      "Commemorative illustration · not documentary evidence",
+      within(academics).getByTestId(
+        "medical-award-evidence-american-dual-diploma-valedictorian",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("medical-hero-academic-honor")).toHaveTextContent(
+      "Valedictorian",
+    );
+    expect(screen.getByTestId("medical-hero-academic-honor")).toHaveAttribute(
+      "href",
+      "#academics",
     );
     expect(
-      screen.queryByTestId(`medical-award-evidence-${award.id}`),
+      screen.getByTestId("medical-award-evidence-hkiso-gold-2022-heat"),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("medical-award-illustration-hkiso-gold-2022-heat"),
     ).not.toBeInTheDocument();
   });
 

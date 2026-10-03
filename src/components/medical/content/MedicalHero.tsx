@@ -16,9 +16,24 @@ export function MedicalHero({ hero }: { hero: HeroContent }) {
         <p className="medical-hero-eyebrow">{hero.eyebrow}</p>
         <h1 id="overview-heading">{hero.name}</h1>
         <p className="medical-hero-role">{hero.role}</p>
+        {hero.academicHonor ? (
+          <a
+            className="medical-hero-honor"
+            href="#academics"
+            data-testid="medical-hero-academic-honor"
+          >
+            {hero.academicHonor}
+            <span aria-hidden="true">↗</span>
+          </a>
+        ) : null}
         <p className="medical-hero-statement">{hero.positioningStatement}</p>
-        <ul className="medical-hero-highlights" aria-label="Academic highlights">
-          {hero.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+        <ul
+          className="medical-hero-highlights"
+          aria-label="Academic highlights"
+        >
+          {hero.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
         </ul>
         <div className="medical-hero-actions">
           <a

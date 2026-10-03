@@ -24,7 +24,9 @@ function collectAssets(): AllowedAsset[] {
 
 describe("content-to-allowlist cross-check (NFR Design Pattern 3)", () => {
   it("every asset referenced in content.ts is present in the asset allowlist", () => {
-    const allowlistedAssetValues = getAllowlistedAssets().map((entry) => entry.asset);
+    const allowlistedAssetValues = getAllowlistedAssets().map(
+      (entry) => entry.asset,
+    );
 
     collectAssets().forEach((asset) => {
       expect(allowlistedAssetValues).toContain(asset);
@@ -51,7 +53,9 @@ describe("content-to-allowlist cross-check (NFR Design Pattern 3)", () => {
       expect(item.sourceFileName).not.toMatch(/\.pdf$/i);
     });
 
-    expect(galleryItems).toHaveLength(16);
-    expect(galleryItems.some((item) => item.asset === content.hero.cvDownload.asset)).toBe(false);
+    expect(galleryItems).toHaveLength(18);
+    expect(
+      galleryItems.some((item) => item.asset === content.hero.cvDownload.asset),
+    ).toBe(false);
   });
 });

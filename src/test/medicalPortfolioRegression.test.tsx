@@ -64,7 +64,7 @@ describe("completed medical portfolio regression", () => {
     expect(screen.getAllByTestId(/^medical-gallery-item-/)).toHaveLength(
       galleryItems.length,
     );
-    expect(galleryItems).toHaveLength(16);
+    expect(galleryItems).toHaveLength(18);
   });
 
   it("keeps former identity, retired choices, and CV-only contacts out of the interface", () => {

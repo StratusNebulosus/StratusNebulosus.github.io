@@ -41,11 +41,15 @@ describe("EvidenceGallery", () => {
   it("renders the exact approved inventory once and excludes the CV", () => {
     renderGallery();
 
-    expect(screen.getAllByTestId(/^medical-gallery-item-/)).toHaveLength(16);
+    expect(screen.getAllByTestId(/^medical-gallery-item-/)).toHaveLength(18);
     galleryItems.forEach((item) => {
-      expect(screen.getByTestId(`medical-gallery-item-${item.id}`)).toBeInTheDocument();
+      expect(
+        screen.getByTestId(`medical-gallery-item-${item.id}`),
+      ).toBeInTheDocument();
     });
-    expect(screen.queryByText(/bui-tuan-phat-cv\.pdf/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/bui-tuan-phat-cv\.pdf/i),
+    ).not.toBeInTheDocument();
   });
 
   it("opens one same-source preview and restores focus from the visible close control", async () => {
@@ -64,16 +68,22 @@ describe("EvidenceGallery", () => {
     expect(modalImage).toHaveAttribute("decoding", "async");
     expect(screen.getAllByTestId("medical-gallery-modal")).toHaveLength(1);
 
-    const close = screen.getByRole("button", { name: "Close evidence preview" });
+    const close = screen.getByRole("button", {
+      name: "Close evidence preview",
+    });
     expect(close).toBeVisible();
     fireEvent.click(close);
-    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
     await waitFor(() => expect(trigger).toHaveFocus());
   });
 
   it("closes with Escape and restores the selected trigger", async () => {
     renderGallery();
-    const trigger = screen.getByTestId(`medical-gallery-item-${galleryItems[2].id}`);
+    const trigger = screen.getByTestId(
+      `medical-gallery-item-${galleryItems[2].id}`,
+    );
 
     trigger.focus();
     fireEvent.click(trigger);
@@ -81,7 +91,9 @@ describe("EvidenceGallery", () => {
     await waitFor(() => expect(dialog).toHaveFocus());
     fireEvent.keyDown(document, { key: "Escape", code: "Escape" });
 
-    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
     await waitFor(() => expect(trigger).toHaveFocus());
   });
 
@@ -94,8 +106,12 @@ describe("EvidenceGallery", () => {
     expect(image).not.toBeNull();
     fireEvent.error(image as HTMLImageElement);
 
-    expect(screen.queryByTestId(`medical-gallery-item-${item.id}`)).not.toBeInTheDocument();
-    expect(screen.getByTestId(`medical-gallery-unavailable-${item.id}`)).toBeInTheDocument();
+    expect(
+      screen.queryByTestId(`medical-gallery-item-${item.id}`),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId(`medical-gallery-unavailable-${item.id}`),
+    ).toBeInTheDocument();
     expect(screen.getByText(item.title)).toBeInTheDocument();
     expect(screen.getByText(item.description)).toBeInTheDocument();
   });
@@ -112,6 +128,8 @@ describe("EvidenceGallery", () => {
     expect(screen.getByRole("status")).toHaveTextContent(
       "Verified gallery evidence is temporarily unavailable.",
     );
-    expect(screen.queryByTestId("medical-gallery-grid")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("medical-gallery-grid"),
+    ).not.toBeInTheDocument();
   });
 });

@@ -3,7 +3,7 @@
 ## Active Workflow
 
 - **Project**: Brownfield React/Vite static portfolio
-- **Workspace**: `/Users/nhamhhung/student_ports/StratusNebulosus.github.io`
+- **Workspace**: `/Users/nhamhhung/StratusNebulosus.github.io`
 - **Change**: Contact Email Draft Revision
 - **Current phase**: CONSTRUCTION
 - **Current stage**: Code Generation revision review - Contact visual consistency
@@ -249,3 +249,9 @@
 - Update active artifacts instead of creating duplicate revisions.
 - Keep application code at the workspace root and documentation under `aidlc-docs/`.
 - Keep `audit.md` append-only and complete.
+
+## Accolades Revision — Correct Project — 2026-10-03
+
+- [x] Workspace inspection and focused requirement scope confirmed.
+- [x] Requested accolade integration and presentation changes applied in the corrected project.
+- [x] Build and Test verification: 135 tests, TypeScript, lint, root/repository-path production policies and desktop/mobile browser checks pass.

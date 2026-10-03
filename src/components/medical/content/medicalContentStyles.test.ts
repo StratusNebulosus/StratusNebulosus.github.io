@@ -74,11 +74,17 @@ describe("medical content styling safeguards", () => {
     expect(css).toContain("grid-template-columns: repeat(2, minmax(0, 1fr));");
   });
 
-  it("adds category color hooks and responsive illustrated interests", () => {
-    expect(css).toContain('.medical-activity-card[data-category="leadership"]');
-    expect(css).toContain('.medical-activity-card[data-category="conference"]');
-    expect(css).toContain('.medical-activity-card[data-category="community"]');
-    expect(css).toContain('.medical-activity-card[data-category="school"]');
+  it("keeps consistent activity colors and responsive illustrated interests", () => {
+    expect(css).not.toContain(
+      '.medical-activity-card[data-category="leadership"]',
+    );
+    expect(css).not.toContain(
+      '.medical-activity-card[data-category="conference"]',
+    );
+    expect(css).not.toContain(
+      '.medical-activity-card[data-category="community"]',
+    );
+    expect(css).not.toContain('.medical-activity-card[data-category="school"]');
     expect(css).toContain(".medical-interest-grid");
     expect(css).toContain(".medical-award-illustration figcaption");
   });

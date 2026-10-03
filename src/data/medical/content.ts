@@ -1,10 +1,11 @@
 import profilePic from "../../assets/profile_pic.jpg";
+import hkiso2022Gold from "../../assets/CV/HKISO2022gold.jpg";
 import hkiso2022Silver from "../../assets/CV/HKISO2022silver.jpg";
 import hkiso2023Bronze from "../../assets/CV/HKISO2023bronze.jpg";
 import hkiso2025Bronze from "../../assets/CV/HKISO2025bronze.jpg";
 import sapFinal from "../../assets/CV/SAPfinalg11.jpg";
 import chemistryExcellentSecond from "../../assets/CV/excellentsecond.jpg";
-import goldAwardCommemorative from "../../assets/illustrations/gold-award-commemorative.webp";
+import wellspringValedictorian from "../../assets/CV/wellspring-valedictorian-2026.jpg";
 import origamiInterest from "../../assets/illustrations/origami-interest.webp";
 import pianoInterest from "../../assets/illustrations/piano-interest.webp";
 import type {
@@ -25,6 +26,7 @@ export const content: PortfolioContent = {
     positioningStatement:
       "Bringing scientific curiosity, disciplined learning, leadership, and compassion to the study of medicine.",
     highlights: ["SAT 1500", "IELTS 8.0", "AP Biology 5", "AP Chemistry 5"],
+    academicHonor: "Valedictorian · American Dual Diploma Program · 2026",
     portrait: profilePic,
     portraitAltText: "Bui Tuan Phat in graduation attire",
     cvDownload: {
@@ -161,11 +163,9 @@ export const content: PortfolioContent = {
           organization: "Hong Kong International Science Olympiad",
           description:
             "Earned Gold in the heat round of the 2021-2022 competition cycle.",
-          illustration: goldAwardCommemorative,
-          illustrationAltText:
-            "Editorial gold medallion illustration with scientific motifs",
-          illustrationDisclosure:
-            "Commemorative illustration · not documentary evidence",
+          evidence: hkiso2022Gold,
+          evidenceAltText:
+            "Certificate recognizing an HKISO Gold Award in the 2021-2022 heat round",
         },
         {
           id: "hkiso-silver-2022-final",
@@ -199,6 +199,23 @@ export const content: PortfolioContent = {
           evidence: hkiso2025Bronze,
           evidenceAltText:
             "Certificate recognizing an HKISO Bronze Award in the 2024-2025 cycle",
+        },
+      ],
+    },
+    {
+      id: "awards-school-honors",
+      theme: "School Honors",
+      awards: [
+        {
+          id: "american-dual-diploma-valedictorian",
+          title: "American Dual Diploma Program Valedictorian",
+          year: "2025-2026",
+          organization: "Wellspring International Bilingual School",
+          description:
+            "Received the Wellspring Student Emulation and Reward as valedictorian of the American Dual Diploma Program.",
+          evidence: wellspringValedictorian,
+          evidenceAltText:
+            "Wellspring certificate recognizing Bui Tuan Phat as valedictorian of the American Dual Diploma Program",
         },
       ],
     },
