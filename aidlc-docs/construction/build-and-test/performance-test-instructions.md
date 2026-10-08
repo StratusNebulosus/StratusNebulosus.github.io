@@ -1,53 +1,25 @@
-# Performance Test Instructions
+# Static Performance Instructions — Stratus Visual Refresh
 
-## Purpose
+## Applicable checks
 
-Track browser-delivery and static-build characteristics appropriate to this GitHub Pages portfolio. Server load, throughput, concurrent-user, database, queue, and autoscaling tests are not applicable because the application has no runtime server or API.
-
-## Applicable Requirements
-
-- Non-critical gallery media remains lazy-loaded with reserved dimensions.
-- The section-heading refinement adds no image, font download, network request, runtime dependency, or interactive JavaScript state.
-- Shared layout changes remain CSS-only and preserve 320-CSS-pixel overflow safeguards.
-- Root and project Pages builds must complete and pass deterministic output verification.
-
-## Execute the Static Performance Check
+This static portfolio has no runtime API/server. Load/stress, throughput, concurrent-user and database tests are N/A. Delivery checks cover comparable bundle bytes, asset reuse, lazy evidence media, reduced motion and usable responsive controls. No Lighthouse score or load-time improvement is claimed.
 
 ```bash
 npm run build
 npm run verify:dist
 ```
 
-Record the Vite build time and JavaScript/CSS sizes printed in the terminal.
+Record output sizes and build time with the same base path as the baseline. Compare gzip using the same compressor/settings. Baseline/final inventories are in /private/tmp/stratus-visual-refresh/baseline-sizes.json and final-sizes.json.
 
-## Verified Baseline
+| Root build asset | Baseline bytes | Final bytes | Baseline gzip | Final gzip |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript | 675330 | 681273 | 194937 | 196728 |
+| CSS | 43866 | 44388 | 8917 | 8253 |
 
-| Measure | Observed result |
-|---|---|
-| Root build time | Approximately 3.05 seconds for Vite bundling |
-| Project-path build time | Approximately 2.89 seconds for Vite bundling |
-| Main JavaScript | Approximately 666.23 kB minified; 192.84 kB gzip |
-| Main CSS | Approximately 36.46 kB minified; 7.92 kB gzip |
-| Complete `dist/` | Approximately 3.0 MB including approved media and CV |
-| Public media inventory | 13 JPG files and one PDF |
-| Runtime application requests | None |
+Navigation/preference/focus code added 5943 JS bytes (1791 gzip). CSS added 522 bytes; compressed CSS decreased 664 bytes. Approved images/PDF hashes and sizes match baseline. No new dependency or font download was introduced. The existing Vite chunk-over-500-kB advisory remains.
 
-The main JavaScript remains above Vite's 500 kB advisory threshold. This is tracked as a non-blocking warning because the section-heading refinement added no runtime dependency or network behavior.
+Review unexpected growth against the source graph and dependency diff, optimize only the measured cause, and repeat affected quality/output checks. A future timing study should use controlled browser/network conditions and report measured results separately; this stage does not invent timing targets.
 
-## Optional Browser Measurement
+## Extension compliance
 
-For a future performance-focused change, run Lighthouse against `npm run preview` using a controlled browser/network profile and record mobile performance, accessibility, and largest-contentful-paint results. No Lighthouse score or runtime layout metric is claimed for this revision because dedicated browser measurement is not configured.
-
-## Failure or Regression Response
-
-1. Compare current Vite output with the baseline above.
-2. Confirm no new dependency or eager media import was introduced.
-3. Review the production graph and gallery lazy-loading tests.
-4. Optimize the largest justified source of growth.
-5. Rebuild both root and project Pages forms and rerun the verifier.
-
-## Not Applicable
-
-- Requests per second, server response percentiles, and concurrent-user targets.
-- Load, stress, endurance, database, cache, or queue tests.
-- API latency or service-level objectives.
+Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled C. Existing property suites and production privacy policy remain enforced. No enabled-extension blocking finding.

@@ -1,68 +1,35 @@
-# Integration Test Instructions
+# Integration Test Instructions — Stratus Visual Refresh
 
-## Purpose
+## Setup and execution
 
-Verify that the typed medical data, content components, shared layout, application shell, cross-cutting policy tests, documentation, and production verifier work together as one static portfolio.
-
-No backend, database, container, test server, or external endpoint is required.
-
-## Scenario 1: Typed Contact Data to Rendered Contact Section
-
-- **Description**: Unit 2's `PortfolioContent.contact` is passed through `App` to Unit 4's `ClosingContact`.
-- **Run**:
+One React frontend unit composes shared medical data, shell/navigation, section renderer, display preferences, evidence provider and contact form. No backend, database or external endpoint is required.
 
 ```bash
-npx vitest run src/data/medical/content.test.ts src/components/medical/content/MedicalContent.test.tsx src/App.test.tsx
+npm test -- src/App.test.tsx src/hooks/useMedicalLayout.test.ts src/components/medical/MedicalShell.test.tsx src/components/medical/gallery/EvidencePreviewProvider.test.tsx src/test/medicalPortfolioRegression.test.tsx
+npm test -- src/test/productionGraph.test.ts src/test/productionBuildPolicy.test.ts src/test/documentationContract.test.ts
 ```
 
-- **Expected**: The exact email and phone examples, labels, `Placeholder` statuses, and verification notice render; CV-only values remain absent; no link, button, form, input, `mailto:`, or `tel:` behavior exists.
-- **Cleanup**: None.
+These suites passed within the final complete test run; documentation assertions also passed after their update.
 
-## Scenario 2: Shared Section Contract Across Content Areas
+## Scenarios and expected behavior
 
-- **Description**: `MedicalSection`, medical content CSS, shell composition, and navigation preserve all eight section IDs and the compact heading/body hierarchy.
-- **Run**:
+1. App/preferences/theme: both styles reuse facts; fresh users receive Notebook/full-page/dark, saved light wins, corrupt or denied storage does not prevent live controls.
+2. App/routes/focus: #science selects full-page and #/science selected-section layout over saved layout. Back/forward follows route state. Switching views after scrolling to Science preserves Science. Unknown sections recover Overview. Skip focuses main without hash mutation.
+3. Shell/drawer/preview: selection closes the mobile drawer before focusing the mounted heading. Cancel restores its trigger. Ordinary preview close/Escape restores a connected origin; view/context changes close stale preview state and use a safe mounted target.
+4. Contact/data: the configured recipient is buituanphat123456@gmail.com. Required-field/email checks focus the first invalid field; messages have a 5000-character limit and open an encoded local email draft. No server send/delivery claim is introduced.
+5. Data/output/docs: exact public graph includes 18 gallery JPGs, two interest WebPs and a separate approved CV. Private/dontuse source files and former-owner markers remain excluded. README and deployment guidance describe the current controls and release gates.
 
-```bash
-npx vitest run src/components/medical/content/MedicalContent.property.test.tsx src/components/medical/content/medicalContentStyles.test.ts src/App.test.tsx
-```
-
-- **Expected**: Generated section content preserves one associated `h2` and one body; desktop CSS contains the 28/72 grid and a 3rem shared-heading cap; single-column and narrow-mobile overrides cap headings at 2.5rem and 2.1rem; all eight application sections remain ordered.
-- **Cleanup**: None.
-
-## Scenario 3: Application Graph, Privacy Policy, and Documentation
-
-- **Description**: Unit 6 verifies that the production graph requires approved website placeholders while continuing to prohibit CV-only/former-owner markers and that repository guidance explains the same boundary.
-- **Run**:
-
-```bash
-npx vitest run src/test/medicalPortfolioRegression.test.tsx src/test/productionGraph.test.ts src/test/documentationContract.test.ts
-```
-
-- **Expected**: Full-app Contact content is present and non-actionable; retired identities/features remain absent; production imports stay within the medical graph; README/deployment guidance matches implementation.
-- **Cleanup**: None.
-
-## Scenario 4: Static Production Output
-
-- **Description**: The complete Vite bundle satisfies the asset, privacy, runtime-request, and base-path contract.
-- **Run**:
+## Static output integration
 
 ```bash
 npm run build
 npm run verify:dist
-VITE_BASE_PATH=/student-profile/ npm run build
-EXPECTED_BASE_PATH=/student-profile/ npm run verify:dist
+VITE_BASE_PATH=/StratusNebulosus.github.io/ npm run build
+EXPECTED_BASE_PATH=/StratusNebulosus.github.io/ npm run verify:dist
 ```
 
-- **Expected**: Both path forms pass with 16 approved JPG files, three approved WebP illustrations, one approved CV PDF, allowed Contact copy, no prohibited markers, and all local URLs inside the expected base path.
-- **Cleanup**: No cleanup is required; a later build replaces `dist/`.
+Both recorded outputs passed with 20 approved images, one approved PDF and correct base paths. Real local production-browser JS/CSS/image/PDF URLs resolved successfully in both forms. Tests clean up their mounted components; a subsequent build replaces dist. For browser workflow reproduction see e2e-test-instructions.md.
 
-## Full Integration Gate
+## Extension compliance
 
-```bash
-npm run quality
-npm run build
-npm run verify:dist
-```
-
-Use the full gate after any focused scenario passes to catch interactions outside the immediate files.
+Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled C. Existing property suites and production privacy policy remain enforced. No enabled-extension blocking finding.

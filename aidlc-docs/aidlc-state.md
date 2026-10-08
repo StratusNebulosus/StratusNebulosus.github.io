@@ -5,13 +5,14 @@
 - Project: Bui Tuan Phat medical-student portfolio visual refresh
 - Workspace: /Users/nhamhhung/StratusNebulosus.github.io
 - Current phase: CONSTRUCTION
-- Current stage: Code Generation Part 2 — generated-code review
-- Status: Twelve implementation steps and nine stories complete and verified; awaiting explicit generated-code approval before Build and Test
+- Current stage: Build and Test — results/instruction review
+- Status: Build and Test complete; awaiting results/instruction approval before Operations placeholder
 - Active plan: aidlc-docs/construction/plans/stratus-visual-refresh-code-generation-plan.md
 - Active NFR design: aidlc-docs/construction/stratus-visual-refresh/nfr-design/nfr-design-patterns.md
 - Active NFR requirements: aidlc-docs/construction/stratus-visual-refresh/nfr-requirements/nfr-requirements.md
 - Active application design: aidlc-docs/inception/application-design/stratus-visual-refresh/application-design.md
-- Active questions: aidlc-docs/construction/stratus-visual-refresh/code-review-questions.md
+- Active questions: aidlc-docs/construction/build-and-test/stratus-visual-refresh-review-questions.md
+- Active build/test summary: aidlc-docs/construction/build-and-test/build-and-test-summary.md
 - Active code summary: aidlc-docs/construction/stratus-visual-refresh/code/code-generation-summary.md
 - Active stories: aidlc-docs/inception/user-stories/stratus-visual-refresh/stories.md
 - Active personas: aidlc-docs/inception/user-stories/stratus-visual-refresh/personas.md
@@ -40,8 +41,9 @@
 - [x] Code Generation Part 1 — detailed plan prepared/validated
 - [x] Code Generation plan approval — user: "approve and continue"
 - [x] Code Generation Part 2 — implementation and concrete verification complete
-- [ ] Generated-code approval — pending explicit user review
-- [ ] Build and Test — EXECUTE
+- [x] Generated-code approval — user: "`a`pprove"
+- [x] Build and Test — results/instructions complete
+- [ ] Build and Test results approval — pending
 - Operations — PLACEHOLDER
 
 Existing Extension Configuration remains authoritative: Security Baseline disabled, PBT disabled. Full rules not loaded; enforcement skipped. Prior contact-revision approval remains historical and does not authorize a new visual implementation. Application presentation implemented; verified content/assets/dependencies/hosting unchanged.

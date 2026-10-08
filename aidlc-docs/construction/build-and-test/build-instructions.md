@@ -1,92 +1,40 @@
-# Build Instructions
+# Build Instructions — Stratus Visual Refresh
 
 ## Prerequisites
 
-| Requirement | Project value |
-|---|---|
-| Runtime | Node.js 20.19 or newer, or Node.js 22.12 or newer |
-| Package manager | npm with the committed `package-lock.json` |
-| Build tools | TypeScript 5.9 and Vite 7 through repository scripts |
-| Required secrets | None |
-| Optional variables | `VITE_BASE_PATH` for a project Pages build; `EXPECTED_BASE_PATH` for matching output verification |
-| Output directory | `dist/` |
+Run from `/Users/nhamhhung/StratusNebulosus.github.io`. Use Node 20.19+ or 22.12+, npm and the committed package-lock.json. Verification used Node 24.0.0, TypeScript 5.9 and Vite 7.3.0. No credentials or runtime services are needed. The existing workflow installs locked dependencies and verifies output before upload.
 
-The GitHub Actions workflow uses Node.js 20, installs locked dependencies, derives the Pages base path, runs the full quality gate, builds, verifies `dist/`, and only then uploads the static artifact.
-
-## Build Steps
-
-### 1. Install Locked Dependencies
-
-From the repository root:
+## Install and quality checks
 
 ```bash
 npm ci
-```
-
-Use `npm install` only when intentionally changing dependencies or regenerating the lockfile.
-
-### 2. Run the Source Quality Gate
-
-```bash
 npm run quality
 ```
 
-This runs TypeScript, ESLint, all example tests, and all property tests.
+The quality command runs TypeScript, ESLint and all Vitest example/property suites.
 
-### 3. Build and Verify Root Pages Output
+## Root Pages build
 
 ```bash
 npm run build
 npm run verify:dist
 ```
 
-Expected verifier result for the active revision: 16 approved JPG files, three approved WebP illustrations, one approved CV PDF, and base path `/`.
-
-### 4. Build and Verify Project Pages Output
+## Project Pages build
 
 ```bash
-VITE_BASE_PATH=/student-profile/ npm run build
-EXPECTED_BASE_PATH=/student-profile/ npm run verify:dist
+VITE_BASE_PATH=/StratusNebulosus.github.io/ npm run build
+EXPECTED_BASE_PATH=/StratusNebulosus.github.io/ npm run verify:dist
 ```
 
-Replace `student-profile` with the actual repository name when reproducing a deployed project Pages path.
+Each build replaces dist. Matching build/verifier base paths are mandatory. Expected output: dist/index.html, JS/CSS bundles, exactly 18 approved JPGs, two approved WebP illustrations and one approved CV PDF. The verifier reports 20 approved images and one approved CV; private source documents stay outside the output.
 
-## Successful Build Evidence
+Both builds and verifiers passed. Vite bundling took 2.30 seconds root and 2.40 seconds project in the recorded final run. The existing chunk-over-500-kB advisory remains. No deployment is performed by these local commands.
 
-- TypeScript compilation succeeds before Vite bundles the application.
-- `dist/index.html` exists and its local URLs stay inside the requested base path.
-- `dist/assets/` contains one JavaScript bundle, one CSS bundle, 16 approved JPG files, three approved WebP illustrations, and one approved CV PDF.
-- The approved website Contact placeholders occur in the built JavaScript.
-- CV-only placeholders, former-owner identity, prohibited/private filenames, dynamic asset discovery, and application runtime requests are absent.
-- No backend, database, secret, or runtime configuration is required.
+## Recovery
 
-## Current Non-Blocking Advisory
+For install failures check supported Node and repository directory, then use npm ci with the existing lockfile. For source failures run npm run typecheck or npm run lint separately and repair the reported issue. For verifier failures rebuild using the matching base path and inspect the named asset/marker; retain the exact public allowlist/privacy policy.
 
-Vite reports the main JavaScript chunk above its 500 kB advisory threshold. The verified section-heading project-path build produced approximately 666.23 kB minified and 192.84 kB gzip. This is a performance follow-up candidate, not a build failure.
+## Extension compliance
 
-## Troubleshooting
-
-### Dependency or Native Binding Failure
-
-1. Confirm the active Node.js version meets the requirement.
-2. Confirm the terminal is in the repository root.
-3. Reinstall locked dependencies with `npm ci` in a clean local dependency environment.
-4. Rerun `npm run quality` before rebuilding.
-
-### TypeScript or ESLint Failure
-
-Run the failing command separately:
-
-```bash
-npm run typecheck
-npm run lint
-```
-
-Fix the first reported source issue, then rerun the complete quality gate.
-
-### Production Verifier Failure
-
-- Confirm `npm run build` completed immediately before verification.
-- Use the same path value for `VITE_BASE_PATH` and `EXPECTED_BASE_PATH`.
-- Review the verifier message for an unexpected asset, prohibited marker, runtime request, or out-of-base URL.
-- Do not weaken the allowlist or denylist to make an unreviewed file pass.
+Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled C. Existing property suites and production privacy policy remain enforced. No enabled-extension blocking finding.

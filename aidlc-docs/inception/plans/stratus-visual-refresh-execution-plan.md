@@ -115,8 +115,9 @@ Text alternative: workspace detection, architecture reuse, requirements and stor
 - [x] Code Generation Part 1 — detailed plan prepared/validated.
 - [x] Code Generation plan approval — user: "approve and continue".
 - [x] Code Generation Part 2 — approved implementation and verification completed.
-- [ ] Generated-code review approval — pending.
-- [ ] Build and Test — execute validation, document results/instructions and request Operations-stage approval.
+- [x] Generated-code review approval — user: "`a`pprove".
+- [x] Build and Test — verified evidence consolidated and instructions/results documented.
+- [ ] Build and Test results approval — pending Operations transition.
 
 Skipped stage decisions are recorded above, not represented as completed implementation. User may add skipped stages, remove recommended stages, or change depth before approval.
 

@@ -116,7 +116,7 @@ SV-Q-01/12: responsive matrix and screenshots. Q-02: rendered contrast and token
 
 ## Review status and next stage
 
-All twelve numbered implementation steps and nine story checkboxes are complete. Explicit generated-code approval remains pending. The mandatory Build and Test stage next documents build/test instructions and summaries, reusing this verification unless changes require another run. Nothing has been committed, pushed or deployed for this refresh.
+All twelve numbered implementation steps and nine story checkboxes are complete. Generated code explicitly approved by user: "`a`pprove". The mandatory Build and Test stage next documents build/test instructions and summaries, reusing this verification unless changes require another run. Nothing has been committed, pushed or deployed for this refresh.
 
 ## Extension compliance
 

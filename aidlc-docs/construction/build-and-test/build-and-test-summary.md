@@ -1,94 +1,37 @@
-# Build and Test Summary
+# Build and Test Summary — Stratus Visual Refresh
 
 ## Outcome
 
-The section-heading refinement passes every applicable source, test, privacy, production-output, and GitHub Pages base-path gate. Every shared non-hero section heading now uses the approved compact scale, and the Closing section renders `Looking ahead`, without changing dependencies, public assets, interfaces, infrastructure, or deployment behavior.
+Generated code was approved with "`a`pprove". Notebook/Casebook and both views meet the approved nine stories and twelve quality checks. Build and Test consolidates the completed verification and current reproduction instructions; no runtime source changed in this stage.
 
-## Build Status
+## Recorded results
 
-- **Build tool**: TypeScript 5.9 and Vite 7 through `npm run build`.
-- **Status**: Success for root and project Pages path forms.
-- **Artifacts at the previous checkpoint**: `dist/index.html`, one JavaScript bundle, one CSS bundle, 13 approved JPG files, and one approved CV PDF. The active visual-showcase revision supersedes this count with 16 reviewed JPGs, three disclosed WebP illustrations, and one approved CV PDF; final Build and Test instructions will be refreshed after code approval.
-- **Root verification**: Passed for `/`.
-- **Project verification**: Passed for `/student-profile/`.
-- **Advisory**: The main JavaScript chunk remains above Vite's 500 kB advisory threshold; no runtime dependency was added by this refinement.
+| Check | Result |
+| --- | --- |
+| TypeScript / ESLint | Passed |
+| Complete Vitest example/property/integration suite | 43 suites, 158 tests, zero failures |
+| Updated documentation contract | Six tests passed after documentation update |
+| Root and project production builds | Passed; Vite bundling 2.30s / 2.40s |
+| Both production output verifiers | Passed; 20 approved images and one CV |
+| Actual production asset/CV URLs | Successful in both base-path forms |
+| Responsive matrix | 32 configurations; no horizontal overflow |
+| Rendered reading/action contrast | Minimum 6.87:1 light / 8.20:1 dark |
+| Essential control border contrast | Minimum 3.49:1 light / 3.88:1 dark |
+| Preferences/routes/history/focus/evidence/contact/motion | Passed applicable tests/browser checks |
+| Server load/API contracts/authentication penetration tests | N/A for this static frontend scope |
 
-## Test Execution Summary
+The full suite includes unit/property and application integration tests; these are not separately additive test totals. No coverage percentage is claimed. Prior passing results were reused instead of rerunning unchanged runtime code. Local evidence resides under /private/tmp/stratus-visual-refresh/; see [implementation summary](../stratus-visual-refresh/code/code-generation-summary.md) for file inventory, story/quality mapping, screenshots and comparable bundle measurements.
 
-### Unit and Property Tests
+## Artifacts and instructions
 
-- **Complete suite**: 32 files, 130 passed, 0 failed.
-- **Focused section-heading suite**: 2 files, 10 passed, 0 failed.
-- **Deterministic replay**: `FC_SEED=20260921 npm test` passed all 130 tests.
-- **Coverage report**: N/A; instrumentation is not configured.
-- **Status**: Pass.
+Output: dist/index.html, JavaScript/CSS, 18 allowlisted JPGs, two WebP interest illustrations and one approved CV PDF. Both / and /StratusNebulosus.github.io/ forms passed. New/current instructions: build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, performance-test-instructions.md and e2e-test-instructions.md. Earlier instructions were preserved under history/pre-stratus-visual-refresh/.
 
-### Integration Tests
+## Limits and readiness
 
-- Typed Contact data to component rendering: Pass.
-- Shared `MedicalSection` hierarchy, compact heading scale, and responsive CSS contract: Pass.
-- Full application, production graph, privacy policy, and documentation contract: Pass.
-- Root/project Pages production output and asset inventory: Pass.
-- **Status**: Pass.
+Existing Vite chunk advisory remains. Final root JS is 681273 bytes (196728 gzip); CSS is 44388 bytes (8253 gzip), with unchanged approved media and no new dependency. No timing/Lighthouse score or universal physical-device coverage is claimed. Content/private-source boundaries remain unchanged. Operations is the AI-DLC placeholder; this stage performed no commit, push or deployment. The current local repository was already at commit 8c590bf when resuming; no publication status is inferred from that local commit.
 
-### Static Performance Checks
+Build and Test is complete and ready for its explicit results/instruction review before Operations.
 
-- Root Vite build: approximately 3.05 seconds.
-- Project-path Vite build: approximately 2.89 seconds.
-- Main JavaScript: approximately 666.23 kB minified and 192.84 kB gzip.
-- Main CSS: approximately 36.46 kB minified and 7.92 kB gzip.
-- Complete output: approximately 3.0 MB.
-- Load/stress testing: N/A for a static site with no runtime server.
-- **Status**: Pass with one non-blocking chunk-size advisory.
+## Extension compliance
 
-### Additional Checks
-
-| Check | Status | Evidence |
-|---|---|---|
-| TypeScript | Pass | `npm run typecheck` via `npm run quality` |
-| ESLint | Pass | `npm run lint` via `npm run quality` |
-| Property shrinking/replay | Pass | fast-check defaults retained; seed `20260921` replayed |
-| Privacy/source policy | Pass | CV-only and former-owner markers excluded |
-| Production graph | Pass | No legacy path, runtime fetch, XHR, or dynamic asset glob |
-| Asset boundary | Superseded | Previous checkpoint verified 13 approved JPGs and one approved CV PDF; active revision expects 16 JPGs, three WebP illustrations, and one PDF |
-| Documentation contract | Pass | README and deployment guidance match Contact behavior |
-| API contract tests | N/A | No API or service boundary exists |
-| Browser E2E automation | N/A | No dedicated browser runner is configured |
-| Security penetration testing | N/A | No authentication or network boundary; Security Baseline is disabled |
-| Deployment execution | Not performed | This workflow does not deploy or change hosting settings |
-
-## Section Heading Acceptance Evidence
-
-- Shared desktop content sections use `minmax(12rem, 28fr) minmax(0, 72fr)`.
-- Shared non-hero headings cap at `3rem` on desktop, `2.5rem` at the `62rem` single-column breakpoint, and `2.1rem` at the `30rem` narrow-mobile breakpoint.
-- The separate hero `h1` scale is unchanged.
-- The Closing section renders the accessible level-two title `Looking ahead`; the former long title is absent from production output.
-- Existing fictional Contact placeholders remain non-interactive, and CV-only/former-owner values remain prohibited.
-- The public asset inventory, CV download, eight-section navigation, theme behavior, and GitHub Pages workflow remain intact.
-
-## Property-Based Testing Compliance
-
-- **PBT-08**: Compliant. Shrinking remains enabled, verbose counterexample output remains configured, failures expose replay seeds, CI runs the complete property suite through `npm run quality`, and seed `20260921` was replayed successfully.
-- **Blocking findings**: None.
-
-## Generated Instructions
-
-- `aidlc-docs/construction/build-and-test/build-instructions.md`
-- `aidlc-docs/construction/build-and-test/unit-test-instructions.md`
-- `aidlc-docs/construction/build-and-test/integration-test-instructions.md`
-- `aidlc-docs/construction/build-and-test/performance-test-instructions.md`
-- `aidlc-docs/construction/build-and-test/build-and-test-summary.md`
-
-## Overall Status
-
-- **Build**: Success.
-- **All applicable tests**: Pass.
-- **Ready for Operations review**: Yes.
-
-## Accolades Revision — Corrected Checkout — 2026-10-03
-
-Verified directly in `/Users/nhamhhung/StratusNebulosus.github.io`: TypeScript, ESLint, 135 tests across 33 files, formatting, whitespace checks, and root/repository-path production builds and asset policy pass. Public inventory: 18 JPEG images, two interest WebPs, one CV PDF. Browser inspection confirms the valedictorian anchor, prominent academic evidence, full certificate fitting, matching activity card colors in both themes and no horizontal overflow at 390px. Existing design retained. Extensions remain disabled by existing configuration; independent privacy/accessibility and regression contracts pass.
-
-## Portfolio Voice Revision — 2026-10-03
-
-Section titles and introductions now speak in the student's voice. Editorial disclaimers replaced with factual personal narrative. Existing copy assertions updated. TypeScript, ESLint, 135 tests across 33 files, production build and public-asset verification pass.
+Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled C. Existing property suites and production privacy policy remain enforced. No enabled-extension blocking finding.
