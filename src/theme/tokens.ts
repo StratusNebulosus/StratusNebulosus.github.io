@@ -1,6 +1,11 @@
 export type ThemeMode = "light" | "dark";
 
-export type ColorTokenRole = "background" | "surface" | "text" | "accent" | "border";
+export type ColorTokenRole =
+  | "background"
+  | "surface"
+  | "text"
+  | "accent"
+  | "border";
 
 export interface ColorToken {
   name: string;
@@ -65,14 +70,15 @@ const sharedMotion: MotionToken[] = [
 export const lightTheme: Theme = {
   mode: "light",
   colors: [
-    { name: "colorBackgroundPage", value: "#faf6ee", role: "background" },
-    { name: "colorBackgroundSurface", value: "#fffdf8", role: "surface" },
-    { name: "colorTextPrimary", value: "#1f2723", role: "text" },
-    { name: "colorTextSecondary", value: "#4a564e", role: "text" },
-    { name: "colorAccentTeal", value: "#0f4c4c", role: "accent" },
-    { name: "colorAccentSurgicalGreen", value: "#2f6f4e", role: "accent" },
+    { name: "colorBackgroundPage", value: "#f7f4ec", role: "background" },
+    { name: "colorBackgroundSurface", value: "#fffdf7", role: "surface" },
+    { name: "colorTextPrimary", value: "#172b2b", role: "text" },
+    { name: "colorTextSecondary", value: "#374c49", role: "text" },
+    { name: "colorAccentTeal", value: "#14534e", role: "accent" },
+    { name: "colorAccentSurgicalGreen", value: "#405b3d", role: "accent" },
     { name: "colorAccentBurgundy", value: "#7a2e3a", role: "accent" },
-    { name: "colorBorderSubtle", value: "#d8cfb8", role: "border" },
+    { name: "colorBorderSubtle", value: "#d5ddd5", role: "border" },
+    { name: "colorBorderStrong", value: "#76867c", role: "border" },
   ],
   typography: sharedTypography,
   motion: sharedMotion,
@@ -81,14 +87,15 @@ export const lightTheme: Theme = {
 export const darkTheme: Theme = {
   mode: "dark",
   colors: [
-    { name: "colorBackgroundPage", value: "#0d1a19", role: "background" },
-    { name: "colorBackgroundSurface", value: "#12211f", role: "surface" },
-    { name: "colorTextPrimary", value: "#f4f1e8", role: "text" },
-    { name: "colorTextSecondary", value: "#c9d2c9", role: "text" },
-    { name: "colorAccentTeal", value: "#5fd6c8", role: "accent" },
-    { name: "colorAccentSurgicalGreen", value: "#7fd39a", role: "accent" },
-    { name: "colorAccentBurgundy", value: "#d98a97", role: "accent" },
-    { name: "colorBorderSubtle", value: "#324a46", role: "border" },
+    { name: "colorBackgroundPage", value: "#0b1718", role: "background" },
+    { name: "colorBackgroundSurface", value: "#112326", role: "surface" },
+    { name: "colorTextPrimary", value: "#f5f1e8", role: "text" },
+    { name: "colorTextSecondary", value: "#bbc9c5", role: "text" },
+    { name: "colorAccentTeal", value: "#83ddd0", role: "accent" },
+    { name: "colorAccentSurgicalGreen", value: "#b9cca4", role: "accent" },
+    { name: "colorAccentBurgundy", value: "#f3a6b4", role: "accent" },
+    { name: "colorBorderSubtle", value: "#2c4241", role: "border" },
+    { name: "colorBorderStrong", value: "#68817c", role: "border" },
   ],
   typography: sharedTypography,
   motion: sharedMotion,

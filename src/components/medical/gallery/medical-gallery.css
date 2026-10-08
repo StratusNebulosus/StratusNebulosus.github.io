@@ -11,7 +11,7 @@
   min-height: 2.75rem;
   padding: 0;
   overflow: hidden;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-border-strong);
   border-radius: 0.45rem;
   color: var(--color-text-primary);
   background: var(--color-background-surface);
@@ -74,11 +74,11 @@ button.medical-gallery-card:hover {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 0.7rem;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-border-strong);
   border-radius: 999px;
   color: var(--color-background-page);
-  background: color-mix(in srgb, var(--color-accent-teal) 90%, transparent);
-  font-size: 0.68rem;
+  background: var(--color-accent-teal);
+  font-size: 0.85rem;
   font-weight: 750;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -108,7 +108,7 @@ button.medical-gallery-card:hover {
   margin: 0;
   color: var(--color-accent-surgical-green);
   font-family: var(--font-nav-sans);
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   font-weight: 760;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -163,7 +163,7 @@ button.medical-gallery-card:hover {
       var(--medical-dialog-bottom-inset)
   ) !important;
   overflow: auto;
-  border: 1px solid var(--color-border-subtle) !important;
+  border: 1px solid var(--color-border-strong) !important;
   border-radius: 0.5rem !important;
   color: var(--color-text-primary) !important;
   background: var(--color-background-surface) !important;
@@ -204,7 +204,7 @@ button.medical-gallery-card:hover {
   min-width: 2.75rem;
   height: 2.75rem;
   place-items: center;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-border-strong);
   border-radius: 50%;
   color: var(--color-text-primary);
   background: color-mix(
@@ -249,4 +249,22 @@ button.medical-gallery-card:hover {
 
 .medical-gallery-card[data-category="portrait"] .medical-gallery-media img {
   object-fit: cover;
+}
+
+.medical-gallery-card,
+button.medical-gallery-card:hover {
+  box-shadow: none;
+}
+.medical-gallery-modal-close {
+  background: var(--color-background-surface);
+}
+[data-medical-style="casebook"] .medical-gallery-caption {
+  border-top: 1px solid var(--color-border-subtle);
+}
+@media (prefers-reduced-motion: reduce) {
+  .medical-gallery-modal *,
+  .medical-gallery-modal-backdrop {
+    animation: none !important;
+    transition: none !important;
+  }
 }

@@ -35,8 +35,12 @@ export function MedicalSection({
           <span aria-hidden="true">{index}</span>
           {eyebrow}
         </p>
-        <h2 id={headingId}>{title}</h2>
-        {introduction ? <p className="medical-section-introduction">{introduction}</p> : null}
+        <h2 id={headingId} tabIndex={-1}>
+          {title}
+        </h2>
+        {introduction ? (
+          <p className="medical-section-introduction">{introduction}</p>
+        ) : null}
       </div>
       <div className="medical-section-body">{children}</div>
     </section>

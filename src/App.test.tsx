@@ -178,6 +178,79 @@ describe("medical portfolio application", () => {
     const control = screen.getByTestId("medical-nav-theme-toggle");
     expect(control).toHaveAccessibleName("Toggle color mode");
     fireEvent.click(control);
-    await waitFor(() => expect(document.documentElement).toHaveClass("dark"));
+    await waitFor(() => expect(document.documentElement).toHaveClass("light"));
   });
+});
+
+it.each(["notebook", "casebook"])(
+  "honors section deep links and preserves context in %s",
+  async (style) => {
+    localStorage.setItem("medical-style", style);
+    localStorage.setItem("medical-layout", "full-page");
+    window.history.replaceState(null, "", "#/contact");
+    renderPortfolio();
+    expect(screen.getByTestId("medical-display-layout")).toHaveValue("section");
+    expect(screen.queryByTestId("medical-section-overview")).toBeNull();
+    fireEvent.change(screen.getByLabelText("Name"), {
+      target: { value: "Reviewer" },
+    });
+    fireEvent.change(screen.getByLabelText("Portfolio style"), {
+      target: { value: style === "notebook" ? "casebook" : "notebook" },
+    });
+    expect(screen.getByLabelText("Name")).toHaveValue("Reviewer");
+    expect(window.location.hash).toBe("#/contact");
+    expect(screen.getByTestId("medical-shell-cv")).toHaveAttribute(
+      "download",
+      content.hero.cvDownload.fileName,
+    );
+  },
+);
+it("adopts external history and dismisses stale evidence", async () => {
+  window.history.replaceState(null, "", "#/gallery");
+  renderPortfolio();
+  fireEvent.click(screen.getAllByTestId(/^medical-gallery-item-/)[0]);
+  expect(await screen.findByRole("dialog")).toBeInTheDocument();
+  fireEvent(window, new PopStateEvent("popstate"));
+  window.history.replaceState(null, "", "#/education");
+  fireEvent(window, new PopStateEvent("popstate"));
+  await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+  expect(screen.getByTestId("medical-section-education")).toBeInTheDocument();
+});
+
+it("retains the section aligned below the sticky header when changing layout", () => {
+  const rectangles = vi
+    .spyOn(Element.prototype, "getBoundingClientRect")
+    .mockImplementation(function (this: Element) {
+      const top = this.id === "science" ? 192 : -500;
+      const bottom = this.classList.contains("medical-header")
+        ? 197
+        : this.id === "science"
+          ? 1500
+          : this.id === "academics"
+            ? 192
+            : 0;
+      return {
+        top,
+        bottom,
+        left: 0,
+        right: 800,
+        width: 800,
+        height: bottom - top,
+        x: 0,
+        y: top,
+        toJSON: () => ({}),
+      } as DOMRect;
+    });
+  renderPortfolio();
+  fireEvent.scroll(window);
+  expect(screen.getByTestId("medical-nav-link-science")).toHaveAttribute(
+    "aria-current",
+    "location",
+  );
+  fireEvent.change(screen.getByLabelText("Portfolio view"), {
+    target: { value: "section" },
+  });
+  expect(window.location.hash).toBe("#/science");
+  expect(screen.getByTestId("medical-section-science")).toBeInTheDocument();
+  rectangles.mockRestore();
 });

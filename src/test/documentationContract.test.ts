@@ -34,7 +34,18 @@ describe("medical portfolio documentation contract", () => {
     ].forEach((path) => expect(readme).toContain(path));
     expect(readme).not.toContain("src/data/template.ts");
     expect(readme).not.toContain("selectedTemplateId");
-    expect(readme).not.toContain("check both styles");
+    [
+      "Notebook",
+      "Casebook",
+      "medical-style",
+      "medical-layout",
+      "chakra-ui-color-mode",
+      "#/science",
+      "#science",
+      "dark mode",
+      "check both styles",
+      "src/data/medical/presentation.ts",
+    ].forEach((marker) => expect(readme).toContain(marker));
   });
 
   it("documents the public/private boundary and CV/gallery separation", () => {
@@ -84,7 +95,11 @@ describe("medical portfolio documentation contract", () => {
       "npm run build",
       "npm run verify:dist",
       "FC_SEED=<reported-seed> npm test",
-      "13 reviewed gallery images",
+      "18 reviewed gallery images",
+      "20 images total",
+      "Notebook",
+      "Casebook",
+      "#/science",
       "Bui Tuan Phat CV",
       "VITE_BASE_PATH",
       "EXPECTED_BASE_PATH",

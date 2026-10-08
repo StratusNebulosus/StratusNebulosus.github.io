@@ -1,6 +1,6 @@
 # Bui Tuan Phat Medical Portfolio
 
-This repository contains Bui Tuan Phat's single-page medical student portfolio. It presents his path through science, academics, leadership, and service in one accessible editorial experience, with light and dark modes and static GitHub Pages deployment.
+This repository contains Bui Tuan Phat's medical student portfolio. Notebook and Casebook present the same verified science, academics, leadership, and service content with full-page or section views. The first visit defaults to Notebook, full page, and dark mode; a saved light preference remains supported. Deployment uses static GitHub Pages.
 
 ## Portfolio structure
 
@@ -29,7 +29,15 @@ The production composition starts in `src/App.tsx`. The main files future contri
 | Light/dark design tokens                | `src/theme/`                                |
 | Approved downloadable CV                | `src/assets/documents/bui-tuan-phat-cv.pdf` |
 
-Do not restore the retired Engineering/Business template selector or multi-layout behavior. Historical source files that are not reachable from `src/main.tsx` are not part of the public application and should not be used for new medical content.
+## Display styles and navigation
+
+Notebook uses an open editorial layout and Casebook uses framed content with a desktop contents rail. Both share `src/data/medical/content.ts`, the eight-section registry, and the accessible evidence dialog. Style metadata is authoritative in `src/data/medical/presentation.ts`; display storage handling lives in `src/utils/medicalDisplayPreferences.ts` and `src/hooks/useMedicalDisplayPreferences.ts`.
+
+The independent storage keys are `medical-style` (Notebook default), `medical-layout` (full-page default), and `chakra-ui-color-mode` (dark default). Invalid values or unavailable storage recover safely; controls remain usable when writes fail. Saved light overrides the default, regardless of OS color preference.
+
+`#science` selects the full-page Science section; `#/science` selects only that section. An explicit hash chooses its layout over saved preferences. Empty URLs use saved layout; unknown sections recover Overview. Style and layout changes retain the active section, and browser back/forward follows the route. Native links retain modified-click behavior. Section navigation focuses its mounted heading; the skip link focuses main without changing the route. Responsive menus and evidence previews keep keyboard focus usable when content changes.
+
+Do not restore the retired Engineering/Business template selector. Historical source files unreachable from `src/main.tsx` are outside the public application. New styles must reuse the medical content graph rather than copy facts or import historical private assets.
 
 ## Public and private asset boundary
 
@@ -38,7 +46,7 @@ The deployed site is public. An asset may be imported by the medical portfolio o
 Approved public material currently consists of:
 
 - `src/assets/profile_pic.jpg`
-- 15 reviewed achievement, certificate, conference, and project images listed in the allowlist
+- 17 reviewed achievement, certificate, conference, and project images listed in the allowlist
 - Two original, clearly classified portfolio illustrations for Origami and Piano, delivered as optimized WebP files
 - `src/assets/documents/bui-tuan-phat-cv.pdf`, provided as a separate CV download
 
@@ -127,7 +135,7 @@ The existing `.github/workflows/deploy.yml` workflow deploys the static `dist/` 
 
 Enable it under **Settings > Pages** by choosing **GitHub Actions** as the source. Pushes to `main` trigger deployment; **Actions > Deploy to GitHub Pages > Run workflow** starts it manually.
 
-After a successful run, open **Settings > Pages > Visit site** and verify navigation, color mode, portrait, evidence previews, and the CV download. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed URL behavior and troubleshooting.
+After a successful run, open **Settings > Pages > Visit site** and check both styles, both views, fresh dark mode, saved light mode, direct hashes/history, responsive menus, evidence focus, the email draft form, and the CV download. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed URL behavior and troubleshooting.
 
 ## Committing changes
 

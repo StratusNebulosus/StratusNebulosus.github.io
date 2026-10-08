@@ -30,17 +30,31 @@ describe("medical single-page layout", () => {
     section.remove();
   });
 
-  it("exposes only active section, href creation, and navigation", () => {
+  it("exposes active section, href creation, and navigation", () => {
     const { result } = renderHook(() =>
       useMedicalLayout(medicalSectionIds, "leadership"),
     );
 
     expect(result.current.activeSection).toBe("leadership");
     expect(result.current.getNavigationHref("contact")).toBe("#contact");
-    expect(result.current).not.toHaveProperty("layoutMode");
+    expect(result.current.layout).toBe("full-page");
     expect(result.current).not.toHaveProperty("toggleLayoutMode");
 
     act(() => result.current.navigateToSection("contact"));
     expect(window.location.hash).toBe("#contact");
   });
+});
+
+it("switches layouts at the current section and follows history", () => {
+  const { result } = renderHook(() =>
+    useMedicalLayout(medicalSectionIds, "science"),
+  );
+  act(() => result.current.setLayout("section"));
+  expect(window.location.hash).toBe("#/science");
+  expect(result.current.activeSection).toBe("science");
+  act(() => {
+    window.history.replaceState(null, "", "#education");
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  });
+  expect(result.current.layout).toBe("full-page");
 });

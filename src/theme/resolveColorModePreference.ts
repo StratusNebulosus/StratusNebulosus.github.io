@@ -1,50 +1,24 @@
 export type ColorModeValue = "light" | "dark";
-
 export interface ColorModePreference {
   value: ColorModeValue;
-  source: "user-selected" | "system-default";
+  source: "user-selected" | "product-default";
 }
-
-const STORAGE_KEY = "theme";
-
-function isColorModeValue(value: unknown): value is ColorModeValue {
-  return value === "light" || value === "dark";
-}
-
-function readSystemPreference(): ColorModeValue {
-  try {
-    if (
-      typeof window !== "undefined" &&
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      return "dark";
-    }
-  } catch {
-    // Fall through to the default below.
-  }
-
-  return "light";
-}
-
-/**
- * BR-5: a persisted-preference read failure always falls back to the
- * system's prefers-color-scheme signal, and finally to "light", and never
- * throws or blocks rendering.
- */
+export const isColorModeValue = (value: unknown): value is ColorModeValue =>
+  value === "light" || value === "dark";
 export function resolveColorModePreference(): ColorModePreference {
   try {
-    const stored =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem(STORAGE_KEY)
-        : null;
-
-    if (isColorModeValue(stored)) {
+    const stored = window.localStorage.getItem("theme");
+    if (isColorModeValue(stored))
       return { value: stored, source: "user-selected" };
-    }
   } catch {
-    // Storage unavailable or corrupted; fall back to system default below.
+    /* Browser storage is optional. */
   }
-
-  return { value: readSystemPreference(), source: "system-default" };
+  return { value: "dark", source: "product-default" };
+}
+export function applyColorModeToRoot(value: ColorModeValue): void {
+  if (typeof document === "undefined") return;
+  document.documentElement.dataset.colorMode = value;
+  document.documentElement.classList.toggle("light", value === "light");
+  document.documentElement.classList.toggle("dark", value === "dark");
+  document.documentElement.style.colorScheme = value;
 }

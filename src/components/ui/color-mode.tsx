@@ -8,12 +8,24 @@ import * as React from "react";
 import { LuMoon, LuSun } from "react-icons/lu";
 
 import { useColorMode } from "./color-mode-utils";
+import { ColorModeSynchronizer } from "./ColorModeSynchronizer";
 
 export type ColorModeProviderProps = ThemeProviderProps;
 
 export function ColorModeProvider(props: ColorModeProviderProps) {
+  const { children, ...rest } = props;
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange {...props} />
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem={false}
+      themes={["light", "dark"]}
+      disableTransitionOnChange
+      {...rest}
+    >
+      <ColorModeSynchronizer />
+      {children}
+    </ThemeProvider>
   );
 }
 

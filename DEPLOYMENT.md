@@ -95,7 +95,7 @@ VITE_BASE_PATH=/repository-name/ npm run build
 EXPECTED_BASE_PATH=/repository-name/ npm run verify:dist
 ```
 
-The production verifier requires exactly the 13 reviewed gallery images and the separate approved Bui Tuan Phat CV. It rejects prohibited/private source filenames, former-portfolio markers, the CV-only placeholder contact line, unexpected application network requests, and local URLs outside the expected Pages base path. The separately approved fictional website placeholders remain allowed only as labeled, non-interactive Contact content.
+The production verifier requires exactly 18 reviewed gallery images, two approved interest illustrations (20 images total), and the separate approved Bui Tuan Phat CV. It rejects prohibited/private source filenames, former-portfolio markers, the CV-only placeholder contact line, unexpected application network requests, and local URLs outside the expected Pages base path. Contact uses the verified recipient `buituanphat123456@gmail.com` and opens a local email draft after validation; it does not send or persist messages.
 
 If a property test fails, its output includes the fast-check seed and shrunk counterexample. Replay it with:
 
@@ -134,7 +134,13 @@ After the workflow succeeds:
 3. Copy the published Pages URL.
 4. Open the URL in your browser.
 5. Check that the page loads without a 404.
-6. Check that styling, section navigation, color mode, the 13 evidence images, modal previews, and `bui-tuan-phat-cv.pdf` load correctly.
+6. Check Notebook and Casebook in full-page and section views at mobile and desktop widths.
+7. Confirm fresh visits use dark mode and saved light remains readable. Display keys are `medical-style`, `medical-layout`, and `chakra-ui-color-mode`; blocked storage must not prevent use.
+8. Open `#science` (full page) and `#/science` (section). Confirm URL layout overrides saved layout, switching views retains the active section, and back/forward works.
+9. Check the 18 evidence images, two interest illustrations, modal Escape/focus restoration, responsive drawer, skip link, and `bui-tuan-phat-cv.pdf` download.
+10. Check required contact fields, first-invalid focus, the 5000-character message limit, and the configured-recipient email draft. Check reduced-motion behavior and visible keyboard focus.
+
+Both styles share the typed content in `src/data/medical/content.ts` and metadata in `src/data/medical/presentation.ts`. A visual change must not alter the public asset allowlist. Local checks confirm build behavior; deployment is complete only after a successful workflow and review of the published URL.
 
 GitHub Pages can take a few minutes to update after a successful workflow.
 
@@ -145,7 +151,7 @@ GitHub Pages can take a few minutes to update after a successful workflow.
 | Workflow fails during install | Dependency install problem or wrong Node setup | Open the failed Actions log and check the `npm ci` step. Confirm the workflow uses Node.js 20. | Re-run the workflow after fixing dependency issues. |
 | Workflow fails during quality checks | TypeScript, ESLint, example test, or property test failure | Run `npm run quality`. If fast-check reports a seed, replay it with `FC_SEED=<seed> npm test`. | All checks pass locally without suppressing the failure. |
 | Workflow fails during build | TypeScript, Vite, or missing asset issue | Run `npm run build` locally and fix the reported error. Check renamed images or the approved CV. | Push the fix and confirm the build step succeeds. |
-| Workflow fails during production verification | Unexpected/missing public asset, prohibited marker, or incorrect base path | Run `npm run verify:dist` after building with the same `VITE_BASE_PATH`. Review the listed policy error. | The verifier reports 13 approved images, one approved CV, and the expected base path. |
+| Workflow fails during production verification | Unexpected/missing public asset, prohibited marker, or incorrect base path | Run `npm run verify:dist` after building with the same `VITE_BASE_PATH`. Review the listed policy error. | The verifier reports 20 approved images, one approved CV, and the expected base path. |
 | Pages says the site is not published | Pages source is not set to GitHub Actions | Go to Settings > Pages and set Source to GitHub Actions. | The Pages settings page shows a published URL. |
 | Site shows 404 | Wrong URL, Pages still updating, or Pages source not configured | Use the URL from Settings > Pages. Wait a few minutes after the workflow succeeds. Confirm Source is GitHub Actions. | Refresh the published URL after the deployment finishes. |
 | CSS or JavaScript does not load | Base path or deployment URL mismatch | Confirm you are using the correct project Pages or root Pages URL. The workflow should set `VITE_BASE_PATH` automatically. | Reload the page and check that styling and interactions work. |

@@ -10960,3 +10960,365 @@ approve and continue, please make use of the content in this CV to structure the
 **Context**: Requested copy revision complete; plan checkboxes updated.
 
 ---
+
+## Stratus Visual Refresh — Initial Request and Workspace Detection
+
+**Timestamp**: 2026-10-07T16:49:37Z
+**User Input**: "using ai-dlc, please revamp the visuals of the current project as well "StratusNebulosus", I want the main functionality,  and sleek design to match the level of the previous project: [https://trannguyenvu-code.github.io/nguyenvu.github.io/](https://trannguyenvu-code.github.io/nguyenvu.github.io/)"
+**AI Response**: "I’ll use AI-DLC to review StratusNebulosus, identify its core functionality, and plan a visual refresh informed by the portfolio’s typography, spacing, colors, and interaction polish. Displayed the complete AI-DLC welcome once. Located the medical portfolio repository, inspected state/current composition, and reused architecture artifacts with root/scope correction."
+**Context**: New visual request, clean brownfield React/Vite repo. Existing eight-section medical features and evidence/privacy boundaries identified. New target is outside original session writable root; explicit user request authorizes documentation work there using execution escalation. Reference web fetch failed; exact local previous-project code and prior live/browser review remain available. No application change. Common rules/opt-in prompts loaded; disabled security/PBT rules not loaded/enforcement skipped. Plan/state checkboxes updated.
+
+---
+
+## Stratus Visual Refresh — Scope Questions
+
+**Timestamp**: 2026-10-07T16:49:37Z
+**User Input**: "N/A"
+**AI Response**: "Found Bui Tuan Phat's medical portfolio. Confirm whether functionality scope adds reference style/layout selectors or retains existing features with a visual redesign, and choose medical-specific versus closely mirrored visual direction. Questions are in stratus-visual-refresh-questions.md; existing disabled extension choices are retained and can be changed."
+**Context**: Requirements Analysis Step 6 explicitly gates requirements generation on validated question answers. Only two new answers required; existing extension decisions persist. All generated Markdown/checklist/Answer syntax validated before writing. No diagrams. Audit appended only.
+
+---
+
+## Stratus Visual Refresh — Scope Approval / Answer Validation
+
+**Timestamp**: 2026-10-07T16:59:10Z
+**User Input**: "approve and continue"
+**AI Response**: "I’ll take your approval as permission to proceed with the recommended scope: a distinct medical editorial design, dark mode by default, and the reference site’s style and page-layout controls alongside the existing medical features. I’ll document that scope and its acceptance criteria next."
+**Context**: Read user-edited question file: Question 1 [Answer]: A; Question 2 [Answer]: A; Security B and PBT C retained. Explicit A/A answers confirm scope rather than relying on an inferred approval. No contradictions/ambiguities. Existing reverse-engineering stack/architecture, original medical requirements, theme bootstrap, contact validation, and production policy loaded. Original single-style/system-default decisions superseded only by these validated scope answers.
+
+---
+
+## Stratus Visual Refresh — Requirements Completion Review
+
+**Timestamp**: 2026-10-07T16:59:10Z
+**User Input**: "N/A"
+**AI Response**: "Requirements Analysis Complete: two medical presentation styles, single-page/section views, saved preferences, default dark/readable light, and polished medical editorial visuals. Existing verified content, CV, contact draft, evidence previews, accessibility and production asset boundaries retained. Review stratus-visual-refresh-requirements.md; Request Changes or Approve & Continue to concise User Stories."
+**Context**: Standard-depth requirements with 12 FRs, 9 NFRs, and acceptance scenarios generated. Markdown table/checklist/fence syntax validated before writing; no diagrams. Plan checkboxes/state updated immediately. Security/PBT N/A because disabled B/C; full rules not loaded and enforcement skipped. Requirements Analysis Step 9 requires explicit generated-document approval; no application/dependency/assets/hosting changed. Audit appended only.
+
+---
+
+## Stratus Visual Refresh — Requirements Approval
+
+**Timestamp**: 2026-10-07T17:06:10Z
+**User Input**: "approve and continue"
+**AI Response**: "I’ll record the requirements approval and prepare the user-story plan for the new styles, layouts, and navigation controls."
+**Context**: Generated requirements review B approved. Loaded inception/user-stories.md, approved current requirements, business overview, and existing persona artifacts. New controls, changed journeys, and multiple audiences meet mandatory story-execution indicators. Security/PBT remain N/A disabled B/C; full rules not loaded/enforcement skipped.
+
+---
+
+## Stratus Visual Refresh — Story Plan Review Prompt
+
+**Timestamp**: 2026-10-07T17:06:10Z
+**User Input**: "N/A"
+**AI Response**: "The user-story plan is ready: nine focused stories covering medical identity/visuals, two styles, page layouts/routes, saved preferences, evidence, CV, contact, responsive accessibility, and shared/public-safe content. It adapts four existing audience archetypes with observable acceptance criteria and FR/NFR traceability. Review stratus-visual-refresh-story-generation-plan.md. Request Changes or Approve & Continue to generate stories/personas."
+**Context**: User Stories Part 1 Step 13 explicitly requires plan approval before generation. Approved requirements resolve product questions; no redundant clarifications added. Markdown tables/checklists/Answer syntax validated before writing; no diagrams. Plan/state/checkboxes updated in the same interaction. Application/assets/dependencies/hosting unchanged. Audit append-only.
+
+---
+
+## Stratus Visual Refresh — Story Plan Approval
+
+**Timestamp**: 2026-10-07T17:20:30Z
+**User Input**: "approve and continue"
+**AI Response**: "I’ll generate the nine stories and four personas from the approved plan, then check that they cover every requirement and the key navigation, evidence, and contact scenarios."
+**Context**: Story plan review A approved. Loaded approved plan, current requirements/state, and User Stories generation steps. No new product ambiguity or scope change introduced. Security/PBT disabled B/C, full rules not loaded/enforcement skipped.
+
+---
+
+## Stratus Visual Refresh — User Stories Completion Review
+
+**Timestamp**: 2026-10-07T17:20:30Z
+**User Input**: "N/A"
+**AI Response**: "User Stories complete: nine stories and four personas generated, with Given/When/Then acceptance criteria, full twelve-FR/nine-NFR traceability, and INVEST verification. Review stories.md and personas.md in user-stories/stratus-visual-refresh. Request Changes or Approve & Continue to Workflow Planning."
+**Context**: All approved generation-plan steps completed and checked off in this interaction. Markdown/table/checklist/Answer syntax and exact story/requirement/persona counts validated before writing. No diagrams. Story-level acceptance review completed; no runtime implementation/test completion claimed. User Stories Step 21 requires explicit artifact approval before Workflow Planning. Application/assets/dependencies/hosting unchanged. Audit append-only.
+
+---
+
+## User Stories — Generated Artifacts Approval
+**Timestamp**: 2026-10-07T17:27:15Z
+**User Input**: "approve and continue"
+**AI Response**: "Recorded explicit approval of nine generated stories and four personas; proceeded to Workflow Planning."
+**Context**: Story review answer B validated; prior plan/history preserved.
+
+---
+
+## Workflow Planning — Execution Plan and Approval Prompt
+**Timestamp**: 2026-10-07T17:27:15Z
+**AI Response**: "Workflow planning is complete. The execution plan recommends focused Application Design, NFR Requirements/Design, then implementation and build/browser verification. Separate unit decomposition, Functional Design and Infrastructure Design are skipped: this remains one frontend application with existing content and hosting. Risk is medium because routes, preferences and evidence focus must work together. Security/PBT extensions remain disabled; existing privacy checks and tests remain required. Review the execution plan; you can request changes, add skipped stages, or approve and continue to Application Design. This review is required by Workflow Planning Step 9, which says to present the plan for user approval before proceeding."
+**Context**: Rules and relevant approved context loaded; component dependencies/impact assessed; Mermaid limited grammar and Markdown validated before creation; plan/state checkboxes updated. Security/PBT extensions skipped because disabled. Application source unchanged; workflow approval pending.
+
+---
+
+## Workflow Planning — Approval
+**Timestamp**: 2026-10-07T18:17:07Z
+**User Input**: "approve and continue"
+**AI Response**: "Recorded explicit execution-plan approval (C) and proceeded to the authorized focused Application Design stage."
+**Context**: Approved one frontend unit; application/NFR design, code and build stages selected; other decisions retained.
+
+---
+
+## Application Design — Context and Decisions
+**Timestamp**: 2026-10-07T18:17:07Z
+**AI Response**: "I’ll record the execution-plan approval and prepare the application design for the two styles, layout switching, saved preferences, and navigation. I’m designing two distinct presentations around the same medical content: Notebook uses open editorial layouts, while Casebook uses a structured document and contents sidebar. Keeping the content and evidence controller shared will help preserve facts, previews, and browsing context when visitors switch styles."
+**Context**: Loaded rules, approved requirements/stories/personas and relevant architecture/source. Assessed all five clarification categories; approved scope sufficient, no unresolved answer required. Existing workflow approval authorizes artifact preparation, not code.
+
+---
+
+## Application Design — Completion and Approval Prompt
+**Timestamp**: 2026-10-07T18:17:07Z
+**AI Response**: "Application design is complete. Notebook uses open editorial layouts; Casebook uses a structured document with desktop contents. Both share the medical content, evidence previews, CV/contact features, and layout-aware navigation. The design also defines saved preferences, dark defaults, and safe focus handling. Review the design and choose Request Changes, Add Units Generation, or Approve & Continue to NFR Requirements. Disabled extensions remain N/A; existing privacy checks/tests remain required. Application Design Steps 12–13 require this review and say: "Do not proceed until the user explicitly approves the application design.""
+**Context**: Five mandatory artifacts plus plan/review file prepared. All FR/NFR/story coverage, component contracts, Markdown tables and Mermaid limited grammar validated before creation; diagram text fallback included. Completed checkboxes/state updated; audit append-only. Security/PBT enforcement skipped because disabled. Documentation only; no runtime results claimed. Explicit generated-design approval pending.
+
+---
+
+## Application Design — Approval
+**Timestamp**: 2026-10-07T18:32:05Z
+**User Input**: "approve and continue"
+**AI Response**: "Recorded explicit Application Design approval C; proceeded to NFR Requirements for the single visual-refresh unit."
+**Context**: Approved execution plan skips separate Functional Design/Units Generation; approved application contracts supply functional context.
+
+---
+
+## NFR Requirements — Assessment
+**Timestamp**: 2026-10-07T18:32:05Z
+**AI Response**: "I’ll record the application-design approval and define the measurable quality requirements for readability, responsive layouts, keyboard use, and production verification."
+**Context**: Loaded NFR/content rules, approved application design/services/methods and existing manifest/build/hosting configuration. Assessed all eight question categories; approved requirements supply quality scope without unresolved ambiguity. Full security/PBT extension rules not loaded/enforcement skipped because disabled.
+
+---
+
+## NFR Requirements — Completion and Approval Prompt
+**Timestamp**: 2026-10-07T18:32:05Z
+**AI Response**:
+# 📊 NFR Requirements Complete — Stratus Visual Refresh
+
+Defined 12 measurable checks for readability, all 32 responsive display configurations, keyboard/focus behavior, saved preferences, privacy, and root/project builds. The existing technology stack stays in place. Disabled extensions remain N/A; existing privacy checks and property tests remain required.
+
+> **📋 REVIEW REQUIRED:**
+> Please examine the [NFR requirements](/Users/nhamhhung/StratusNebulosus.github.io/aidlc-docs/construction/stratus-visual-refresh/nfr-requirements/nfr-requirements.md).
+
+> **🚀 WHAT’S NEXT?**
+>
+> **You may:**
+>
+> 🔧 **Request Changes** — Ask for modifications to the NFR requirements.
+> ✅ **Continue to Next Stage** — Approve the requirements and proceed to **NFR Design**.
+
+---
+
+Your [AI-DLC NFR Requirements rule, Step 8](/Users/nhamhhung/StratusNebulosus.github.io/.aidlc-rule-details/construction/nfr-requirements.md) requires this approval: “Do not proceed until the user explicitly approves the NFR requirements.”
+**Context**: Validated Markdown/tables and all nine NFR mappings before writing requirements/stack decisions/plan/review files; tracked completed checkboxes immediately; state moved to Construction review. Documentation only; no measured runtime results claimed. Explicit NFR approval pending.
+
+---
+
+## NFR Requirements — Progress Update
+**Timestamp**: 2026-10-07T18:32:17Z
+**AI Response**: "The requirements now cover all 32 combinations of style, layout, color, and screen width, plus contrast, focus, storage failures, and direct-link behavior. Performance checks will record actual build sizes and browser results; they won’t claim improvements without measurements."
+**Context**: Planning progress commentary; documentation consistency checked; Markdown hard-break spaces trimmed before rerunning git diff --check. No runtime verification claimed.
+
+---
+
+## NFR Requirements — Approval
+**Timestamp**: 2026-10-07T18:39:00Z
+**User Input**: "approve and continue"
+**AI Response**: "Recorded explicit NFR Requirements approval B and proceeded to NFR Design."
+**Context**: Twelve quality checks/current stack approved; existing asset/privacy/property obligations retained.
+
+---
+
+## NFR Design — Context and Progress
+**Timestamp**: 2026-10-07T18:39:00Z
+**AI Response**: "I’ll record the quality-requirements approval and prepare the implementation design for colors, responsive layouts, focus handling, and saved preferences. The proposed palette passes the static contrast checks: light-mode primary text is 13.48:1 and secondary text is 8.33:1; essential borders exceed 3:1 in both modes. The design also defines mobile control placement and focus handling after navigation or preview changes. Rendered colors and interactions still need verification during implementation."
+**Context**: Loaded NFR Design/content-validation rules, approved quality/stack contracts and existing token/provider/motion code. All five pattern categories assessed; server scaling/queues N/A for this static frontend. Calculated proposed opaque sRGB pairs before writing; no runtime/browser passes claimed.
+
+---
+
+## NFR Design — Completion and Approval Prompt
+**Timestamp**: 2026-10-07T18:39:00Z
+**AI Response**:
+# 🎨 NFR Design Complete — Stratus Visual Refresh
+
+Specified the palette, responsive layouts, saved preferences, reduced motion, and keyboard/dialog focus handling. Proposed light-mode text contrasts are 13.48:1 primary and 8.33:1 secondary; browser verification remains pending. Disabled extensions remain N/A; existing privacy checks and tests stay required.
+
+> **📋 REVIEW REQUIRED:**
+>
+> Review the [NFR design](/Users/nhamhhung/StratusNebulosus.github.io/aidlc-docs/construction/stratus-visual-refresh/nfr-design/nfr-design-patterns.md).
+>
+> **🚀 WHAT’S NEXT?**
+>
+> **You may:**
+>
+> 🔧 **Request Changes** — Modify the design.
+>
+> ✅ **Continue to Next Stage** — Approve and proceed to **Code Generation planning**.
+
+---
+
+Your [AI-DLC rule, Step 8](/Users/nhamhhung/StratusNebulosus.github.io/.aidlc-rule-details/construction/nfr-design.md:88) requires this approval: “Do not proceed until the user explicitly approves the NFR design.”
+**Context**: Plan, patterns, logical components and review prepared; all twelve quality checks mapped; proposed reading/action/border contrast assertions and Markdown/table/coverage validations passed before creation. Checkboxes/state updated immediately; append-only audit. Security/PBT full rules not loaded/enforcement skipped because disabled. Application source unchanged; explicit NFR Design approval pending.
+
+---
+
+## NFR Design — Approval
+**Timestamp**: 2026-10-07T19:06:22Z
+**User Input**: "approve and continue"
+**AI Response**: "Recorded explicit NFR Design approval B and proceeded to Code Generation Part 1."
+**Context**: Approved quality patterns/logical components; no code-generation plan approval inferred.
+
+---
+
+## Code Generation Part 1 — Context and Progress
+**Timestamp**: 2026-10-07T19:06:22Z
+**AI Response**: "I’ll record the NFR Design approval and prepare the file-level implementation plan for the visual refresh, including verification and cleanup steps. The plan will preserve all eight medical sections and approved assets. It will add the two visual styles and display controls, update tests tied to the old single-style defaults, and retire conflicting legacy styling after checking its references. Final checks will cover navigation history, evidence previews, contact/CV actions, and both deployment base paths."
+**Context**: Loaded code-generation/content-validation rules, state, approved design/quality contracts, brownfield structure and current source/test paths. Plan covers one frontend unit; backend/API/database/infrastructure generation N/A. Security/PBT full extension rules not loaded/enforcement skipped because disabled.
+
+---
+
+## Code Generation Part 1 — Plan Approval Prompt
+**Timestamp**: 2026-10-07T19:06:22Z
+**AI Response**:
+The [implementation plan](/Users/nhamhhung/StratusNebulosus.github.io/aidlc-docs/construction/plans/stratus-visual-refresh-code-generation-plan.md) is ready: 12 steps cover the two visual styles, display controls, dark defaults, navigation, evidence/contact/CV integration, cleanup, and browser/build verification. All nine stories are mapped.
+
+Disabled extensions remain N/A; existing privacy checks and tests stay required.
+
+The [review file](/Users/nhamhhung/StratusNebulosus.github.io/aidlc-docs/construction/stratus-visual-refresh/code-plan-review-questions.md) offers **Request Changes** or **Continue to Next Stage** to begin implementation.
+
+Your [AI-DLC Code Generation rule, Part 1 Step 7](/Users/nhamhhung/StratusNebulosus.github.io/.aidlc-rule-details/construction/code-generation.md) requires approval of this complete plan before code generation.
+**Context**: Numbered twelve-step plan with exact source/test/documentation paths, all nine stories/twelve quality checks, checkbox enforcement and concrete validation. Markdown/coverage/code-location consistency checked before creation. Updated earlier approval/checklists/state and appended audit; source/assets/dependencies unchanged. Explicit entire-plan approval pending before Part 2.
+
+---
+
+## Code Generation — Plan approval
+**Timestamp**: 2026-10-07T19:09:44Z
+**User Input**: "approve and continue"
+**AI Response**: "I’ll begin implementing the approved plan. First I’ll establish the current build and test baseline, then add the display controls and refresh both visual styles."
+
+---
+
+## Code Generation — Step 1
+**Timestamp**: 2026-10-07T19:11:10Z
+**AI Response**: "Completed numbered Step 1; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 2
+**Timestamp**: 2026-10-07T19:12:35Z
+**AI Response**: "Completed numbered Step 2; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 3
+**Timestamp**: 2026-10-07T19:12:39Z
+**AI Response**: "Completed numbered Step 3; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 4
+**Timestamp**: 2026-10-07T19:13:57Z
+**AI Response**: "Completed numbered Step 4; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 5
+**Timestamp**: 2026-10-07T19:16:43Z
+**AI Response**: "Completed numbered Step 5; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 6
+**Timestamp**: 2026-10-07T19:16:45Z
+**AI Response**: "Completed numbered Step 6; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 7
+**Timestamp**: 2026-10-07T19:18:37Z
+**AI Response**: "Completed numbered Step 7; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 8
+**Timestamp**: 2026-10-07T19:19:28Z
+**AI Response**: "Completed numbered Step 8; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Step 9
+**Timestamp**: 2026-10-07T19:19:28Z
+**AI Response**: "Completed numbered Step 9; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Scoped cleanup
+**Timestamp**: 2026-10-07T19:19:28Z
+**AI Response**: "Removed conflicting blue-tech root variables, unused legacy font request and old pulse/arch hero decoration. No medical section or approved/private source asset was deleted; exact public graph policy retained. Baseline 33 suites/135 tests and root build verification passed; new behavior verification pending."
+
+---
+
+## Code Generation — Step 10
+**Timestamp**: 2026-10-07T19:19:28Z
+**AI Response**: "Completed numbered Step 10; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Integration correction
+**Timestamp**: 2026-10-07T19:20:00Z
+**AI Response**: "Both visual styles implemented. Typecheck passed; lint identified render-time ref reads in route initialization/evidence context. Replaced those values with React state without suppressing the lint rule. Integration testing continues."
+
+---
+
+## Code Generation — Browser correction
+**Timestamp**: 2026-10-07T19:26:57Z
+**AI Response**: "Layout matrix and core interactions passed. Additional browser scroll-context test exposed active-section offset mismatch with the sticky header; tracker now accounts for header bottom and section scroll margin, with an App regression test. Storage denial/invalid-theme recovery already verified; rerunning affected checks."
+
+---
+
+## Code Generation — Step 11
+**Timestamp**: 2026-10-07T19:35:37Z
+**AI Response**: "Completed numbered Step 11; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Verification results
+**Timestamp**: 2026-10-07T19:35:37Z
+**AI Response**: "Final 43 suites / 158 tests passed, including retained properties/privacy. Typecheck, lint, root/project builds and production verifiers passed. All 32 responsive configurations have no horizontal overflow. Actual production browser assets/CV resolve at both base paths. Rendered text minimum 6.87:1 light / 8.20:1 dark; essential border minimum 3.49:1 light / 3.88:1 dark. Storage denial/corruption, routes/history, active-section switch, drawer/dialog/skip focus and contact checks passed. Baseline/final root JS 675330/681273 bytes, gzip 194937/196728; CSS 43866/44388 bytes, gzip 8917/8253. Existing chunk advisory retained. Assets/dependencies unchanged."
+
+---
+
+## Code Generation — Documentation update
+**Timestamp**: 2026-10-07T19:35:38Z
+**AI Response**: "README and deployment guidance now describe current Notebook/Casebook, routes/preferences, dark default, verification and exact approved asset/contact contracts. Obsolete documentation assertions updated without weakening privacy/release gates."
+
+---
+
+## Code Generation — Step 12
+**Timestamp**: 2026-10-07T19:38:21Z
+**AI Response**: "Completed numbered Step 12; plan checkboxes updated immediately."
+
+---
+
+## Code Generation — Documentation and review preparation
+**Timestamp**: 2026-10-07T19:38:21Z
+**AI Response**: "Summary, exact created/modified file inventory, nine-story/twelve-quality traceability, screenshots, measured bundle results and limitations recorded. Documentation suite passed six tests. Twelve plan steps and nine stories marked complete; explicit code approval remains pending. Security/PBT extension enforcement skipped per disabled configuration. Both production builds load their images, styles, scripts, and CV download correctly. The browser review passed all 32 display combinations with no horizontal overflow and readable light-mode contrast. The refresh is ready for generated-code review; it has not been deployed."
+
+---
+
+## Code Generation — Generated-code approval prompt
+**Timestamp**: 2026-10-07T19:39:07Z
+**AI Response**: "💻 **Code Generation Complete — Stratus Visual Refresh**
+
+Implemented Notebook and Casebook styles, full-page and section views, dark defaults, and improved light-mode readability. Existing medical content, evidence, CV, and contact functionality are preserved.
+
+Verification passed: **158 tests**, type checking, linting, both production builds, and **32 responsive configurations**. This refresh has not been deployed.
+
+> **📋 REVIEW REQUIRED**
+> - **Application Code:** [StratusNebulosus project](/Users/nhamhhung/StratusNebulosus.github.io)
+> - **Documentation:** [Change summary and screenshots](/Users/nhamhhung/StratusNebulosus.github.io/aidlc-docs/construction/stratus-visual-refresh/code/code-generation-summary.md)
+>
+> **🚀 WHAT'S NEXT?**
+>
+> 🔧 **Request Changes** — Describe modifications to the visuals or code.
+> ✅ **Continue to Next Stage** — Approve the generated code and proceed to **Build and Test**.
+
+The [AI-DLC rule](/Users/nhamhhung/StratusNebulosus.github.io/.aidlc-rule-details/construction/code-generation.md:161) requires: “Do not proceed until the user explicitly approves the generated code.” This approval completes the code-review gate before Build and Test.
+"
+
+---

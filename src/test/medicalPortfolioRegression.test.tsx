@@ -80,7 +80,8 @@ describe("completed medical portfolio regression", () => {
     ].forEach((marker) => {
       expect(renderedText).not.toContain(marker);
     });
-    expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Portfolio style")).toHaveValue("notebook");
+    expect(screen.getByLabelText("Portfolio view")).toHaveValue("full-page");
     expect(
       screen.queryByText(/choose.*(?:template|layout|style)/i),
     ).not.toBeInTheDocument();

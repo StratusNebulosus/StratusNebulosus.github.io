@@ -1,6 +1,11 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import {
+  applyColorModeToRoot,
+  isColorModeValue,
+  resolveColorModePreference,
+} from "../../theme/resolveColorModePreference";
 
 export type ColorMode = "light" | "dark";
 
@@ -12,15 +17,14 @@ export interface UseColorModeReturn {
 
 export function useColorMode(): UseColorModeReturn {
   const { resolvedTheme, setTheme, forcedTheme } = useTheme();
-  const colorMode = (forcedTheme || resolvedTheme || "light") as ColorMode;
+  const candidate = forcedTheme || resolvedTheme;
+  const colorMode = isColorModeValue(candidate)
+    ? candidate
+    : resolveColorModePreference().value;
   const applyColorMode = (nextMode: ColorMode) => {
     setTheme(nextMode);
 
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-color-mode", nextMode);
-      document.documentElement.classList.toggle("light", nextMode === "light");
-      document.documentElement.classList.toggle("dark", nextMode === "dark");
-    }
+    applyColorModeToRoot(nextMode);
   };
   const toggleColorMode = () =>
     applyColorMode(colorMode === "dark" ? "light" : "dark");

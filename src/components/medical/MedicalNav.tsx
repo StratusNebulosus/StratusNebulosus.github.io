@@ -1,180 +1,222 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  Box,
-  Drawer,
-  Flex,
-  IconButton,
-  Link,
-  Text,
-  VStack,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { useRef, useState } from "react";
+import { Drawer, IconButton } from "@chakra-ui/react";
 import { HiMenu, HiX } from "react-icons/hi";
-
 import { content } from "../../data/medical/content";
 import type {
   MedicalNavigationItem,
   MedicalSectionId,
 } from "../../data/medical/navigation";
 import { ColorModeButton } from "../ui/color-mode";
-
-export type MedicalNavProps = {
+import {
+  MedicalDisplayControls,
+  type DisplayProps,
+} from "./MedicalDisplayControls";
+export type MedicalNavProps = DisplayProps & {
   activeSection: MedicalSectionId;
-  getNavigationHref: (sectionId: MedicalSectionId) => string;
+  getNavigationHref: (section: MedicalSectionId) => string;
   navigationItems: readonly MedicalNavigationItem[];
-  onNavigate: (sectionId: MedicalSectionId) => void;
+  onNavigate: (section: MedicalSectionId) => void;
 };
-
-export function MedicalNav({
+export function MedicalContents({
   activeSection,
   getNavigationHref,
   navigationItems,
   onNavigate,
 }: MedicalNavProps) {
-  const { open, onOpen, onClose } = useDisclosure();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const menuTriggerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 24);
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const closeDrawer = () => {
-    onClose();
-    window.requestAnimationFrame(() => menuTriggerRef.current?.focus());
+  return (
+    <ul className="medical-desktop-links">
+      {navigationItems.map((item, index) => (
+        <li key={item.id}>
+          <a
+            className="medical-nav-link"
+            href={getNavigationHref(item.id)}
+            data-testid={`medical-nav-link-${item.id}`}
+            aria-current={activeSection === item.id ? "location" : undefined}
+            onClick={(e) => {
+              if (
+                !e.metaKey &&
+                !e.ctrlKey &&
+                !e.shiftKey &&
+                !e.altKey &&
+                e.button === 0
+              ) {
+                e.preventDefault();
+                onNavigate(item.id);
+              }
+            }}
+          >
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+export function MedicalNav(props: MedicalNavProps) {
+  const {
+    activeSection,
+    getNavigationHref,
+    navigationItems,
+    onNavigate,
+    style = "notebook",
+  } = props;
+  const [open, setOpen] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const pending = useRef<MedicalSectionId | null>(null);
+  const close = () => {
+    pending.current = null;
+    setOpen(false);
+    requestAnimationFrame(() => trigger.current?.focus());
   };
-
-  const navigate = (sectionId: MedicalSectionId) => {
-    onNavigate(sectionId);
-    onClose();
-  };
-
   return (
     <>
       <nav
-        className={`medical-navigation-band${isScrolled ? " is-scrolled" : ""}`}
+        className="medical-navigation-band"
         aria-label="Medical portfolio sections"
         data-testid="medical-navigation"
       >
-        <Link
-          className="medical-brand-lockup"
-          href={getNavigationHref("overview")}
-          onClick={(event) => {
-            event.preventDefault();
-            navigate("overview");
-          }}
-          aria-label="Navigate to portfolio overview"
-          data-testid="medical-nav-brand-link"
-        >
-          <span className="medical-brand-mark" aria-hidden="true">
-            <span />
-          </span>
-          <span>
-            <Text as="strong" className="medical-brand-name">
-              {content.hero.name}
-            </Text>
-            <Text as="span" className="medical-brand-role">
-              Medical portfolio
-            </Text>
-          </span>
-        </Link>
-
-        <Box as="ul" className="medical-desktop-links">
-          {navigationItems.map((item, index) => {
-            const isActive = item.id === activeSection;
-
-            return (
-              <li key={item.id}>
-                <Link
-                  className="medical-nav-link"
-                  href={getNavigationHref(item.id)}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    navigate(item.id);
-                  }}
-                  aria-current={isActive ? "location" : undefined}
-                  data-testid={`medical-nav-link-${item.id}`}
-                >
-                  <span aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </Box>
-
-        <Flex className="medical-nav-controls">
-          <ColorModeButton
-            className="medical-icon-control"
-            data-testid="medical-nav-theme-toggle"
-          />
-          <IconButton
-            ref={menuTriggerRef}
-            className="medical-icon-control medical-menu-toggle"
-            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-            onClick={open ? closeDrawer : onOpen}
-            data-testid="medical-nav-menu-toggle"
+        <div className="medical-navigation-top">
+          <a
+            className="medical-brand-lockup"
+            href={getNavigationHref("overview")}
+            aria-label="Navigate to portfolio overview"
+            data-testid="medical-nav-brand-link"
+            onClick={(e) => {
+              if (
+                !e.metaKey &&
+                !e.ctrlKey &&
+                !e.shiftKey &&
+                !e.altKey &&
+                e.button === 0
+              ) {
+                e.preventDefault();
+                onNavigate("overview");
+              }
+            }}
           >
-            {open ? <HiX /> : <HiMenu />}
-          </IconButton>
-        </Flex>
+            <span className="medical-brand-mark" aria-hidden="true">
+              B<span>TP</span>
+            </span>
+            <span>
+              <strong className="medical-brand-name">
+                {content.hero.name}
+              </strong>
+              <span className="medical-brand-role">Medical portfolio</span>
+            </span>
+          </a>
+          <div className="medical-nav-controls">
+            <a
+              className="medical-shell-cv"
+              href={content.hero.cvDownload.asset}
+              download={content.hero.cvDownload.fileName}
+              aria-label="Download Bui Tuan Phat CV (PDF)"
+              data-testid="medical-shell-cv"
+            >
+              CV <span aria-hidden="true">↓</span>
+            </a>
+            <ColorModeButton
+              className="medical-icon-control"
+              data-testid="medical-nav-theme-toggle"
+            />
+            <IconButton
+              ref={trigger}
+              className="medical-icon-control medical-menu-toggle"
+              aria-label="Open navigation menu"
+              data-testid="medical-nav-menu-toggle"
+              onClick={() => setOpen(true)}
+            >
+              <HiMenu />
+            </IconButton>
+          </div>
+        </div>
+        <div className="medical-navigation-bottom">
+          <p className="medical-edition">
+            {style === "notebook"
+              ? "A notebook of curiosity & care"
+              : "A record of learning & purpose"}
+          </p>
+          <MedicalDisplayControls {...props} />
+        </div>
+        {style === "notebook" && <MedicalContents {...props} />}
       </nav>
-
       <Drawer.Root
         open={open}
-        onOpenChange={(details) => !details.open && closeDrawer()}
-        finalFocusEl={() => menuTriggerRef.current}
+        onOpenChange={(details) => {
+          if (!details.open) {
+            setOpen(false);
+            if (!pending.current)
+              requestAnimationFrame(() => trigger.current?.focus());
+          }
+        }}
         placement="end"
+        finalFocusEl={() => (pending.current ? null : trigger.current)}
+        onExitComplete={() => {
+          const section = pending.current;
+          pending.current = null;
+          if (section) onNavigate(section);
+          else trigger.current?.focus();
+        }}
       >
         <Drawer.Backdrop className="medical-drawer-backdrop" />
         <Drawer.Positioner>
           <Drawer.Content className="medical-drawer-content">
             <Drawer.Header className="medical-drawer-header">
-              <Box>
-                <Text className="medical-drawer-eyebrow">Patient path</Text>
-                <Text className="medical-drawer-title">Portfolio index</Text>
-              </Box>
+              <div>
+                <p className="medical-drawer-eyebrow">Portfolio contents</p>
+                <Drawer.Title className="medical-drawer-title">
+                  Explore the journey
+                </Drawer.Title>
+              </div>
               <IconButton
                 className="medical-icon-control"
                 aria-label="Close navigation menu"
-                onClick={closeDrawer}
                 data-testid="medical-nav-menu-close"
+                onClick={close}
               >
                 <HiX />
               </IconButton>
             </Drawer.Header>
             <Drawer.Body className="medical-drawer-body">
-              <VStack as="ul" align="stretch" gap="2">
-                {navigationItems.map((item, index) => {
-                  const isActive = item.id === activeSection;
-
-                  return (
-                    <li key={item.id}>
-                      <Link
-                        className="medical-mobile-link"
-                        href={getNavigationHref(item.id)}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          navigate(item.id);
-                        }}
-                        aria-current={isActive ? "location" : undefined}
-                        data-testid={`medical-nav-mobile-link-${item.id}`}
-                      >
-                        <span aria-hidden="true">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span>{item.label}</span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </VStack>
+              <ul>
+                {navigationItems.map((item, index) => (
+                  <li key={item.id}>
+                    <a
+                      className="medical-mobile-link"
+                      href={getNavigationHref(item.id)}
+                      data-testid={`medical-nav-mobile-link-${item.id}`}
+                      aria-current={
+                        activeSection === item.id ? "location" : undefined
+                      }
+                      onClick={(e) => {
+                        if (
+                          !e.metaKey &&
+                          !e.ctrlKey &&
+                          !e.shiftKey &&
+                          !e.altKey
+                        ) {
+                          e.preventDefault();
+                          pending.current = item.id;
+                          setOpen(false);
+                        }
+                      }}
+                    >
+                      <span aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                className="medical-action medical-action--secondary"
+                href={content.hero.cvDownload.asset}
+                download={content.hero.cvDownload.fileName}
+                data-testid="medical-drawer-cv"
+              >
+                Download CV (PDF) ↓
+              </a>
             </Drawer.Body>
           </Drawer.Content>
         </Drawer.Positioner>

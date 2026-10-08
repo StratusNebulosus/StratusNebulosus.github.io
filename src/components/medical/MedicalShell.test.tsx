@@ -41,12 +41,16 @@ describe("MedicalShell", () => {
     renderShell();
     const shell = screen.getByTestId("medical-portfolio-shell");
 
-    expect(shell.firstElementChild).toBe(screen.getByTestId("medical-skip-link"));
+    expect(shell.firstElementChild).toBe(
+      screen.getByTestId("medical-skip-link"),
+    );
     expect(screen.getByTestId("medical-skip-link")).toHaveAttribute(
       "href",
       "#main-content",
     );
-    expect(screen.getByRole("navigation", { name: "Medical portfolio sections" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: "Medical portfolio sections" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("main")).toHaveAttribute("id", "main-content");
   });
 
@@ -63,19 +67,20 @@ describe("MedicalShell", () => {
       "aria-current",
       "location",
     );
-    expect(
-      screen.getAllByRole("link", { current: "location" }),
-    ).toHaveLength(1);
+    expect(screen.getAllByRole("link", { current: "location" })).toHaveLength(
+      1,
+    );
   });
 
-  it("navigates from desktop links without a layout or style selector", () => {
+  it("navigates from desktop links with named display controls", () => {
     const { onNavigate } = renderShell();
 
     fireEvent.click(screen.getByTestId("medical-nav-link-education"));
 
     expect(onNavigate).toHaveBeenCalledWith("education");
     expect(screen.queryByText(/multi-page/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/portfolio style/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Portfolio style")).toHaveValue("notebook");
+    expect(screen.getByLabelText("Portfolio view")).toHaveValue("full-page");
     expect(screen.getByTestId("medical-nav-theme-toggle")).toBeInTheDocument();
   });
 
@@ -87,10 +92,9 @@ describe("MedicalShell", () => {
     fireEvent.click(toggle);
     const close = await screen.findByTestId("medical-nav-menu-close");
     expect(close).toBeInTheDocument();
-    expect(screen.getByTestId("medical-nav-mobile-link-leadership")).toHaveAttribute(
-      "aria-current",
-      "location",
-    );
+    expect(
+      screen.getByTestId("medical-nav-mobile-link-leadership"),
+    ).toHaveAttribute("aria-current", "location");
 
     close.focus();
     expect(close).toHaveFocus();

@@ -1,6 +1,52 @@
 # AI-DLC State Tracking
 
-## Active Workflow
+## Active Workflow — Stratus Visual Refresh
+
+- Project: Bui Tuan Phat medical-student portfolio visual refresh
+- Workspace: /Users/nhamhhung/StratusNebulosus.github.io
+- Current phase: CONSTRUCTION
+- Current stage: Code Generation Part 2 — generated-code review
+- Status: Twelve implementation steps and nine stories complete and verified; awaiting explicit generated-code approval before Build and Test
+- Active plan: aidlc-docs/construction/plans/stratus-visual-refresh-code-generation-plan.md
+- Active NFR design: aidlc-docs/construction/stratus-visual-refresh/nfr-design/nfr-design-patterns.md
+- Active NFR requirements: aidlc-docs/construction/stratus-visual-refresh/nfr-requirements/nfr-requirements.md
+- Active application design: aidlc-docs/inception/application-design/stratus-visual-refresh/application-design.md
+- Active questions: aidlc-docs/construction/stratus-visual-refresh/code-review-questions.md
+- Active code summary: aidlc-docs/construction/stratus-visual-refresh/code/code-generation-summary.md
+- Active stories: aidlc-docs/inception/user-stories/stratus-visual-refresh/stories.md
+- Active personas: aidlc-docs/inception/user-stories/stratus-visual-refresh/personas.md
+- Active requirements: aidlc-docs/inception/requirements/stratus-visual-refresh-requirements.md
+- Workspace findings: aidlc-docs/inception/requirements/stratus-visual-refresh-workspace-findings.md
+- Reference: https://trannguyenvu-code.github.io/nguyenvu.github.io/
+- [x] Workspace Detection
+- [x] Reverse Engineering assessment — reuse current artifacts; root correction documented
+- [x] Requirements Analysis — questions A/A, extensions B/C validated; requirements generated
+- [x] Requirements document approval — user: "approve and continue"
+- [x] User Stories assessment and Part 1 plan preparation
+- [x] User Stories plan approval — user: "approve and continue"
+- [x] User Stories generation and INVEST/coverage verification
+- [x] Generated stories/personas approval — user: "approve and continue"
+- [x] Workflow Planning — analysis, stage decisions, execution plan and validation strategy complete
+- [x] Execution-plan approval — user: "approve and continue"
+- [x] Application Design — focused artifacts generated/validated
+- [x] Application Design approval — user: "approve and continue"
+- Units Planning/Generation — SKIP, one cohesive frontend unit
+- Functional Design — SKIP, no complex domain rules
+- [x] NFR Requirements — focused quality/stack artifacts generated and validated
+- [x] NFR Requirements approval — user: "approve and continue"
+- [x] NFR Design — patterns/logical components generated and validated
+- [x] NFR Design approval — user: "approve and continue"
+- Infrastructure Design — SKIP, hosting unchanged
+- [x] Code Generation Part 1 — detailed plan prepared/validated
+- [x] Code Generation plan approval — user: "approve and continue"
+- [x] Code Generation Part 2 — implementation and concrete verification complete
+- [ ] Generated-code approval — pending explicit user review
+- [ ] Build and Test — EXECUTE
+- Operations — PLACEHOLDER
+
+Existing Extension Configuration remains authoritative: Security Baseline disabled, PBT disabled. Full rules not loaded; enforcement skipped. Prior contact-revision approval remains historical and does not authorize a new visual implementation. Application presentation implemented; verified content/assets/dependencies/hosting unchanged.
+
+## Previous Workflow — retained history
 
 - **Project**: Brownfield React/Vite static portfolio
 - **Workspace**: `/Users/nhamhhung/StratusNebulosus.github.io`

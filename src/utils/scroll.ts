@@ -24,18 +24,23 @@ export const getEnabledSectionIds = (
 export const scrollToSection = (sectionId: SectionId): void => {
   const section = document.getElementById(sectionId);
 
-  section?.scrollIntoView({ behavior: "smooth" });
+  const reduced = window.matchMedia?.(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  section?.scrollIntoView({ behavior: reduced ? "instant" : "smooth" });
 };
 
 export const useActiveSection = (
   sectionIds: readonly SectionId[],
   offset = 150,
+  enabled = true,
 ): SectionId => {
   const [activeSection, setActiveSection] = useState<SectionId>(
     sectionIds[0] ?? DEFAULT_SECTION_ID,
   );
 
   useEffect(() => {
+    if (!enabled) return;
     const handleScroll = () => {
       const currentSection = sectionIds.find((sectionId) => {
         const element = document.getElementById(sectionId);
@@ -46,7 +51,14 @@ export const useActiveSection = (
 
         const rect = element.getBoundingClientRect();
 
-        return rect.top <= offset && rect.bottom >= offset;
+        const headerBottom =
+          document.querySelector(".medical-header")?.getBoundingClientRect()
+            .bottom ?? 0;
+        const scrollMargin =
+          Number.parseFloat(window.getComputedStyle(element).scrollMarginTop) ||
+          0;
+        const readingEdge = Math.max(offset, headerBottom, scrollMargin) + 1;
+        return rect.top <= readingEdge && rect.bottom >= readingEdge;
       });
 
       if (currentSection) {
@@ -58,7 +70,7 @@ export const useActiveSection = (
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [offset, sectionIds]);
+  }, [offset, sectionIds, enabled]);
 
   return activeSection;
 };

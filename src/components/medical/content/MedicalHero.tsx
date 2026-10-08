@@ -1,3 +1,4 @@
+import { MedicalSectionLink } from "../MedicalSectionLink";
 import { isAllowedAsset } from "../../../data/medical/assetAllowlist";
 import type { HeroContent } from "../../../types/medicalPortfolio";
 
@@ -14,17 +15,19 @@ export function MedicalHero({ hero }: { hero: HeroContent }) {
     >
       <div className="medical-hero-copy">
         <p className="medical-hero-eyebrow">{hero.eyebrow}</p>
-        <h1 id="overview-heading">{hero.name}</h1>
+        <h1 id="overview-heading" tabIndex={-1}>
+          {hero.name}
+        </h1>
         <p className="medical-hero-role">{hero.role}</p>
         {hero.academicHonor ? (
-          <a
+          <MedicalSectionLink
             className="medical-hero-honor"
-            href="#academics"
+            section="academics"
             data-testid="medical-hero-academic-honor"
           >
             {hero.academicHonor}
             <span aria-hidden="true">↗</span>
-          </a>
+          </MedicalSectionLink>
         ) : null}
         <p className="medical-hero-statement">{hero.positioningStatement}</p>
         <ul
@@ -32,17 +35,20 @@ export function MedicalHero({ hero }: { hero: HeroContent }) {
           aria-label="Academic highlights"
         >
           {hero.highlights.map((highlight) => (
-            <li key={highlight}>{highlight}</li>
+            <li key={highlight}>
+              <span>{highlight.split(" ").slice(0, -1).join(" ")}</span>{" "}
+              <strong>{highlight.split(" ").at(-1)}</strong>
+            </li>
           ))}
         </ul>
         <div className="medical-hero-actions">
-          <a
+          <MedicalSectionLink
             className="medical-action medical-action--primary"
-            href="#calling"
+            section="calling"
             data-testid="medical-hero-calling-link"
           >
             Explore my path
-          </a>
+          </MedicalSectionLink>
           {showCv ? (
             <a
               className="medical-action medical-action--secondary"
@@ -75,7 +81,9 @@ export function MedicalHero({ hero }: { hero: HeroContent }) {
           </figcaption>
         </figure>
       ) : null}
-      <div className="medical-pulse-line" aria-hidden="true" />
+      <div className="medical-cover-index" aria-hidden="true">
+        01 / OVERVIEW
+      </div>
     </section>
   );
 }

@@ -1,0 +1,13 @@
+# Stratus Visual Refresh — Workspace Findings
+
+Repository: /Users/nhamhhung/StratusNebulosus.github.io. Git HEAD b12831b, October 3, 2026, update textual content. Existing AI-DLC state records a prior Contact visual-consistency review. This visual refresh is a new request; no prior approval is assumed.
+
+The app serves Bui Tuan Phat's medical-student portfolio. src/App.tsx composes eight sections: overview, calling to medicine, education journey, academic excellence, science and awards, leadership/service, evidence gallery, closing contact. Shared medical shell/navigation use anchored navigation and active-section tracking. EvidencePreviewProvider unifies gallery and content previews; dialogs support keyboard closing/focus restoration. Theme bootstrap/generated tokens coexist with the existing color-mode provider. Contact uses an email draft; the approved CV is downloadable. Production asset allowlisting and privacy checks are already established.
+
+Existing reverse-engineering architecture/component inventory describes this exact composition. Metadata contains an obsolete parent workspace path; the target root above is authoritative. Latest changes concern textual content and do not invalidate the architecture. Reuse the existing artifacts with this root/scope delta, rather than inventing a new app architecture.
+
+Reference: https://trannguyenvu-code.github.io/nguyenvu.github.io/. The preceding project in this workspace supplies its exact source and recent browser-reviewed visual design: dark ink/ivory surfaces, teal/chartreuse accents, editorial headings, generous spacing, subtle diagram motifs, clear evidence cards, responsive navigation, accessible theme controls, style/layout preferences, and resume/email actions. The requested live URL could not be fetched by the web tool; local reference source and prior live verification remain available. Reference content/identity will not be copied into the medical portfolio.
+
+Recommended design direction: a coherent medical-student editorial notebook using careful typography, dark ink, teal/sage, ivory light surfaces, improved evidence cards, polished portrait framing, and readable metrics/timelines. Use existing student facts and approved evidence assets. Confirm whether functional parity also adds reference style/page-layout selectors; these are absent from the current medical app.
+
+Verification scope after implementation: existing unit/property/integration tests, typecheck/lint/build, production asset-policy verification, theme contrast, fresh/saved preferences, evidence dialog behavior/focus, contact/CV actions, and 320/390/768/1440px browser review.

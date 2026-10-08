@@ -8,6 +8,16 @@ import type { Theme } from "./tokens";
 
 const DOCUMENTED_PAIRS: ContrastPair[] = [
   {
+    textToken: "colorTextSecondary",
+    backgroundToken: "colorBackgroundSurface",
+    sizeClass: "normal",
+  },
+  {
+    textToken: "colorBorderStrong",
+    backgroundToken: "colorBackgroundSurface",
+    sizeClass: "large-or-essential",
+  },
+  {
     textToken: "colorTextPrimary",
     backgroundToken: "colorBackgroundPage",
     sizeClass: "normal",
@@ -25,35 +35,40 @@ const DOCUMENTED_PAIRS: ContrastPair[] = [
   {
     textToken: "colorAccentTeal",
     backgroundToken: "colorBackgroundSurface",
-    sizeClass: "large-or-essential",
+    sizeClass: "normal",
   },
   {
     textToken: "colorAccentSurgicalGreen",
     backgroundToken: "colorBackgroundSurface",
-    sizeClass: "large-or-essential",
+    sizeClass: "normal",
   },
   {
     textToken: "colorAccentBurgundy",
     backgroundToken: "colorBackgroundSurface",
-    sizeClass: "large-or-essential",
+    sizeClass: "normal",
   },
 ];
 
 function colorsByToken(theme: Theme): Record<string, string> {
-  return Object.fromEntries(theme.colors.map((token) => [token.name, token.value]));
+  return Object.fromEntries(
+    theme.colors.map((token) => [token.name, token.value]),
+  );
 }
 
 describe("theme contrast validation (BR-3)", () => {
   it.each([
     ["light", lightTheme],
     ["dark", darkTheme],
-  ] as const)("every documented pair passes WCAG AA in %s mode", (_mode, theme) => {
-    const results = validateContrast(colorsByToken(theme), DOCUMENTED_PAIRS);
+  ] as const)(
+    "every documented pair passes WCAG AA in %s mode",
+    (_mode, theme) => {
+      const results = validateContrast(colorsByToken(theme), DOCUMENTED_PAIRS);
 
-    results.forEach((result) => {
-      expect(result.passes).toBe(true);
-    });
-  });
+      results.forEach((result) => {
+        expect(result.passes).toBe(true);
+      });
+    },
+  );
 
   it("holds for every documented pair via property-based sampling", () => {
     fc.assert(

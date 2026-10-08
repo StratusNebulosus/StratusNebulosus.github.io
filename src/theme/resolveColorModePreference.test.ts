@@ -1,44 +1,30 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-
+import { afterEach, expect, it, vi } from "vitest";
 import { resolveColorModePreference } from "./resolveColorModePreference";
-
-describe("resolveColorModePreference (BR-5)", () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-    window.localStorage.clear();
+afterEach(() => {
+  vi.restoreAllMocks();
+  localStorage.clear();
+});
+it("honors saved light", () => {
+  localStorage.setItem("theme", "light");
+  expect(resolveColorModePreference()).toEqual({
+    value: "light",
+    source: "user-selected",
   });
-
-  it("returns the persisted value when available", () => {
-    window.localStorage.setItem("theme", "dark");
-
+});
+it.each([null, "system", "unknown"])(
+  "uses product dark for %s regardless of OS",
+  (value) => {
+    localStorage.clear();
+    if (value) localStorage.setItem("theme", value);
     expect(resolveColorModePreference()).toEqual({
       value: "dark",
-      source: "user-selected",
+      source: "product-default",
     });
+  },
+);
+it("recovers from blocked storage", () => {
+  vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+    throw Error("denied");
   });
-
-  it("falls back to the system preference when the persisted read throws", () => {
-    vi.spyOn(window.localStorage.__proto__, "getItem").mockImplementation(() => {
-      throw new Error("storage unavailable");
-    });
-    vi.spyOn(window, "matchMedia").mockReturnValue({
-      matches: true,
-    } as MediaQueryList);
-
-    expect(resolveColorModePreference()).toEqual({
-      value: "dark",
-      source: "system-default",
-    });
-  });
-
-  it("falls back to light when neither persistence nor system preference is available", () => {
-    vi.spyOn(window, "matchMedia").mockImplementation(() => {
-      throw new Error("matchMedia unavailable");
-    });
-
-    expect(resolveColorModePreference()).toEqual({
-      value: "light",
-      source: "system-default",
-    });
-  });
+  expect(resolveColorModePreference().value).toBe("dark");
 });

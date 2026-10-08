@@ -35,11 +35,13 @@ describe("medical content styling safeguards", () => {
     expect(css).toContain("@media (prefers-reduced-motion: reduce)");
   });
 
-  it("prioritizes section content with bounded headings at every breakpoint", () => {
+  it("prioritizes readable section content in both presentation variants", () => {
     expect(css).toContain(
       "grid-template-columns: minmax(10rem, 22fr) minmax(0, 78fr);",
     );
-    expect(css).toContain("font-size: clamp(2rem, 2.7vw, 2.4rem);");
+    expect(css).toContain(
+      '[data-medical-style="casebook"] .medical-content-section',
+    );
     expect(css).toContain("font-size: clamp(1.85rem, 4vw, 2.1rem);");
     expect(css).toContain("font-size: clamp(1.6rem, 7vw, 1.8rem);");
     expect(css).toContain(".medical-contact-panel");

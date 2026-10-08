@@ -19,6 +19,7 @@ import {
   transitionGalleryState,
   validateGalleryCollection,
 } from "../../../utils/medicalGallery";
+import { useMedicalNavigation } from "../MedicalNavigationContext";
 import { GalleryModal } from "./GalleryModal";
 
 type EvidencePreviewContextValue = {
@@ -29,17 +30,22 @@ type EvidencePreviewContextValue = {
   markImageFailed: (itemId: string) => void;
 };
 
-const EvidencePreviewContext = createContext<EvidencePreviewContextValue | null>(null);
+const EvidencePreviewContext =
+  createContext<EvidencePreviewContextValue | null>(null);
 
 type EvidencePreviewProviderProps = {
   items: readonly GalleryItemData[];
   children: ReactNode;
+  presentationKey?: string;
 };
 
 export function EvidencePreviewProvider({
   items,
   children,
+  presentationKey = "stable",
 }: EvidencePreviewProviderProps) {
+  const navigation = useMedicalNavigation();
+  const [openedPresentation, setOpenedPresentation] = useState(presentationKey);
   const validItems = useMemo(
     () =>
       validateGalleryCollection(
@@ -57,11 +63,12 @@ export function EvidencePreviewProvider({
 
   const selectedItem = resolveGalleryItem(
     validItems,
-    selection.selectedItemId,
+    openedPresentation === presentationKey ? selection.selectedItemId : null,
     failedItemIds,
   );
 
   const openItem = (itemId: string, trigger: HTMLButtonElement) => {
+    setOpenedPresentation(presentationKey);
     lastTrigger.current = trigger;
     setSelection((current) =>
       transitionGalleryState(
@@ -75,7 +82,12 @@ export function EvidencePreviewProvider({
 
   const closeModal = () => {
     setSelection((current) =>
-      transitionGalleryState(current, { type: "close" }, validItems, failedItemIds),
+      transitionGalleryState(
+        current,
+        { type: "close" },
+        validItems,
+        failedItemIds,
+      ),
     );
   };
 
@@ -89,14 +101,21 @@ export function EvidencePreviewProvider({
   };
 
   const findItemByAsset = (asset?: AllowedAsset) =>
-    asset ? validItems.find((item) => item.asset === asset) ?? null : null;
+    asset ? (validItems.find((item) => item.asset === asset) ?? null) : null;
 
   const restoreFocusEl = () => {
-    if (lastTrigger.current?.isConnected && !lastTrigger.current.disabled) {
+    if (
+      openedPresentation === presentationKey &&
+      lastTrigger.current?.isConnected &&
+      !lastTrigger.current.disabled
+    ) {
       return lastTrigger.current;
     }
     return (
-      document.getElementById("gallery-heading") ??
+      document.getElementById(
+        `${navigation?.activeSection ?? "gallery"}-heading`,
+      ) ??
+      document.getElementById("main-content") ??
       document.getElementById("science-heading")
     );
   };
@@ -127,7 +146,9 @@ export function EvidencePreviewProvider({
 export function useEvidencePreview(): EvidencePreviewContextValue {
   const context = useContext(EvidencePreviewContext);
   if (!context) {
-    throw new Error("useEvidencePreview must be used within EvidencePreviewProvider");
+    throw new Error(
+      "useEvidencePreview must be used within EvidencePreviewProvider",
+    );
   }
   return context;
 }
