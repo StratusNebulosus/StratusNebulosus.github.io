@@ -35,3 +35,23 @@ Build and Test is complete and ready for its explicit results/instruction review
 ## Extension compliance
 
 Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled C. Existing property suites and production privacy policy remain enforced. No enabled-extension blocking finding.
+
+## Owner Revision — Bright Medical Light Theme (2026-10-10)
+
+Replaced the light cream/olive palette with bright white and pale blue surfaces, navy text, teal primary actions, blue labels, and rose accents. Light headings now use the existing Inter sans-serif font. Updated the shared header, hero, section backgrounds, narrative/academic/research/contact cards, portrait frame, scholarship, and gallery to coordinated light surfaces and soft elevation. Rules are scoped to light mode and shared by Notebook/Casebook; dark tokens and typography remain unchanged.
+
+Modified application files: `src/theme/tokens.ts`, `src/components/medical/medical-shell.css`, `src/components/medical/content/medical-content.css`, `src/components/medical/gallery/medical-gallery.css`.
+
+Verification: 26 tests across theme contrast, token properties, accessibility/style safeguards, and content regressions pass. TypeScript production build, ESLint, diff validation, and `verify:dist` pass (20 approved images, one CV). CSS gzip 8.47 KB; JavaScript gzip 196.75 KB. The existing Vite chunk-size advisory remains. Browser checks at 1440 and 390 pixels in both styles confirm correct light tokens, white contact panels, sans-serif headings, no horizontal overflow, and successful dark-theme toggling. Screenshots: `/tmp/stratus-bright-notebook-1440.png`, `/tmp/stratus-bright-notebook-390.png`, `/tmp/stratus-bright-casebook-1440.png`, `/tmp/stratus-bright-casebook-390.png`; matching contact screenshots share the `/tmp/stratus-contact-` prefix. Other previously passing tests were not rerun for this palette-only revision.
+
+Optional Security/PBT extensions remain disabled (N/A). Existing results review remains pending; the local preview runs at http://127.0.0.1:5174/. No commit, push, or deployment performed.
+
+## Reference Green Palette Revision (2026-10-10)
+
+Matched the supplied deployed reference main green (#176b62), deeper green (#10544d), primary text (#15312e), secondary text (#52635f), and rose (#ad4652). White surfaces and pale mint page (#f4faf8) retain the bright presentation across Notebook and Casebook. Existing dark tokens are unchanged.
+
+Verification: 26 focused theme/contrast/content tests across five files pass; production build passes with the existing large-chunk advisory (CSS 46.33 kB, JS 681.33 kB). Both styles at 1440px and 390px render the correct Bui Tuan Phat identity, mint page, white panels, and no horizontal overflow; dark toggle works. Screenshot inspected. git diff --check passes. Local preview: http://127.0.0.1:5174/. No publication performed; prior results review remains pending. Extensions: Security Baseline and PBT N/A because disabled.
+
+## Contact Alignment Revision (2026-10-11)
+
+Contact introduction now uses a single column, with the statement in left-aligned body typography (16–18px, line-height 1.7) above the privacy note and form. Verified Notebook/Casebook at 390px and 1440px: statement and form left edges align, privacy follows below, paragraph wraps naturally, and no horizontal overflow. Production build passes with the existing chunk-size advisory. Browser screenshots: /tmp/stratus-contact-aligned-{notebook,casebook}-{390,1440}.png. Disabled extensions remain N/A; stage review remains pending; no deployment.

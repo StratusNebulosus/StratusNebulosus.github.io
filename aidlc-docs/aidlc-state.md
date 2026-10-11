@@ -6,7 +6,7 @@
 - Workspace: /Users/nhamhhung/StratusNebulosus.github.io
 - Current phase: CONSTRUCTION
 - Current stage: Build and Test — results/instruction review
-- Status: Build and Test complete; awaiting results/instruction approval before Operations placeholder
+- Status: Reference green palette and contact alignment owner revisions implemented and verified; awaiting results/instruction review before Operations placeholder
 - Active plan: aidlc-docs/construction/plans/stratus-visual-refresh-code-generation-plan.md
 - Active NFR design: aidlc-docs/construction/stratus-visual-refresh/nfr-design/nfr-design-patterns.md
 - Active NFR requirements: aidlc-docs/construction/stratus-visual-refresh/nfr-requirements/nfr-requirements.md
@@ -311,3 +311,13 @@ Existing Extension Configuration remains authoritative: Security Baseline disabl
 - [x] Build and Test: TypeScript, ESLint, 135 tests, production build, asset-policy verification, formatting and whitespace checks pass.
 
 Extension compliance: existing Security/PBT opt-outs preserved. No new architectural, infrastructure or privacy impact.
+
+## Owner Revision — Bright Medical Light Theme (2026-10-10)
+
+- [x] Correct workspace confirmed: StratusNebulosus.github.io; Notebook and Casebook share the active theme.
+- [x] Light palette and all-page surfaces updated: white/pale blue backgrounds, navy text, teal/blue/rose accents, sans-serif headings, subtle elevations, rounded cards/gallery.
+- [x] 26 focused tests in five files, TypeScript production build, lint, and production asset verification pass.
+- [x] Notebook/Casebook at 1440/390 pixels visually inspected; no horizontal overflow; dark toggle retains the original dark palette.
+- [ ] Existing results/instruction review remains pending; no commit, push, or deployment.
+
+Security Baseline and Property-Based Testing extension enforcement: N/A (disabled); existing contrast/property checks still pass.

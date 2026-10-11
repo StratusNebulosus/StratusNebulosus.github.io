@@ -173,3 +173,19 @@ Estimated scope: twelve coordinated frontend implementation/verification/documen
 ## Extension compliance
 
 Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled C. Full rules not loaded; enforcement skipped. Existing public-asset/privacy policy and meaningful property suites remain mandatory independently. No enabled-extension blocking findings.
+
+## Owner Revision — Bright Medical Light Theme (2026-10-10)
+
+- [x] Replace cream/olive light colors with bright white, pale blue, navy, teal, and rose while retaining accessible contrast.
+- [x] Apply sleek light surfaces, subtle elevation, and coordinated accents to the header, hero, section backgrounds, cards, contact form, and gallery in Notebook and Casebook.
+- [x] Verify theme contrast, focused tests, production build, and desktop/mobile previews in both styles; reconcile review records.
+
+## Owner Revision — Reference Green Palette (2026-10-10)
+
+- [x] Match the supplied live reference main green and coordinate light text, backgrounds, and borders across both styles.
+- [x] Verify accessible contrast, focused tests, build, and responsive browser rendering; update review records.
+
+## Owner Revision — Contact Alignment (2026-10-11)
+
+- [x] Align the contact statement above the form with readable body typography and natural full-width wrapping.
+- [x] Verify both styles at desktop/mobile widths and production build; update review records.

@@ -414,3 +414,9 @@
   outline: 3px solid var(--color-accent-burgundy);
   outline-offset: 3px;
 }
+
+[data-color-mode="light"] .medical-header {
+  background: var(--color-background-surface);
+  box-shadow: 0 2px 16px
+    color-mix(in srgb, var(--color-text-primary) 4%, transparent);
+}

@@ -11373,3 +11373,56 @@ The [AI-DLC review rule](/Users/nhamhhung/StratusNebulosus.github.io/.aidlc-rule
 "
 
 ---
+
+## Stratus Bright Medical Theme — Owner Revision
+
+**Timestamp**: 2026-10-10T14:42:07Z
+**User Input**: "for the current project StratusNebulosus, change the light theme color to something more professional, medicine related theme instead. The current color is slightly dull"
+**User Input**: "it's still not reflected to me, I want the entire page theme to be brighter and more sleek"
+**User Input**: "no, I'm talking about the current project stratusnebulosus"
+**AI Response**: "Corrected the workspace to StratusNebulosus.github.io, which has a distinct token-based theme and Notebook/Casebook presentations. Earlier work in the wrong portfolio was undone. Reopening visual review for an entire-page bright medical light palette and sleeker surfaces. Existing common/stage rules match those already loaded; optional Security/PBT extensions remain disabled (N/A)."
+**Context**: CONSTRUCTION — Build and Test owner-requested visual revision.
+
+---
+
+## Stratus Bright Medical Theme — Revision Complete
+
+**Timestamp**: 2026-10-10T14:44:52Z
+**AI Response**: "Updated the correct StratusNebulosus project across both reading styles with bright white/pale blue surfaces, teal/blue accents, navy typography, Inter headings, subtle shadows, and rounded cards/gallery. Confirmed the rendered identity is Bui Tuan Phat. 26 focused tests, production build, lint, asset verification, and four desktop/mobile browser configurations pass. Original dark mode remains functional. Local preview is available at http://127.0.0.1:5174/. Wrong-project changes were undone; local preview is separate from deployment."
+**Context**: CONSTRUCTION — Owner-requested revision complete; existing results review remains pending; optional extensions N/A because disabled.
+
+---
+
+## Reference Color — Owner Revision
+
+**Timestamp**: 2026-10-10T16:00:37Z
+**User Input**: "use similar main color as this project: [https://ngtuangialinh-del.github.io/ngtuangialinh.github.io/#introduction](https://ngtuangialinh-del.github.io/ngtuangialinh.github.io/#introduction)"
+**AI Response**: "Read the deployed reference stylesheet. Its light main accent is #176b62, with #10544d deeper green and #15312e primary text. Apply these to the correct StratusNebulosus workspace with white/pale mint surfaces, keeping the sleek presentation. Plan: update shared light tokens, verify contrast/build/browser, update review records. Optional extensions remain disabled and N/A."
+**Context**: CONSTRUCTION — Build and Test visual revision; no deployment requested.
+
+---
+
+## Reference Color — Revision Complete
+
+**Timestamp**: 2026-10-10T16:01:29Z
+**AI Response**: "Updated StratusNebulosus to the reference’s deep green (#176b62), with bright white and pale mint backgrounds. 26 tests, production build, and desktop/mobile checks pass. Preview: http://127.0.0.1:5174/. Changes are local; existing stage review remains pending."
+**Context**: CONSTRUCTION — Owner revision verified; plan checkboxes complete; disabled extensions N/A.
+
+---
+
+## Contact Alignment — Owner Revision
+
+**Timestamp**: 2026-10-10T17:17:50Z
+**User Input**: "keep this part properly aligned"
+**Attachment**: Screenshot of the contact statement wrapping into a tall, narrow block.
+**AI Response**: "Inspect the contact statement in StratusNebulosus. Replace narrow two-column introduction with a full-width stacked introduction and readable left-aligned body typography; verify both styles on desktop/mobile. Existing review revision scope; disabled extensions N/A."
+
+---
+
+## Contact Alignment — Revision Complete
+
+**Timestamp**: 2026-10-10T17:18:34Z
+**AI Response**: "Fixed the contact message in StratusNebulosus with readable paragraph text and full-width left alignment above the form. Production build and desktop/mobile browser checks pass in both styles. Available at http://127.0.0.1:5174/."
+**Context**: Owner revision complete; plan and review records updated.
+
+---

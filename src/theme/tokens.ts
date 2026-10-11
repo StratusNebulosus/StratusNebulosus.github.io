@@ -70,17 +70,21 @@ const sharedMotion: MotionToken[] = [
 export const lightTheme: Theme = {
   mode: "light",
   colors: [
-    { name: "colorBackgroundPage", value: "#f7f4ec", role: "background" },
-    { name: "colorBackgroundSurface", value: "#fffdf7", role: "surface" },
-    { name: "colorTextPrimary", value: "#172b2b", role: "text" },
-    { name: "colorTextSecondary", value: "#374c49", role: "text" },
-    { name: "colorAccentTeal", value: "#14534e", role: "accent" },
-    { name: "colorAccentSurgicalGreen", value: "#405b3d", role: "accent" },
-    { name: "colorAccentBurgundy", value: "#7a2e3a", role: "accent" },
-    { name: "colorBorderSubtle", value: "#d5ddd5", role: "border" },
-    { name: "colorBorderStrong", value: "#76867c", role: "border" },
+    { name: "colorBackgroundPage", value: "#f4faf8", role: "background" },
+    { name: "colorBackgroundSurface", value: "#ffffff", role: "surface" },
+    { name: "colorTextPrimary", value: "#15312e", role: "text" },
+    { name: "colorTextSecondary", value: "#52635f", role: "text" },
+    { name: "colorAccentTeal", value: "#176b62", role: "accent" },
+    { name: "colorAccentSurgicalGreen", value: "#10544d", role: "accent" },
+    { name: "colorAccentBurgundy", value: "#ad4652", role: "accent" },
+    { name: "colorBorderSubtle", value: "#d6e7e1", role: "border" },
+    { name: "colorBorderStrong", value: "#66867c", role: "border" },
   ],
-  typography: sharedTypography,
+  typography: sharedTypography.map((token) =>
+    token.name === "fontHeadingEditorial"
+      ? { ...token, family: readableSans }
+      : token,
+  ),
   motion: sharedMotion,
 };
 

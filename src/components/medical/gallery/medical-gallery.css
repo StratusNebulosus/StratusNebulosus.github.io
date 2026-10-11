@@ -268,3 +268,15 @@ button.medical-gallery-card:hover {
     transition: none !important;
   }
 }
+
+[data-color-mode="light"] .medical-gallery-card {
+  border-color: var(--color-border-subtle);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px
+    color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+}
+[data-color-mode="light"] button.medical-gallery-card:hover {
+  border-color: var(--color-accent-teal);
+  box-shadow: 0 12px 30px
+    color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+}
