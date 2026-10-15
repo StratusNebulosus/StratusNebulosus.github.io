@@ -12,7 +12,7 @@ export const APPROVED_SECTION_IDS = [
 export const CURRENT_PUBLIC_IDENTITY_MARKERS = [
   "Bui Tuan Phat",
   "Medical Student",
-  "Thai Nguyen University of Medicine and Pharmacy",
+  "University of Debrecen",
 ] as const;
 
 export const FORMER_PUBLIC_IDENTITY_MARKERS = [

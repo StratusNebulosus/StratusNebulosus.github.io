@@ -11442,3 +11442,19 @@ The [AI-DLC review rule](/Users/nhamhhung/StratusNebulosus.github.io/.aidlc-rule
 **Context**: Owner revision complete; plan and review records updated.
 
 ---
+
+## University Update — Owner Revision
+
+**Timestamp**: 2026-10-15T17:14:51Z
+**User Input**: "The student just enrolled shortly in Thai Nguyen University, before flying over to Hungary to pursue Medicine at the University of Debrecen, please help to update the website to replace Thai Nguyen by Debrecen"
+**AI Response**: "Update the StratusNebulosus hero, current education entry, education summary, and current-identity checks to University of Debrecen. Preserve brief prior Thai Nguyen enrollment as historical context in the education description, without inventing dates. Update README and verify relevant regressions/build. Disabled extensions N/A."
+
+---
+
+## University Update — Revision Complete
+
+**Timestamp**: 2026-10-15T17:15:25Z
+**AI Response**: "Updated StratusNebulosus to show Medical Student at the University of Debrecen, with Hungary in the education summary and brief prior Thai Nguyen enrollment retained as historical context. 25 tests and production build pass. Changes are local."
+**Context**: Owner revision verified; plan and review records updated; disabled extensions N/A.
+
+---

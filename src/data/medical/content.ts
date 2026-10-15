@@ -22,7 +22,7 @@ export const content: PortfolioContent = {
   hero: {
     eyebrow: "Welcome to my portfolio",
     name: "Bui Tuan Phat",
-    role: "Medical Student at Thai Nguyen University of Medicine and Pharmacy",
+    role: "Medical Student at the University of Debrecen",
     positioningStatement:
       "I am Bui Tuan Phat, a medical student bringing my curiosity for science and commitment to service into the next chapter of my education.",
     highlights: ["SAT 1500", "IELTS 8.0", "AP Biology 5", "AP Chemistry 5"],
@@ -57,12 +57,12 @@ export const content: PortfolioContent = {
         "I completed a bilingual high-school pathway at Wellspring, with a strong focus on science.",
     },
     {
-      id: "thai-nguyen-medicine",
-      institution: "Thai Nguyen University of Medicine and Pharmacy",
+      id: "debrecen-medicine",
+      institution: "University of Debrecen, Hungary",
       period: "Current",
       milestone: "Medicine Program",
       description:
-        "I am continuing my education as a medical student at Thai Nguyen University of Medicine and Pharmacy.",
+        "After a brief enrollment at Thai Nguyen University of Medicine and Pharmacy, I moved to Hungary to pursue medicine at the University of Debrecen.",
     },
   ],
   academicYears: [

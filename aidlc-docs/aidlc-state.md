@@ -6,7 +6,7 @@
 - Workspace: /Users/nhamhhung/StratusNebulosus.github.io
 - Current phase: CONSTRUCTION
 - Current stage: Build and Test — results/instruction review
-- Status: INNOVERSE video owner revision implemented and verified; awaiting results/instruction review before Operations placeholder
+- Status: University of Debrecen enrollment update implemented and verified; awaiting results/instruction review before Operations placeholder
 - Active plan: aidlc-docs/construction/plans/stratus-visual-refresh-code-generation-plan.md
 - Active NFR design: aidlc-docs/construction/stratus-visual-refresh/nfr-design/nfr-design-patterns.md
 - Active NFR requirements: aidlc-docs/construction/stratus-visual-refresh/nfr-requirements/nfr-requirements.md

@@ -194,3 +194,8 @@ Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled 
 
 - [x] Add the supplied video to the relevant research project with responsive accessible playback and a direct link.
 - [x] Verify content tests, production build, and responsive rendering; record results.
+
+## Owner Revision — University of Debrecen (2026-10-16)
+
+- [x] Update current university and education copy, supporting documentation and identity checks.
+- [x] Verify relevant content/identity regressions and build; record results.

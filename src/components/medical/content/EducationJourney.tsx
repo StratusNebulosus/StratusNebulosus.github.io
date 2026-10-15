@@ -20,7 +20,7 @@ export function EducationJourney({
       index="03"
       eyebrow="Education journey"
       title="My education"
-      introduction="My journey began at Wellspring, where I built a strong foundation in science. Today, I am continuing that journey at Thai Nguyen University of Medicine and Pharmacy."
+      introduction="My journey began at Wellspring, where I built a strong foundation in science. Today, I am pursuing medicine at the University of Debrecen in Hungary."
     >
       <ol className="medical-timeline">
         {education.map((entry) => (

@@ -8,7 +8,7 @@ The public page has eight sections in this order:
 
 1. **Overview** - identity, medical-study direction, portrait, and CV download
 2. **Calling** - motivation for medicine and responsible experience framing
-3. **Education** - Wellspring and Thai Nguyen University of Medicine and Pharmacy
+3. **Education** - Wellspring and the University of Debrecen in Hungary
 4. **Academics** - GPA, SAT, IELTS, AP results, and scholarship context
 5. **Science & Awards** - student research and verified recognition
 6. **Leadership & Service** - school, conference, leadership, and community activities
