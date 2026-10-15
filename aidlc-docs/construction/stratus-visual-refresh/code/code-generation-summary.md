@@ -141,3 +141,9 @@ Verification: 26 focused theme/contrast/content tests across five files pass; pr
 ## Contact Alignment Revision (2026-10-11)
 
 Contact introduction now uses a single column, with the statement in left-aligned body typography (16–18px, line-height 1.7) above the privacy note and form. Verified Notebook/Casebook at 390px and 1440px: statement and form left edges align, privacy follows below, paragraph wraps naturally, and no horizontal overflow. Production build passes with the existing chunk-size advisory. Browser screenshots: /tmp/stratus-contact-aligned-{notebook,casebook}-{390,1440}.png. Disabled extensions remain N/A; stage review remains pending; no deployment.
+
+## INNOVERSE Video Revision (2026-10-15)
+
+Added user-supplied YouTube video iLVkk7hrsHU (public oEmbed title: INNOVERSE 2026) to the existing INNOVERSE research project in Science & Awards. Optional project video data keeps content shared across Notebook/Casebook. Player uses a titled, lazy-loaded youtube-nocookie iframe with responsive 16:9 dimensions, fullscreen support, and a direct YouTube viewing link. No runtime dependency added.
+
+Verification: 15 content tests in two files pass; production build and lint pass, with the existing chunk-size advisory. Four browser configurations (Notebook/Casebook at 390/1440px) confirm correct project placement, video title/source, direct link, 16:9 sizing, and no horizontal overflow. Screenshot layout reviewed; third-party video playback was not manually verified. git diff --check passes. Optional extensions remain disabled (N/A); existing results review remains pending; no deployment performed.

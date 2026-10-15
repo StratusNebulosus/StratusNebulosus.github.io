@@ -189,3 +189,8 @@ Security Baseline: N/A — disabled B. Property-Based Testing: N/A — disabled 
 
 - [x] Align the contact statement above the form with readable body typography and natural full-width wrapping.
 - [x] Verify both styles at desktop/mobile widths and production build; update review records.
+
+## Owner Revision — INNOVERSE Video (2026-10-15)
+
+- [x] Add the supplied video to the relevant research project with responsive accessible playback and a direct link.
+- [x] Verify content tests, production build, and responsive rendering; record results.

@@ -1268,3 +1268,33 @@
 [data-color-mode="light"] .medical-hero-image-frame::before {
   display: none;
 }
+
+.medical-research-video {
+  margin: 2rem 0 0;
+  min-width: 0;
+}
+
+.medical-research-video iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--color-background-page);
+}
+
+.medical-research-video figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.medical-research-video a {
+  color: var(--color-accent-teal);
+  text-underline-offset: 0.2em;
+}

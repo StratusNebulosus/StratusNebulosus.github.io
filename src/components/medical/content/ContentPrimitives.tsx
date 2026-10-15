@@ -53,6 +53,30 @@ export function ResearchFeature({ project }: { project: ResearchProjectData }) {
           </ul>
         </div>
       </div>
+      {project.video ? (
+        <figure className="medical-research-video">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${project.video.youtubeId}`}
+            title={project.video.title}
+            width="960"
+            height="540"
+            loading="lazy"
+            allow="encrypted-media; picture-in-picture; fullscreen"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+          <figcaption>
+            {project.video.title}
+            <a
+              href={`https://www.youtube.com/watch?v=${project.video.youtubeId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Watch on YouTube <span aria-hidden="true">↗</span>
+            </a>
+          </figcaption>
+        </figure>
+      ) : null}
     </article>
   );
 }

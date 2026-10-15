@@ -85,6 +85,7 @@ export interface ResearchProjectData extends IdentifiedContent {
   context: string;
   methods: string[];
   reportedObservations: string[];
+  video?: { youtubeId: string; title: string };
 }
 
 export type ActivityCategory =

@@ -137,6 +137,7 @@ export const content: PortfolioContent = {
   researchProjects: [
     {
       id: "innoverse-nanomaterials-medicine",
+      video: { youtubeId: "iLVkk7hrsHU", title: "INNOVERSE 2026" },
       title: "Exploring Nanomaterials in Medicine",
       period: "February-August 2026",
       context:
